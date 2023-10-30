@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { type } from "os";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Equipe } from "src/equipe/entities/equipe.entity";
 
 @Entity()
 export class Usuario {
@@ -17,4 +19,13 @@ export class Usuario {
   
     @Column({ type: 'varchar' })
     senha: string;
+
+    @OneToMany(() => Equipe, (equipe) => equipe.responsavel)
+    equipeslideradas: Equipe[]
+
+    @ManyToMany((type) => Equipe, (equipe) => equipe.membros, {
+        cascade: true,
+    })
+    @JoinTable()
+    equipes: Equipe[]
 }
