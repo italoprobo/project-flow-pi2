@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Equipe } from "src/equipe/entities/equipe.entity";
+import { Tarefa } from "src/tarefa/entities/tarefa.entity";
+import { Usuario } from "src/usuario/entities/usuario.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Projeto {
@@ -17,4 +20,13 @@ export class Projeto {
 
     @Column({type: 'timestamptz',  nullable: true})
     dt_final: Date;
+
+    @ManyToOne(() => Usuario, (usuario) => usuario.equipeslideradas)
+    responsavel: Usuario
+
+    @OneToMany(() => Tarefa, (tarefa) => tarefa.projeto)
+    tarefas: Tarefa[]
+
+    @OneToMany(() => Equipe, (equipe) => equipe.projeto)
+    equipes: Equipe[]
 }

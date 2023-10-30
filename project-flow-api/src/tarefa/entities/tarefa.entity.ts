@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Equipe } from "src/equipe/entities/equipe.entity";
+import { Projeto } from "src/projeto/entities/projeto.entity";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
 export enum Importancia{
     BAIXA,
@@ -32,4 +34,10 @@ export class Tarefa {
 
     @Column({type: 'int', width: 1})
     isDone: number;
+
+    @ManyToOne(() => Projeto, (projeto) => projeto.tarefas)
+    projeto: Projeto
+
+    @ManyToOne(() => Equipe, (equipe) => equipe.tarefas)
+    equipe: Equipe
 }

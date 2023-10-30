@@ -1,6 +1,7 @@
 import { type } from "os";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Equipe } from "src/equipe/entities/equipe.entity";
+import { Projeto } from "src/projeto/entities/projeto.entity";
 
 @Entity()
 export class Usuario {
@@ -22,6 +23,9 @@ export class Usuario {
 
     @OneToMany(() => Equipe, (equipe) => equipe.responsavel)
     equipeslideradas: Equipe[]
+
+    @OneToMany(() => Projeto, (projeto) => projeto.responsavel)
+    projetosliderados: Equipe[]
 
     @ManyToMany((type) => Equipe, (equipe) => equipe.membros, {
         cascade: true,

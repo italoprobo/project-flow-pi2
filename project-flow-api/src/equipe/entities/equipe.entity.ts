@@ -1,6 +1,8 @@
 import { type } from 'os'
+import { Projeto } from 'src/projeto/entities/projeto.entity'
+import { Tarefa } from 'src/tarefa/entities/tarefa.entity'
 import { Usuario } from 'src/usuario/entities/usuario.entity'
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne, OneToMany } from 'typeorm'
 
 @Entity()
 export class Equipe {
@@ -19,4 +21,10 @@ export class Equipe {
 
     @ManyToOne(() => Usuario, (usuario) => usuario.equipeslideradas)
     responsavel: Usuario
+
+    @OneToMany(() => Projeto, (projeto) => projeto.equipes)
+    projeto: Projeto
+
+    @OneToMany(() => Tarefa, (tarefa) => tarefa.equipe)
+    tarefas: Tarefa[]
 }
