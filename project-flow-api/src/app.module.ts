@@ -8,6 +8,7 @@ import { ProjetoModule } from './projeto/projeto.module';
 import { Projeto } from './projeto/entities/projeto.entity';
 import { EquipeModule } from './equipe/equipe.module';
 import { Equipe } from './equipe/entities/equipe.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { Equipe } from './equipe/entities/equipe.entity';
     TarefaModule,
     ProjetoModule,
     EquipeModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

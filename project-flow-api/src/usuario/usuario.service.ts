@@ -4,6 +4,7 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UsuarioService {
@@ -13,13 +14,20 @@ export class UsuarioService {
     private readonly usuarioRepositorio: Repository<Usuario>,
   ) {}
 
-  createUser(createUsuarioDto: CreateUsuarioDto): Promise<Usuario>{
-    const usuario: Usuario = new Usuario();
-    usuario.nome = createUsuarioDto.nome
-    usuario.telefone = createUsuarioDto.telefone
-    usuario.email = createUsuarioDto.email
-    usuario.senha = createUsuarioDto.senha
-    return this.usuarioRepositorio.save(usuario)
+  async createUser(createUsuarioDto: CreateUsuarioDto): Promise<Usuario>{
+    const { nome, senha, telefone, email } = createUsuarioDto
+
+    const salt = await bcrypt.genSalt();
+    const hashedSenha = await bcrypt.hash(senha, salt);
+
+    const user = new Usuario();
+    user.nome = nome
+    user.senha = hashedSenha
+    user.telefone = telefone
+    user.email = email
+
+    return this.usuarioRepositorio.save(user)
+
   }
 
   async findAllUser(): Promise<Usuario[]> {
@@ -32,6 +40,10 @@ export class UsuarioService {
     } catch (error) {
       throw new NotFoundException(error.message)
     }
+  }
+
+  findByName(nome: string) {
+    return this.usuarioRepositorio.findOneBy({nome})
   }
 
   updateUser(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {

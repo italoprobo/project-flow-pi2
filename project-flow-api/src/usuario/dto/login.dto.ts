@@ -11,22 +11,13 @@ import {
   } from 'class-validator';
 
 
-export class CreateUsuarioDto {
+export class LoginDto {
 
     @IsString()
     @MinLength(2, { message: 'Nome deve ter ao menos 2 caracteres' })
     @IsNotEmpty()
     @ApiProperty()
     nome: string;
-
-    @IsNotEmpty()
-    @MinLength(8, { message: 'O telefone deve ter ao menos 8 caracteres.' })
-    @ApiProperty()
-    telefone: string;
-
-    @IsNotEmpty()
-    @ApiProperty()
-    email: string;
 
     @IsNotEmpty()
     @ApiProperty()
