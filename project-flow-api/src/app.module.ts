@@ -17,7 +17,7 @@ import { AuthModule } from './auth/auth.module';
       host: 'localhost',
       port: 5432,
       password: 'postgres',
-      username: 'postgres',
+      username: 'nicolasgabriel',
       entities: [Usuario, Tarefa, Projeto, Equipe],
       database: 'project_flow_db',
       synchronize: true,

@@ -14,6 +14,10 @@ export class EquipeService {
     const team: Equipe = new Equipe()
     team.nome = createEquipeDto.nome
     team.funcao = createEquipeDto.funcao
+    team.membros = createEquipeDto.membros
+    team.responsavel = createEquipeDto.responsavel
+    team.projeto = createEquipeDto.projeto
+    team.tarefas = createEquipeDto.tarefas
     return this.equipeRepositorio.save(team)
   }
 
