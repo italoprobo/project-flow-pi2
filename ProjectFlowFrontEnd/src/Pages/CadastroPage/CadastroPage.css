@@ -1,47 +1,20 @@
-* {
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.cadastro {
     height: 100vh;
-}
-
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30vh;
-}
-
-main {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 50vh;
-}
-
-.div_logo {
-    justify-content: center;
-    align-items: center;
-}
-
-.logo {
-    height: 15vh;
-    width: 40vh;
-}
-
-.login {
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .entrar {
@@ -59,7 +32,7 @@ main {
     gap: 3vh;
 }
 
-.botaoLogin {
+.botaoCadastro {
     background-color: #0F70BC;
     color: white;
     cursor:pointer;
@@ -71,15 +44,18 @@ main {
     font-size: medium;
 }
 
-.username, .senha {
+.username, .senha, .telefone, .email {
     display: flex;
     align-items: center;
     border-bottom: 0.2vh solid black;
+    width: 40vh;
+    font-size: 1rem;
 }
 
 input {
     border: none;
     height: 4vh;
+    font-size: 1rem;
 }
 
 input:focus {

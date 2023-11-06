@@ -1,23 +1,30 @@
 import "./LoginPage.css"
 import {BiSolidUser} from 'react-icons/bi'
 import {AiFillLock} from 'react-icons/ai'
+import logo from '../../assets/logo_project_flow.png'; 
 
 const LoginPage = () => {
     return(
-        <div className="login">
-            <div className="card">
-                <div className="entrar">
-                <h1>Entrar</h1>
+        <body>
+            <header>
+                <div className="div_logo">
+                    <img src={logo} className="logo"></img>
                 </div>
-                <div className="rigth">
+            </header>
+            <main>
+                <div className="login">
+                    <h1>Entrar</h1>
                     <form className="campos">
-                        <div className="username"><BiSolidUser/> <input type="text" placeholder="Username"/></div>
+                        <div className="username"><BiSolidUser/> <input type="text" placeholder="Usuário"/></div>
                         <div className="senha"><AiFillLock/> <input type="password" placeholder="Senha"/></div>
                         <button className="botaoLogin"><b>Login</b></button>
                     </form>
                 </div>
-            </div>
-        </div>
+            </main>
+            <footer>
+
+            </footer>
+        </body>
     )
 }
 
