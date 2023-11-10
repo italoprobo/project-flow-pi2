@@ -9,6 +9,8 @@ import {
     Matches,
     MinLength,
   } from 'class-validator';
+import { Equipe } from 'src/equipe/entities/equipe.entity';
+import { Projeto } from 'src/projeto/entities/projeto.entity';
 
 
 export class CreateUsuarioDto {
@@ -31,4 +33,8 @@ export class CreateUsuarioDto {
     @IsNotEmpty()
     @ApiProperty()
     senha: string;
+
+    equipeslideradas: Equipe[];
+    
+    projetosliderados: Projeto[];
 }

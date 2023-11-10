@@ -2,6 +2,7 @@ import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import LoginPage from './Pages/LoginPage/LoginPage'
 import CadastroPage from './Pages/CadastroPage/CadastroPage'
+import HomePage from './Pages/HomePage'
  
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
     }, {
       path:"/cadastro",
       element: <CadastroPage></CadastroPage>
+    }, {
+      path: "/home",
+      element: <HomePage></HomePage>
     }
   ])
 

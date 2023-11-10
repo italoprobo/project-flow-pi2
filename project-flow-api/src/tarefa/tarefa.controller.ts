@@ -28,13 +28,13 @@ export class TarefaController {
   }
 
   @Patch(':id')
-  @ApiOperation({summary: 'Atualizar usuario'})
+  @ApiOperation({summary: 'Atualizar tarefa'})
   update(@Param('id') id: string, @Body() updateTarefaDto: UpdateTarefaDto) {
     return this.tarefaService.updateTask(+id, updateTarefaDto);
   }
 
   @Delete(':id')
-  @ApiOperation({summary: 'Deletar usuario'})
+  @ApiOperation({summary: 'Deletar tarefa'})
   remove(@Param('id') id: string) {
     return this.tarefaService.removeTask(+id);
   }

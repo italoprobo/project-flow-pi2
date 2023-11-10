@@ -1,0 +1,70 @@
+body{
+    width: 100vw;
+    background-color: #7A7A7A;
+    justify-content: start;
+
+    & header {
+        width: 100vw;
+        display: flex;
+        align-items: flex-start;
+        justify-content: left;
+
+        & .head-content{
+            width: 100vw;
+            height: 10vh;
+            display:flex;
+            flex-direction: row;
+            gap:60vw;
+            & img{
+                height: 8vh;
+                width: auto;
+            }
+            & .div_logo{
+                padding: 1rem 0 0 1rem;
+            }
+            & .div_account{
+                align-self: self-end;
+            }
+        }
+    }
+    & main{
+        justify-content: left;
+        width: 100vw;
+        height: 80vh;
+
+        & .div_saudacao{
+            padding: 0 0 0 7vw;
+            color: white;
+            & h1{
+                font-size: 2rem;
+            }
+            & p{
+                font-size: 1.2rem;
+            }
+        }
+    }
+    & footer{
+        width: 100vw;
+        height: 10vh;
+        background-color: #979797;
+        display: flex;
+        align-items: center;
+        
+        & .footer-content{
+            & .menu{
+                display: flex;
+                justify-content: space-around;
+                width: 100vw;
+            }
+            & img{
+                height: 4vh;
+                width: auto;
+            }
+
+            & img:hover{
+                transform: scale(1.2);
+            }   
+        }
+
+    }
+}

@@ -16,7 +16,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30vh;
+    height: 15vh;
 }
 
 main {
@@ -84,4 +84,8 @@ input {
 
 input:focus {
     outline: none;
+}
+
+h1{
+    padding-bottom: 1rem;
 }

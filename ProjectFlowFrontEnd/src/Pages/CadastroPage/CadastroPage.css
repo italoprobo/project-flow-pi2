@@ -24,6 +24,10 @@
     color: darkblue;
 }
 
+.cadastrar {
+    padding-bottom: 2rem;
+}
+
 .campos {
     display: flex;
     flex-direction: column;

@@ -12,7 +12,7 @@ const CadastroPage = () => {
                     <img src={logo} className="logo"></img>
                 </div>
                 <div className="cadastrar">
-                    <h1>Cadastre-se</h1>
+                    <h1>Cadastro de Usuário</h1>
                 </div>
                 <div className="rigth">
                     <form className="campos">
