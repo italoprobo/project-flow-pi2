@@ -16,7 +16,7 @@ export class Usuario {
     @Column({ type: 'varchar', length: 11 })
     telefone: string;
   
-    @Column({ type: 'varchar', length: 50 })
+    @Column({ type: 'varchar', length: 50, unique: true })
     email: string;
   
     @Column({ type: 'varchar' })
@@ -29,7 +29,7 @@ export class Usuario {
     @OneToMany(() => Equipe, (equipe) => equipe.responsavel)
     equipeslideradas: Equipe[]
 
-    @OneToMany(() => Projeto, (projeto) => projeto.responsavel)
+    @OneToMany(() => Projeto, (projeto: Projeto) => projeto.responsavel)
     projetosliderados: Projeto[]
 
     @ManyToMany((type) => Equipe, (equipe) => equipe.membros, {

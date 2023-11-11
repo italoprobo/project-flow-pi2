@@ -4,6 +4,7 @@ import {
     IsString,
     IsDate,
     MinLength,
+    IsNumber,
   } from 'class-validator';
 
 export class CreateProjetoDto {
@@ -21,11 +22,13 @@ export class CreateProjetoDto {
     descricao: string;
 
     @IsNotEmpty()
-    @IsDate()
     @ApiProperty()
     dt_inicio: Date;
   
-    @IsDate()
     @ApiProperty()
     dt_final: Date;
+
+    @IsNumber()
+    @IsNotEmpty()
+    responsavelId: number
 }

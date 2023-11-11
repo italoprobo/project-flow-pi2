@@ -21,7 +21,7 @@ export class Projeto {
     @Column({type: 'timestamptz',  nullable: true})
     dt_final: Date;
 
-    @ManyToOne(() => Usuario, (usuario) => usuario.equipeslideradas)
+    @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.projetosliderados)
     responsavel: Usuario
 
     @OneToMany(() => Tarefa, (tarefa) => tarefa.projeto)
@@ -29,4 +29,5 @@ export class Projeto {
 
     @OneToMany(() => Equipe, (equipe) => equipe.projeto)
     equipes: Equipe[]
+  project: Promise<Usuario>;
 }

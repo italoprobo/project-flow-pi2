@@ -2,12 +2,6 @@ import { Equipe } from "src/equipe/entities/equipe.entity";
 import { Projeto } from "src/projeto/entities/projeto.entity";
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
-export enum Importancia{
-    BAIXA,
-    MEDIA,
-    ALTA,
-}
-
 @Entity()
 export class Tarefa {
 
@@ -29,8 +23,8 @@ export class Tarefa {
     @Column({ type: 'timestamptz' })
     tempo_previsto: Date;
 
-    @Column({type: 'enum', enum: Importancia})
-    importancia: Importancia;
+    @Column({type: 'varchar'})
+    importancia: string;
 
     @Column({type: 'int', width: 1})
     isDone: number;

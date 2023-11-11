@@ -10,7 +10,6 @@ import {
     Matches,
     MinLength,
   } from 'class-validator';
-import { Importancia } from '../entities/tarefa.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTarefaDto {
@@ -27,22 +26,23 @@ export class CreateTarefaDto {
     descricao: string;
 
     @IsNotEmpty()
-    // @IsDate()
+    //@IsDate()
     @ApiProperty()
     dt_inicio: Date;
   
-    // @IsDate()
+    //@IsDate()
     @ApiProperty()
     dt_final: Date;
   
     @IsNotEmpty()
-    // @IsDate()
+    //@IsDate()
     @ApiProperty()
     tempo_previsto: Date;
 
-    @IsEnum([Importancia.BAIXA, Importancia.MEDIA, Importancia.ALTA])
+    @IsString()
+    @IsNotEmpty()
     @ApiProperty()
-    importancia: Importancia;
+    importancia: string;
 
     @IsNotEmpty()
     @IsIn([0,1])

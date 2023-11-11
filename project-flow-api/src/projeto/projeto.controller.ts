@@ -3,6 +3,7 @@ import { ProjetoService } from './projeto.service';
 import { CreateProjetoDto } from './dto/create-projeto.dto';
 import { UpdateProjetoDto } from './dto/update-projeto.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
 
 @Controller('api/v1/projeto')
 @ApiTags('projeto')
