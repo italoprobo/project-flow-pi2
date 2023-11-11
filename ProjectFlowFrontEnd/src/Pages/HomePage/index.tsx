@@ -1,4 +1,6 @@
 import "./style.css"
+import "./components/TarefaItem"
+import TarefaListaItem from "./components/TarefaItem"
 
 const HomePage = () => {
     return(
@@ -19,7 +21,7 @@ const HomePage = () => {
                 <p>Essas são as tarefas que você deve executar agora:</p>
             </div> 
             <div className="div_lista_tarefas">
-
+                <TarefaListaItem/>
             </div>
             <div className="div_lista_reunioes">
 

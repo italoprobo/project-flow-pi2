@@ -27,16 +27,16 @@ export class CreateTarefaDto {
     descricao: string;
 
     @IsNotEmpty()
-    @IsDate()
+    // @IsDate()
     @ApiProperty()
     dt_inicio: Date;
   
-    @IsDate()
+    // @IsDate()
     @ApiProperty()
     dt_final: Date;
   
     @IsNotEmpty()
-    @IsDate()
+    // @IsDate()
     @ApiProperty()
     tempo_previsto: Date;
 
