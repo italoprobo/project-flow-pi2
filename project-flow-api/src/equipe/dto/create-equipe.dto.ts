@@ -1,29 +1,28 @@
-import { IsArray, IsNotEmpty, IsString, MinLength } from 'class-validator'
-import { Projeto } from 'src/projeto/entities/projeto.entity'
-import { Tarefa } from 'src/tarefa/entities/tarefa.entity'
-import { Usuario } from 'src/usuario/entities/usuario.entity'
+import { IsArray, IsNotEmpty, IsNumber, IsString, MinLength } from 'class-validator';
+import { Tarefa } from 'src/tarefa/entities/tarefa.entity';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
 
 export class CreateEquipeDto {
 
     @IsString()
     @IsNotEmpty()
-    nome: string
+    nome: string;
 
     @IsString()
     @MinLength(2, { message: 'Name must have at least 2 characters.' })
-    funcao: string
+    funcao: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    responsavelId: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    projetoId: number;
 
     @IsArray()
-    @IsNotEmpty()
-    membros: Usuario[]
-
-    @IsNotEmpty()
-    responsavel: Usuario
-
-    @IsNotEmpty()
-    projeto: Projeto
+    membros: Usuario[] = [];
 
     @IsArray()
-    @IsNotEmpty()
-    tarefas: Tarefa[]
+    tarefas: Tarefa[] = [];
 }

@@ -3,6 +3,7 @@ import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColum
 import { Equipe } from "src/equipe/entities/equipe.entity";
 import { Projeto } from "src/projeto/entities/projeto.entity";
 import * as bcrypt from 'bcrypt'
+import { Usuario_equipe} from "src/usuario_equipe/entities/usuario_equipe.entity";
 
 @Entity()
 export class Usuario {
@@ -26,15 +27,12 @@ export class Usuario {
         return bcrypt.compare(senha, this.senha)
     }
 
-    @OneToMany(() => Equipe, (equipe) => equipe.responsavel)
+    @OneToMany(() => Equipe, (equipe) => equipe.responsavel, { cascade: true })
     equipeslideradas: Equipe[]
 
-    @OneToMany(() => Projeto, (projeto: Projeto) => projeto.responsavel)
+    @OneToMany(() => Projeto, (projeto: Projeto) => projeto.responsavel, { cascade: true })
     projetosliderados: Projeto[]
 
-    @ManyToMany((type) => Equipe, (equipe) => equipe.membros, {
-        cascade: true,
-    })
-    @JoinTable()
-    equipes: Equipe[]
+    @OneToMany(() => Usuario_equipe, (usuario_equipe) => usuario_equipe.usuario, { cascade: true })
+    usuario_equipe?: Usuario_equipe[]
 }

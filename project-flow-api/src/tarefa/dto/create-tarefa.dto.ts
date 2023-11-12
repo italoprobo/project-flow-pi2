@@ -1,51 +1,62 @@
 import {
-    IsAlphanumeric,
-    IsDate,
-    IsEmail,
-    IsEnum,
-    IsIn,
-    IsInt,
-    IsNotEmpty,
-    IsString,
-    Matches,
-    MinLength,
-  } from 'class-validator';
+  IsAlphanumeric,
+  IsBoolean,
+  IsDate,
+  IsEmail,
+  IsEnum,
+  IsIn,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  Matches,
+  MinLength,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { PrimaryGeneratedColumn } from 'typeorm';
 
 export class CreateTarefaDto {
 
-    @IsString()
-    @MinLength(2, { message: 'Nome deve ter ao menos 2 caracteres' })
-    @IsNotEmpty()
-    @ApiProperty()
-    nome: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @IsString()
-    @MinLength(2, { message: 'Descrição deve ter ao menos 2 caracteres' })
-    @ApiProperty()
-    descricao: string;
+  @IsString()
+  @MinLength(2, { message: 'Nome deve ter ao menos 2 caracteres' })
+  @IsNotEmpty()
+  @ApiProperty()
+  nome: string;
 
-    @IsNotEmpty()
-    //@IsDate()
-    @ApiProperty()
-    dt_inicio: Date;
-  
-    //@IsDate()
-    @ApiProperty()
-    dt_final: Date;
-  
-    @IsNotEmpty()
-    //@IsDate()
-    @ApiProperty()
-    tempo_previsto: Date;
+  @IsString()
+  @MinLength(2, { message: 'Descrição deve ter ao menos 2 caracteres' })
+  @ApiProperty()
+  descricao: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @ApiProperty()
-    importancia: string;
+  @IsNotEmpty()
+  @ApiProperty()
+  dt_inicio: Date;
 
-    @IsNotEmpty()
-    @IsIn([0,1])
-    @ApiProperty()
-    isDone: number
+  @ApiProperty()
+  dt_final: Date;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  tempo_previsto: number;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  importancia: string;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  @ApiProperty()
+  isDone: boolean
+
+  @IsNumber()
+  @IsNotEmpty()
+  ProjetoId: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  EquipeId: number
 }

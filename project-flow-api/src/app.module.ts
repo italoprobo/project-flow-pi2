@@ -9,6 +9,7 @@ import { Projeto } from './projeto/entities/projeto.entity';
 import { EquipeModule } from './equipe/equipe.module';
 import { Equipe } from './equipe/entities/equipe.entity';
 import { AuthModule } from './auth/auth.module';
+import { Usuario_equipe } from './usuario_equipe/entities/usuario_equipe.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
       port: 5432,
       password: 'postgres',
       username: 'postgres',
-      entities: [Usuario, Tarefa, Projeto, Equipe],
+      entities: [Usuario, Tarefa, Projeto, Equipe, Usuario_equipe],
       database: 'project_flow_db',
       synchronize: true,
       logging: true,

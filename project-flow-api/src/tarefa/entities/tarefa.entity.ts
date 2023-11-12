@@ -20,14 +20,14 @@ export class Tarefa {
     @Column({ type: 'timestamptz', nullable: true })
     dt_final: Date;
   
-    @Column({ type: 'timestamptz' })
-    tempo_previsto: Date;
+    @Column({ type: 'int' })
+    tempo_previsto: number;
 
     @Column({type: 'varchar'})
     importancia: string;
 
-    @Column({type: 'int', width: 1})
-    isDone: number;
+    @Column({type: 'boolean'})
+    isDone: boolean;
 
     @ManyToOne(() => Projeto, (projeto) => projeto.tarefas)
     projeto: Projeto

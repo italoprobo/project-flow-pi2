@@ -24,10 +24,10 @@ export class Projeto {
     @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.projetosliderados)
     responsavel: Usuario
 
-    @OneToMany(() => Tarefa, (tarefa) => tarefa.projeto)
+    @OneToMany(() => Tarefa, (tarefa) => tarefa.projeto, { cascade: true })
     tarefas: Tarefa[]
 
-    @OneToMany(() => Equipe, (equipe) => equipe.projeto)
+    @OneToMany(() => Equipe, (equipe) => equipe.projeto, { cascade: true })
     equipes: Equipe[]
-  project: Promise<Usuario>;
+    project: Promise<Usuario>;
 }
