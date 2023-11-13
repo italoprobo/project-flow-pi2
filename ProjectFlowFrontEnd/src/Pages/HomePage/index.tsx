@@ -1,8 +1,17 @@
 import "./style.css"
-import "./components/TarefaItem"
-import TarefaListaItem from "./components/TarefaItem"
+import "./components/TarefaListaItem"
+import { useEffect, useState } from "react";
+import { useTarefa } from '../../hooks'
+import { TarefaLista } from "./components/TarefaLista";
+import { Tarefa } from "../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
 
 const HomePage = () => {
+    const { tarefas, getAllTarefas } = useTarefa()
+    
+    useEffect(() => {
+        getAllTarefas()
+    }, [])
+
     return(
     <body>
         <header>
@@ -21,7 +30,7 @@ const HomePage = () => {
                 <p>Essas são as tarefas que você deve executar agora:</p>
             </div> 
             <div className="div_lista_tarefas">
-                <TarefaListaItem/>
+                <TarefaLista tarefas={tarefas}/>
             </div>
             <div className="div_lista_reunioes">
 
