@@ -41,7 +41,7 @@ export class TarefaService {
   }
 
   viewTask(id: number): Promise<Tarefa> {
-    return this.taferaRepositorio.findOneBy({ id });
+    return this.taferaRepositorio.findOne({ id });
   }
 
   updateTask(id: number, updateTarefaDto: UpdateTarefaDto): Promise<Tarefa> {

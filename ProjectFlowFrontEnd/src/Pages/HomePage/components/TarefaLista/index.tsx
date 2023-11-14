@@ -5,12 +5,14 @@ interface TarefaListProps {
     tarefas: ITarefa[]
 }
 
-export function TarefaLista({tarefas}: TarefaListProps) {
-    return(
+export function TarefaLista({ tarefas }: TarefaListProps) {
+    return (
         <>
-            <ul>
-                {tarefas.map(tarefa => <TarefaListaItem key={tarefa.id} tarefa={tarefa}/>)}
-            </ul>
+            <div className="ListaTarefas">
+                <ul>
+                    {tarefas.map(tarefa => <TarefaListaItem key={tarefa.id} tarefa={tarefa} />)}
+                </ul>
+            </div>
         </>
     )
 }
