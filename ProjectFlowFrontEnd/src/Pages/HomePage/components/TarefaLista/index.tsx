@@ -12,6 +12,7 @@ export function TarefaLista({ tarefas }: TarefaListProps) {
                 <ul>
                     {tarefas.map(tarefa => <TarefaListaItem key={tarefa.id} tarefa={tarefa} />)}
                 </ul>
+                <a href="">Ver todas</a>
             </div>
         </>
     )

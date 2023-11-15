@@ -26,7 +26,7 @@ const HomePage = () => {
         </header>
         <main>
             <div className="div_saudacao">
-                <h1>Olá, Nicolas.</h1>
+                <h1>Olá, Emanuel.</h1>
                 <p>Essas são as tarefas que você deve executar agora:</p>
             </div> 
             <div className="div_lista_tarefas">

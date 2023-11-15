@@ -12,6 +12,8 @@ export const useTarefa = () => {
             throw new Error()
         }
 
+        data.splice(4)
+
         setTarefas(data)
     }, [])
 

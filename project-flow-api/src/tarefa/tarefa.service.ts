@@ -11,7 +11,7 @@ import { Equipe } from 'src/equipe/entities/equipe.entity';
 export class TarefaService {
 
   constructor(
-    @InjectRepository(Tarefa) private readonly taferaRepositorio: Repository<Tarefa>,
+    @InjectRepository(Tarefa) private readonly tarefaRepositorio: Repository<Tarefa>,
     @InjectRepository(Projeto) private readonly projetoRepositorio: Repository<Projeto>,
     @InjectRepository(Equipe) private readonly equipeRepositorio: Repository<Equipe>,
   ) { }
@@ -32,16 +32,16 @@ export class TarefaService {
       tarefa.isDone = createTarefaDto.isDone
       tarefa.equipe = equipe
       tarefa.projeto = projeto
-      return this.taferaRepositorio.save(tarefa)
+      return this.tarefaRepositorio.save(tarefa)
     }
   }
 
   findAllTask(): Promise<Tarefa[]> {
-    return this.taferaRepositorio.find();
+    return this.tarefaRepositorio.find({ relations: ['projeto', 'equipe'] });
   }
 
   viewTask(id: number): Promise<Tarefa> {
-    return this.taferaRepositorio.findOne({ id });
+    return this.tarefaRepositorio.findOne({ where: { id } });
   }
 
   updateTask(id: number, updateTarefaDto: UpdateTarefaDto): Promise<Tarefa> {
@@ -54,10 +54,10 @@ export class TarefaService {
     task.tempo_previsto = updateTarefaDto.tempo_previsto
     task.isDone = updateTarefaDto.isDone
     task.id = id
-    return this.taferaRepositorio.save(task);
+    return this.tarefaRepositorio.save(task);
   }
 
   removeTask(id: number): Promise<{ affected?: number }> {
-    return this.taferaRepositorio.delete(id);
+    return this.tarefaRepositorio.delete(id);
   }
 }

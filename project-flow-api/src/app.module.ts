@@ -18,7 +18,7 @@ import { Usuario_equipe } from './usuario_equipe/entities/usuario_equipe.entity'
       host: 'localhost',
       port: 5432,
       password: 'postgres',
-      username: 'admin',
+      username: 'postgres',
       entities: [Usuario, Tarefa, Projeto, Equipe, Usuario_equipe],
       database: 'project_flow_db',
       synchronize: true,
