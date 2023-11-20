@@ -39,9 +39,9 @@ const HomePage = () => {
         <footer>
             <div className="footer-content">
                 <div className="menu">
-                    <a href=""><img src="../../../public/list_icon.png" alt="Rojao" className="logo"/></a>
-                    <a href=""><img src="../../../public/calendar_icon.png" alt="Oi" className="teste"/></a>
-                    <a href=""><img src="../../../public/team_icon.png" alt="Tchau" className="teste"/></a>
+                    <a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista"/></a>
+                    <a href=""><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario"/></a>
+                    <a href=""><img src="../../../public/team_icon.png" alt="Time" className="time"/></a>
                 </div>
             </div>
         </footer>

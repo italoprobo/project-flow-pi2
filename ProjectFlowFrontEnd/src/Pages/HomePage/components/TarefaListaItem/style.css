@@ -14,3 +14,15 @@
         font-size: 12px;
     }
 }
+
+.time {
+    height: 40%;
+}
+
+.concluido {
+    background-color: green;
+}
+
+.nao_concluido {
+    background-color: rgb(181, 39, 39);
+}

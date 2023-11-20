@@ -15,14 +15,6 @@ body{
         font-size: large;
     }
 
-    & ul {
-        width: 100vw;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-
     & header {
         width: 100vw;
         display: flex;

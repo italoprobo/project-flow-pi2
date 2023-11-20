@@ -13,10 +13,10 @@ export default function TarefaListaItem({tarefa}: TarefaListItemProps) {
             <div className="card">
                 <p>Nome: {tarefa.nome}</p>
                 <p>Projeto: {tarefa.projeto.nome}</p>
-                <p>Equipe: {tarefa.equipe.nome}</p>
+                <p><a href=""><img src="../../../public/team_icon.png" alt="Time" className="time"/></a> {tarefa.equipe.nome}</p>
                 {tarefa.isDone?
-                <p>Feito</p> :
-                <p>Não feito</p>
+                <p className="concluido" >Concluído</p> :
+                <p className="nao_concluido">Não Concluído</p>
                 }
             </div>
         </>
