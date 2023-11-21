@@ -29,11 +29,11 @@ export class ProjetoService {
   }
 
   findAllProject(): Promise<Projeto[]> {
-    return this.projetoRepositorio.find();
+    return this.projetoRepositorio.find({ relations: ['responsavel', 'tarefas'] });
   }
 
   viewProject(id: number): Promise<Projeto> {
-    return this.projetoRepositorio.findOneBy({id});
+    return this.projetoRepositorio.findOne({ where: { id }, relations: ['responsavel', 'tarefas'] });
   }
 
   async updateProject(idUsuario: number, updateProjetoDto: UpdateProjetoDto): Promise<Projeto | null> {

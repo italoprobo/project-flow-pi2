@@ -1,23 +1,23 @@
-import "./style.css"
-import "./components/TarefaListaItem"
+import "../../components/ProjetoListaItem"
 import { useEffect } from "react";
-import { useTarefa } from '../../hooks'
-import { TarefaLista } from "./components/TarefaLista";
+import { useProjeto } from '../../hooks'
+import { ProjetoLista } from "../../components/ProjetoLista";
 import { Link } from "react-router-dom";
+import "./styleProjetos.css"
 
-const HomePage = () => {
-    const { tarefas, getAllTarefas } = useTarefa()
-    
+const ProjetosPage = () => {
+    const {projetos, getAllProjetos} = useProjeto()
+
     useEffect(() => {
-        getAllTarefas()
+        getAllProjetos()
     }, [])
 
-    return(
-    <body>
+    return (
+        <body>
         <header>
         <div className="head-content">
             <div className="div_logo">
-            <Link to="/home"><img src="../../../public/icon.png" alt="Logo" className="logo"/></Link>
+                <Link to="/home"><img src="../../../public/icon.png" alt="Logo" className="logo"/></Link>
             </div>
             <div className="div_account">
                 <img src="../../../public/account.png" alt="Conta" className="conta_icon"/>
@@ -25,15 +25,9 @@ const HomePage = () => {
         </div>
         </header>
         <main>
-            <div className="div_saudacao">
-                <h1>Olá, Emanuel.</h1>
-                <p>Essas são as tarefas que você deve executar agora:</p>
-            </div> 
-            <div className="div_lista_tarefas">
-                <TarefaLista tarefas={tarefas}/>
-            </div>
-            <div className="div_lista_reunioes">
-
+            <div className="div_lista_projetos">
+                <h1>Seus projetos: </h1>
+                <ProjetoLista projetos={projetos}/>
             </div>
         </main>
         <footer>
@@ -49,4 +43,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default ProjetosPage

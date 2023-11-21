@@ -49,4 +49,4 @@ const EquipePage = () => {
     )
 }
 
-export default HomePage
+export default EquipePage
