@@ -1,9 +1,10 @@
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import LoginPage from './Pages/LoginPage/LoginPage'
-import CadastroPage from './Pages/CadastroPage/CadastroPage'
+import LoginPage from './Pages/LoginPage'
+import CadastroPage from './Pages/CadastroPage'
 import HomePage from './Pages/HomePage'
 import TaskPage from './Pages/TaskPage'
+import ProjetosPage from './Pages/ProjetosPage'
  
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
     }, {
       path: "/tarefas",
       element: <TaskPage/>
+    }, {
+      path: "/projetos",
+      element: <ProjetosPage></ProjetosPage>
     }
   ])
 

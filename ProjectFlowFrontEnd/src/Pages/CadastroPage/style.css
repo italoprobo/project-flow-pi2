@@ -1,0 +1,57 @@
+.cadastro {
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+     
+    & .cadastro_campos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3vh;
+        & .cadastro_username, .cadastro_senha, .cadastro_telefone, .cadastro_email {
+            display: flex;
+            align-items: center;
+            border-bottom: 0.2vh solid black;
+            width: 70vw;
+            font-size: 1rem;
+            & .cadastro_icon{
+                height: auto;
+                width: 7vw;
+            }
+            & input {
+                border: none;
+                height: 4vh;
+                font-size: 1rem;
+                width: 100vw;
+            }
+            
+            & input:focus {
+                outline: none;
+            }
+        }
+
+        & .cadastro_botaoCadastro {
+            background-color: #0F70BC;
+            color: white;
+            cursor:pointer;
+            box-shadow: none;
+            border: none;
+            height: 5vh;
+            width: 30vh;
+            border-radius: 0%;
+            font-size: medium;
+        }
+    }
+}
+
+/* @media (min-width: 786px) {
+    .cadastro_username, .cadastro_senha, .cadastro_telefone, .cadastro_email {
+        font-size:100rem;
+    }
+} */
