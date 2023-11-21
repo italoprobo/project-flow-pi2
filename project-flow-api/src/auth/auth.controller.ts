@@ -5,8 +5,10 @@ import { CreateUsuarioDto } from 'src/usuario/dto/create-usuario.dto';
 import { LoginDto } from 'src/usuario/dto/login.dto';
 import { Public } from './public.decorator';
 import { LocalAuthGuard } from './local-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('auth')
+@Controller('api/auth')
+@ApiTags('autenticacao')
 export class AuthController {
     constructor(
         private readonly authService: AuthService,

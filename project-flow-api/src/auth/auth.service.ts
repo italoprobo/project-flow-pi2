@@ -32,11 +32,24 @@ export class AuthService {
       }
 
       async validateUser(nome: string, senha: string): Promise<any> {
+        console.log('Tentativa de login para o usuário:', nome);
+      
         const user = await this.usersService.findByName(nome);
-        if (user && (await user.validatePassword(senha))) {
-          const { senha, ...result } = user;
-          return result;
+      
+        if (!user) {
+          console.log('Usuário não encontrado.');
+          return null;
         }
-        return null;
+      
+        const passwordIsValid = await user.validatePassword(senha);
+      
+        if (!passwordIsValid) {
+          console.log('Senha inválida.');
+          return null;
+        }
+      
+        console.log('Usuário validado com sucesso:', user);
+        return user;
       }
+      
 }

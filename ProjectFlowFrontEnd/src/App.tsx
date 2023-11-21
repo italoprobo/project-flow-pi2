@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import LoginPage from './Pages/LoginPage/LoginPage'
 import CadastroPage from './Pages/CadastroPage/CadastroPage'
 import HomePage from './Pages/HomePage'
+import TaskPage from './Pages/TaskPage'
  
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
     }, {
       path: "/home",
       element: <HomePage></HomePage>
+    }, {
+      path: "/tarefas",
+      element: <TaskPage/>
     }
   ])
 
