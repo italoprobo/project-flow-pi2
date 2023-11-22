@@ -46,7 +46,6 @@ const CadastroPage = () => {
                 <div className="cadastrar">
                     <h1>Cadastro de Usuário</h1>
                 </div>
-                {/* <div className="cadastro_form"> */}
                     <form className="cadastro_campos" onSubmit={handleCadastro}>
                         <div className="cadastro_username"><BiSolidUser className="cadastro_icon"/> <input type="text"
                         placeholder="Nome" 
@@ -74,7 +73,6 @@ const CadastroPage = () => {
 
                         <button type="submit" className="cadastro_botaoCadastro"><b>Cadastrar</b></button>
                     </form>
-                {/* </div> */}
         </div>
     )
 }

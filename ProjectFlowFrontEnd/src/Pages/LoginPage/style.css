@@ -38,7 +38,7 @@
                     display: flex;
                     align-items: center;
                     border-bottom: 0.2vh solid black;
-                    width: 70vw;
+                    width: 55vw;
                     font-size: 1.5rem;
 
                     & input {
@@ -67,15 +67,51 @@
     }
 }
 
-
-
-
 .logo {
     height: 15vh;
     width: 40vh;
 }
 
-
 h1{
     padding-bottom: 1rem;
+}
+
+@media (min-width: 786px) {
+    .icon{
+        width: 6vw;
+        height: 6vh;
+    }
+
+    .login_body {
+        & .login_main{
+            & .login{
+                & .login_campos{
+                    .login_username, .login_senha {
+                        width: 45vw;
+                        border-bottom: 0.2vh solid black;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .icon{
+        width: 2vw;
+        height: auto;
+    }
+
+    .login_body {
+        & .login_main{
+            & .login{
+                & .login_campos{
+                    .login_username, .login_senha {
+                        width: 25vw;
+                        border-bottom: 0.2vh solid black;
+                    }
+                }
+            }
+        }
+    }
 }

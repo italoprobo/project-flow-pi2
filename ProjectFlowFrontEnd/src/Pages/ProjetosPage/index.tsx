@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useProjeto } from '../../hooks'
 import { ProjetoLista } from "../../components/ProjetoLista";
 import { Link } from "react-router-dom";
-import "./styleProjetos.css"
+import "./style.css"
 
 const ProjetosPage = () => {
     const {projetos, getAllProjetos} = useProjeto()

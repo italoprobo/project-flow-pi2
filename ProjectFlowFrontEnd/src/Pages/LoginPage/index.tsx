@@ -50,13 +50,13 @@ const LoginPage = () => {
                 <div className="login">
                     <h1>Entrar</h1>
                     <form className="login_campos" onSubmit={handleLogin}>
-                        <div className="login_username"><BiSolidUser/> <input type="text" 
+                        <div className="login_username"><BiSolidUser class="icon"/> <input type="text" 
                         placeholder="Email"
                         value={nome}
                         onChange={(e) => setUsername(e.target.value)}
                         /></div>
 
-                        <div className="login_senha"><AiFillLock/> <input type="password" 
+                        <div className="login_senha"><AiFillLock class="icon"/> <input type="password" 
                         placeholder="Senha"
                         value={senha}
                         onChange={(e) => setPassword(e.target.value)}

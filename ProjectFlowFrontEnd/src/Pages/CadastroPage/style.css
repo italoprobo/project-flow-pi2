@@ -22,7 +22,7 @@
             font-size: 1rem;
             & .cadastro_icon{
                 height: auto;
-                width: 7vw;
+                width: 10vw;
             }
             & input {
                 border: none;
@@ -50,8 +50,30 @@
     }
 }
 
-/* @media (min-width: 786px) {
-    .cadastro_username, .cadastro_senha, .cadastro_telefone, .cadastro_email {
-        font-size:100rem;
+@media (min-width: 786px) {
+    .cadastro{
+        & .cadastro_campos{
+            & .cadastro_username, .cadastro_senha, .cadastro_email, .cadastro_telefone {
+                width: 45vw;
+                border-bottom: 0.2vh solid black;
+                & .cadastro_icon{
+                        width: 10vw;
+                }
+            }
+        }
     }
-} */
+}
+
+@media (min-width: 1024px) {
+    .cadastro{
+        & .cadastro_campos{
+            & .cadastro_username, .cadastro_senha, .cadastro_email, .cadastro_telefone {
+                width: 25vw;
+                border-bottom: 0.2vh solid black;
+                & .cadastro_icon{
+                        width: 8vw;
+                }
+            }
+        }
+    }
+}
