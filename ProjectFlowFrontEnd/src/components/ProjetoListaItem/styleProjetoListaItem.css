@@ -1,17 +1,18 @@
-.card{
+.cardProjeto{
     background-color: white;
     padding: 20px 15px;
     border-radius: 5%;
     border: 1px solid #0F70BC;
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     gap: 1vh;
-    max-width: 33vw;
-    max-height: 10vh;
+    width: 70vw;
+    height: 10vh;
     margin-bottom: 1vh;
 
     & p{
-        font-size: 12px;
+        font-size: 16px;
     }
 }
 

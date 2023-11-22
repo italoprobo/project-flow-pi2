@@ -1,9 +1,9 @@
 import "./style.css"
 import "./components/TarefaListaItem"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTarefa } from '../../hooks'
 import { TarefaLista } from "./components/TarefaLista";
-import { Tarefa } from "../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
     const { tarefas, getAllTarefas } = useTarefa()
@@ -17,7 +17,7 @@ const HomePage = () => {
         <header>
         <div className="head-content">
             <div className="div_logo">
-                <img src="../../../public/icon.png" alt="Logo" className="logo"/>
+            <Link to="/home"><img src="../../../public/icon.png" alt="Logo" className="logo"/></Link>
             </div>
             <div className="div_account">
                 <img src="../../../public/account.png" alt="Conta" className="conta_icon"/>
@@ -39,7 +39,7 @@ const HomePage = () => {
         <footer>
             <div className="footer-content">
                 <div className="menu">
-                    <a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista"/></a>
+                    <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista"/></a></Link>
                     <a href=""><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario"/></a>
                     <a href=""><img src="../../../public/team_icon.png" alt="Time" className="time"/></a>
                 </div>
