@@ -1,0 +1,81 @@
+.login_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    
+    & .login_header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 15vh;
+        
+        & .div_logo {
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    & .login_main {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 50vh;
+        & .login {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            & .login_campos {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 3vh;
+                & .login_username, .login_senha {
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 0.2vh solid black;
+                    width: 70vw;
+                    font-size: 1.5rem;
+
+                    & input {
+                        border: none;
+                        font-size: 1rem;
+                        height: 4vh;
+                    }
+                    
+                    & input:focus {
+                        outline: none;
+                    }
+                }
+                & .botaoLogin {
+                    background-color: #0F70BC;
+                    color: white;
+                    cursor:pointer;
+                    box-shadow: none;
+                    border: none;
+                    height: 5vh;
+                    width: 30vh;
+                    border-radius: 0%;
+                    font-size: medium;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+.logo {
+    height: 15vh;
+    width: 40vh;
+}
+
+
+h1{
+    padding-bottom: 1rem;
+}

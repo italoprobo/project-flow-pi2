@@ -1,10 +1,10 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import LoginPage from './Pages/LoginPage/LoginPage'
-import CadastroPage from './Pages/CadastroPage/CadastroPage'
 import HomePage from './Pages/HomePage'
 import ProjetosPage from './Pages/ProjetosPage'
 import ProjetoPage from './Pages/ProjetoPage'
+import CadastroPage from './Pages/CadastroPage'
+import LoginPage from './Pages/LoginPage'
 
 
 function App() {
