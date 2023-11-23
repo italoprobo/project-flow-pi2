@@ -13,7 +13,7 @@ const ProjetosPage = () => {
         getAllProjetos()
     }, [])
 
-    const dispolayNone = {
+    const displayNone = {
         display: 'none'
     };
 
@@ -45,7 +45,7 @@ const ProjetosPage = () => {
                 </div>
             </main>
             {footerVisible ?
-                <footer style={dispolayNone}>
+                <footer style={displayNone}>
                     <div className="footer-content">
                         <div className="menu">
                             <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></a></Link>
@@ -71,7 +71,7 @@ const ProjetosPage = () => {
                 <div className="botaoBarraSubir">
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div> :
-                <div className="botaoBarraSubir" style={dispolayNone}>
+                <div className="botaoBarraSubir" style={displayNone}>
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div>
             }

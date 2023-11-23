@@ -13,7 +13,7 @@ const HomePage = () => {
         getAllTarefas()
     }, [])
 
-    const estiloDoFooter = {
+    const displayNone = {
         display: 'none'
     };
 
@@ -48,7 +48,7 @@ const HomePage = () => {
                 </div>
             </main>
             {footerVisible ?
-                <footer style={estiloDoFooter}>
+                <footer style={displayNone}>
                     <div className="footer-content">
                         <div className="menu">
                             <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></a></Link>
@@ -60,7 +60,7 @@ const HomePage = () => {
                 <footer>
                     <div className="footer-content">
                         <div className="botaoBarraAbaixar">
-                            <button onClick={toggleFooter}><FaCircleArrowDown/></button>
+                            <button onClick={toggleFooter}><FaCircleArrowDown /></button>
                         </div>
                         <div className="menu">
                             <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></a></Link>
@@ -70,9 +70,14 @@ const HomePage = () => {
                     </div>
                 </footer>
             }
-            <div className="botaoBarraSubir">
-                <button onClick={toggleFooter}><FaCircleArrowUp /></button>
-            </div>
+            {footerVisible ?
+                <div className="botaoBarraSubir">
+                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                </div> :
+                <div className="botaoBarraSubir" style={displayNone}>
+                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                </div>
+            }
         </body>
     )
 }
