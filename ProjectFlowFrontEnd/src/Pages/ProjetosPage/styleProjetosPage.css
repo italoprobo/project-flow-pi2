@@ -1,0 +1,18 @@
+.div_lista_projetos {
+    padding-top: 4vh;
+
+    & .linkCriarProjeto {
+        text-align: center;
+        background-color: white;
+        margin-left: 30vw;
+        margin-right: 30vw;
+        width: 40vw;
+        border-radius: 2%;
+        border: 1px solid #0F70BC;
+    }
+
+
+    & h1 {
+        padding-left: 10vw;
+    }
+}

@@ -33,6 +33,10 @@ export class CreateUsuarioDto {
     @IsNotEmpty()
     @ApiProperty()
     senha: string;
+    
+    @IsNotEmpty()
+    @ApiProperty()
+    cargo: string;
 
     equipeslideradas: Equipe[];
     

@@ -1,7 +1,7 @@
 .cardProjeto{
     background-color: white;
     padding: 20px 15px;
-    border-radius: 5%;
+    border-radius: 2%;
     border: 1px solid #0F70BC;
     display: flex;
     flex-direction: column;
@@ -26,4 +26,8 @@
 
 .nao_concluido {
     background-color: rgb(181, 39, 39);
+}
+
+.linkProjeto {
+    width: 100%;
 }

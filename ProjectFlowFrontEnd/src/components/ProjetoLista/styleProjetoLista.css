@@ -1,4 +1,4 @@
-& .ListaProjetos{
+& .ListaProjetos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -6,7 +6,9 @@
     width: 100%;
     text-align: center;
     padding: 2vh 0 0 0;
+
     & ul {
+        padding: 0 0 0 0;
         width: 100vw;
         display: flex;
         flex-direction: row;

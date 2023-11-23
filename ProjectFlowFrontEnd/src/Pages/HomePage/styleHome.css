@@ -3,11 +3,10 @@
     border: 0;
 }
 
-body{
+body {
     width: 100vw;
     height: 100vh;
     background-color: #7A7A7A;
-    justify-content: start;
 
     & a {
         text-decoration: none;
@@ -17,49 +16,56 @@ body{
 
     & header {
         width: 100vw;
+        height: 10vh;
         display: flex;
         align-items: flex-start;
         justify-content: left;
 
-        & .head-content{
+        & .head-content {
             width: 100vw;
             height: 10vh;
-            display:flex;
+            display: flex;
             flex-direction: row;
-            gap:60vw;
-            & img{
+            gap: 60vw;
+
+            & img {
                 height: 8vh;
                 width: auto;
             }
-            & .div_logo{
+
+            & .div_logo {
                 padding: 1rem 0 0 1rem;
             }
-            & .div_account{
+
+            & .div_account {
                 align-self: self-end;
             }
         }
     }
-    & main{
-        display:flex;
+
+    & main {
+        display: flex;
         flex-direction: column;
         justify-content: left;
         width: 100vw;
         height: 80vh;
 
-        & .div_saudacao{
+        & .div_saudacao {
             color: white;
             justify-content: center;
             align-items: center;
             text-align: center;
-            & h1{
+
+            & h1 {
                 font-size: 2rem;
             }
-            & p{
+
+            & p {
                 font-size: 1.2rem;
             }
         }
 
-        & .div_lista_tarefas{
+        & .div_lista_tarefas {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -68,28 +74,41 @@ body{
             text-align: center;
         }
     }
-    & footer{
+
+    & footer {
         width: 100vw;
         height: 10vh;
         background-color: #979797;
         display: flex;
         align-items: center;
-        
-        & .footer-content{
-            & .menu{
+        position: fixed;
+
+        & .footer-content {
+            & .menu {
                 display: flex;
                 justify-content: space-around;
                 width: 100vw;
             }
-            & img{
+
+            & img {
                 height: 4vh;
                 width: auto;
             }
 
-            & img:hover{
+            & img:hover {
                 transform: scale(1.2);
-            }   
+            }
         }
 
+    }
+
+    & .botaoBarraAbaixar{
+        text-align: start;
+        background-color: #979797;
+    }
+
+    & .botaoBarraSubir {
+        background-color: #7A7A7A;
+        position: fixed;
     }
 }

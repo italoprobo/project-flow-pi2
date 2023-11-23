@@ -13,6 +13,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<HomePage></HomePage>} />
           <Route path='login' element={<LoginPage></LoginPage>} />
           <Route path='cadastro' element={<CadastroPage></CadastroPage>} />
           <Route path='home' element={<HomePage></HomePage>} />

@@ -6,7 +6,7 @@ interface ProjetoListItemProps {
     projeto: Projeto
 }
 
-export default function ProjetoListaItem({projeto}: ProjetoListItemProps) {
+export default function ProjetoListaItem({ projeto }: ProjetoListItemProps) {
 
     return (
 
@@ -14,7 +14,9 @@ export default function ProjetoListaItem({projeto}: ProjetoListItemProps) {
             <div className="cardProjeto">
                 <p>Nome: {projeto.nome}</p>
                 <p>Responsável: {projeto.responsavel.nome}</p>
-                <Link to={`/projetos/${projeto.id}`}>Ver projeto</Link>
+                <div className="linkProjeto">
+                    <Link to={`/projetos/${projeto.id}`}>Ver projeto</Link>
+                </div>
             </div>
         </>
 
