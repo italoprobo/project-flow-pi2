@@ -44,6 +44,13 @@ export class TarefaService {
     return this.tarefaRepositorio.findOne({ where: { id } });
   }
 
+  async findTarefasByEquipeId(equipeId: number): Promise<Tarefa[]> {
+    return this.tarefaRepositorio.find({
+      where: { equipe: { id: equipeId } },
+      relations: ['projeto'], 
+    });
+  }
+
   updateTask(id: number, updateTarefaDto: UpdateTarefaDto): Promise<Tarefa> {
     const task: Tarefa = new Tarefa();
     task.nome = updateTarefaDto.nome

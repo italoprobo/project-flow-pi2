@@ -28,7 +28,7 @@ const ProjetosPage = () => {
             <header>
                 <div className="head-content">
                     <div className="div_logo">
-                        <Link to="/home"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
+                        <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                     </div>
                     <div className="div_account">
                         <img src="../../../public/account.png" alt="Conta" className="conta_icon" />

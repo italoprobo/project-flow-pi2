@@ -14,6 +14,10 @@ body {
         font-size: large;
     }
 
+    & ul {
+        padding: 0;
+    }
+
     & header {
         width: 100vw;
         height: 10vh;

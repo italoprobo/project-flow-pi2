@@ -5,12 +5,21 @@ import { useEffect, useState } from "react";
 import { useTarefa } from '../../hooks'
 import { TarefaLista } from "./components/TarefaLista";
 import { Link } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext'
 
 const HomePage = () => {
+    const { signout, isAuthenticated, user } = useAuth()
+
     const { tarefas, getAllTarefas } = useTarefa()
+
+    const { fourTarefas, get4Tarefas } = useTarefa()
 
     useEffect(() => {
         getAllTarefas()
+    }, [])
+
+    useEffect(() => {
+        get4Tarefas()
     }, [])
 
     const displayNone = {
@@ -28,7 +37,7 @@ const HomePage = () => {
             <header>
                 <div className="head-content">
                     <div className="div_logo">
-                        <Link to="/home"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
+                        <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                     </div>
                     <div className="div_account">
                         <img src="../../../public/account.png" alt="Conta" className="conta_icon" />
@@ -37,11 +46,11 @@ const HomePage = () => {
             </header>
             <main>
                 <div className="div_saudacao">
-                    <h1>Olá, Emanuel.</h1>
+                    <h1>Olá, {user?.username}.</h1>
                     <p>Essas são as tarefas que você deve executar agora:</p>
                 </div>
                 <div className="div_lista_tarefas">
-                    <TarefaLista tarefas={tarefas} />
+                    <TarefaLista tarefas={fourTarefas} />
                 </div>
                 <div className="div_lista_reunioes">
 

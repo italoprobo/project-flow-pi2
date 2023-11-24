@@ -45,11 +45,11 @@ export class EquipeService {
   
 
   findAllTeam(): Promise<Equipe[]> {
-    return this.equipeRepositorio.find();
+    return this.equipeRepositorio.find({ relations: ['projeto', 'responsavel'] });
   }
 
   viewTeam(id: number): Promise<Equipe> {
-    return this.equipeRepositorio.findOneBy({id});
+    return this.equipeRepositorio.findOne({ where: { id }, relations: ['projeto', 'responsavel'] });
   }
 
   updateTeam(id: number, updateEquipeDto: UpdateEquipeDto): Promise<Equipe> {

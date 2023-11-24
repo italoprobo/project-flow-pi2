@@ -1,73 +1,80 @@
 import "./style.css"
-import {BiSolidUser} from 'react-icons/bi'
-import {AiFillLock} from 'react-icons/ai'
-import logo from '../../assets/logo_project_flow.png'; 
-import { useState } from "react";
-import { isAxiosError } from "axios";
-import { Api } from "../../providers/api";
+import { BiSolidUser } from 'react-icons/bi'
+import { AiFillLock } from 'react-icons/ai'
+import logo from '../../assets/logo_project_flow.png';
+import { useEffect, useRef, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useUsuario } from "../../hooks";
+interface LoginPagePros {
+  next?: string
+}
 
-const LoginPage = () => {
+export function LoginPage({ next = '/' }: LoginPagePros) {
 
-    const [nome, setUsername] = useState('');
-    const [senha, setPassword] = useState('');
+  const { usuarios, getAllUsuarios } = useUsuario()
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-    
-        try {
-            const response = await Api.post('/auth/login', {
-              nome: nome,
-              senha: senha,
-            });
-          
-            console.log('Login bem-sucedido:', response.data);
-            const accessToken = response.data.access_token;
-            console.log('Token de acesso:', accessToken);
-          
-          } catch (error) {
-            if (isAxiosError(error) && error.response) {
-              const errorMessage = error.response.data.message;
-              console.error('Erro ao fazer login:', errorMessage);
-          
-              if (error.response.status === 401) {
-                console.error('Credenciais inválidas.');
-              }
-          
-            } else {
-              console.error('Erro desconhecido ao fazer login:', error);
-            }
-          }
-        }
+  useEffect(() => {
+    getAllUsuarios()
+  }, [])
 
-    return(
-        <div className="login_body">
-            <div className="login_header">
-                <div className="div_logo">
-                    <img src={logo} className="logo"></img>
-                </div>
-            </div>
-            <div className="login_main">
-                <div className="login">
-                    <h1>Entrar</h1>
-                    <form className="login_campos" onSubmit={handleLogin}>
-                        <div className="login_username"><BiSolidUser class="icon"/> <input type="text" 
-                        placeholder="Email"
-                        value={nome}
-                        onChange={(e) => setUsername(e.target.value)}
-                        /></div>
+  const { signin, isAuthenticated } = useAuth()
 
-                        <div className="login_senha"><AiFillLock class="icon"/> <input type="password" 
-                        placeholder="Senha"
-                        value={senha}
-                        onChange={(e) => setPassword(e.target.value)}
-                        /></div>
+  const navigate = useNavigate()
 
-                        <button type="submit" className="botaoLogin"><b>Login</b></button>
-                    </form>
-                </div>
-            </div>
+  const usernameInputRef = useRef<HTMLInputElement>(null)
+  const passwordInputRef = useRef<HTMLInputElement>(null)
+
+  const [loginAutorizado, setLoginAutorizado] = useState(true)
+
+  const textoVermelho = {
+    color: 'red'
+  };
+
+  const handleLoginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    event.preventDefault()
+    const username = usernameInputRef.current!.value
+    const password = passwordInputRef.current!.value
+
+    for (let usuario of usuarios) {
+      if (username === usuario.nome && password === usuario.senha) {
+        console.log(username);
+        signin({
+          username,
+          id: usuario.id
+        })
+        navigate(next)
+        return
+      }
+    }
+
+    setLoginAutorizado(false)
+  }
+
+  return (
+    <div className="login_body">
+      <div className="login_header">
+        <div className="div_logo">
+          <img src={logo} className="logo"></img>
         </div>
-    )
+      </div>
+      <div className="login_main">
+        <div className="login">
+          <h1>Entrar</h1>
+          <form className="login_campos" onSubmit={handleLoginSubmit}>
+            <div className="login_username"><BiSolidUser className="icon" /> <input type="text" placeholder="Usuário" ref={usernameInputRef} /></div>
+            <div className="login_senha"><AiFillLock className="icon" /> <input type="password" placeholder="Senha" ref={passwordInputRef} /></div>
+            <input type="submit" className="botaoLogin" value="Login" />
+          </form>
+          {loginAutorizado === true ?
+            <p></p> :
+            <p style={textoVermelho}>Credenciais inválidas.</p>
+          }
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default LoginPage

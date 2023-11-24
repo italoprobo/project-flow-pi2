@@ -27,6 +27,11 @@ export class TarefaController {
     return this.tarefaService.viewTask(+id);
   }
 
+  @Get('/equipe/:equipeId')
+  async getTarefasByEquipeId(@Param('equipeId') equipeId: number) {
+    return this.tarefaService.findTarefasByEquipeId(equipeId);
+  }
+
   @Patch(':id')
   @ApiOperation({summary: 'Atualizar tarefa'})
   update(@Param('id') id: string, @Body() updateTarefaDto: UpdateTarefaDto) {
