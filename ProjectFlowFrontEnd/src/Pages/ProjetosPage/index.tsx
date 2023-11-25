@@ -5,9 +5,11 @@ import { ProjetoLista } from "../../components/ProjetoLista";
 import { Link } from "react-router-dom";
 import "./styleProjetosPage.css"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
+import PopupComponent from "./componentes/Popup";
 
 const ProjetosPage = () => {
     const { projetos, getAllProjetos } = useProjeto()
+    const [popupVisible, setPopupVisible] = useState(false);
 
     useEffect(() => {
         getAllProjetos()
@@ -21,6 +23,10 @@ const ProjetosPage = () => {
 
     const toggleFooter = () => {
         setFooterVisible(!footerVisible);
+    };
+
+    const togglePopup = () => {
+        setPopupVisible(!popupVisible);
     };
 
     return (
@@ -39,7 +45,7 @@ const ProjetosPage = () => {
                 <div className="div_lista_projetos">
                     <h1>Seus projetos: </h1>
                     <div className="linkCriarProjeto">
-                        <Link to="">Criar Projeto</Link>
+                        <button onClick={togglePopup}>Criar Projeto</button>
                     </div>
                     <ProjetoLista projetos={projetos} />
                 </div>
@@ -75,6 +81,7 @@ const ProjetosPage = () => {
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div>
             }
+            {popupVisible && <PopupComponent onClose={togglePopup} />}
         </body>
     )
 }
