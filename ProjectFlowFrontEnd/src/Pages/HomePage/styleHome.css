@@ -43,6 +43,10 @@ body {
 
             & .div_account {
                 align-self: self-end;
+
+                & button {
+                    background: #7A7A7A;
+                }
             }
         }
     }
@@ -106,13 +110,30 @@ body {
 
     }
 
-    & .botaoBarraAbaixar{
+    & .botaoBarraAbaixar {
         text-align: start;
-        background-color: #979797;
+
+        & button {
+            background: #979797;
+            cursor: pointer;
+            
+            & svg {
+                font-size: 24px;
+            }
+        }
     }
 
     & .botaoBarraSubir {
-        background-color: #7A7A7A;
         position: fixed;
+
+        & button {
+            background: #7A7A7A;
+            cursor: pointer;
+
+            & svg {
+                font-size: 24px;
+            }
+        }
     }
+
 }

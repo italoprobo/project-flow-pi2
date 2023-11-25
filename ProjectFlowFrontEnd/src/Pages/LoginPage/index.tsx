@@ -22,7 +22,7 @@ export function LoginPage({ next = '/' }: LoginPagePros) {
 
   const navigate = useNavigate()
 
-  const usernameInputRef = useRef<HTMLInputElement>(null)
+  const emailInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
 
   const [loginAutorizado, setLoginAutorizado] = useState(true)
@@ -34,15 +34,15 @@ export function LoginPage({ next = '/' }: LoginPagePros) {
   const handleLoginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 
     event.preventDefault()
-    const username = usernameInputRef.current!.value
+    const email = emailInputRef.current!.value
     const password = passwordInputRef.current!.value
 
     for (let usuario of usuarios) {
-      if (username === usuario.nome && password === usuario.senha) {
-        console.log(username);
+      if (email === usuario.email && password === usuario.senha) {
         signin({
-          username,
-          id: usuario.id
+          nome: usuario.nome,
+          id: usuario.id,
+          cargo: usuario.cargo
         })
         navigate(next)
         return
@@ -63,7 +63,7 @@ export function LoginPage({ next = '/' }: LoginPagePros) {
         <div className="login">
           <h1>Entrar</h1>
           <form className="login_campos" onSubmit={handleLoginSubmit}>
-            <div className="login_username"><BiSolidUser className="icon" /> <input type="text" placeholder="Usuário" ref={usernameInputRef} /></div>
+            <div className="login_username"><BiSolidUser className="icon" /> <input type="text" placeholder="Email" ref={emailInputRef} /></div>
             <div className="login_senha"><AiFillLock className="icon" /> <input type="password" placeholder="Senha" ref={passwordInputRef} /></div>
             <input type="submit" className="botaoLogin" value="Login" />
           </form>

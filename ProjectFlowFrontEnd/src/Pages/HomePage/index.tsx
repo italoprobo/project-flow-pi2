@@ -40,13 +40,13 @@ const HomePage = () => {
                         <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                     </div>
                     <div className="div_account">
-                        <img src="../../../public/account.png" alt="Conta" className="conta_icon" />
+                        <button><img src="../../../public/account.png" alt="Conta" className="conta_icon" /></button>
                     </div>
                 </div>
             </header>
             <main>
                 <div className="div_saudacao">
-                    <h1>Olá, {user?.username}.</h1>
+                    <h1>Olá, {user?.nome}.</h1>
                     <p>Essas são as tarefas que você deve executar agora:</p>
                 </div>
                 <div className="div_lista_tarefas">

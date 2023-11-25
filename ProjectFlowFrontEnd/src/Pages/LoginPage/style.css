@@ -87,7 +87,7 @@ h1{
             & .login{
                 & .login_campos{
                     .login_username, .login_senha {
-                        width: 45vw;
+                        width: 60vw;
                         border-bottom: 0.2vh solid black;
                     }
                 }

@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
 type User = {
-  username: string
+  nome: string
   id: number
+  cargo: string
 }
 
 interface AuthContextType {

@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import "./styleProjetosPage.css"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import PopupComponent from "./componentes/Popup";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ProjetosPage = () => {
+    const { signout, isAuthenticated, user } = useAuth()
+
     const { projetos, getAllProjetos } = useProjeto()
     const [popupVisible, setPopupVisible] = useState(false);
 
@@ -44,9 +47,12 @@ const ProjetosPage = () => {
             <main>
                 <div className="div_lista_projetos">
                     <h1>Seus projetos: </h1>
-                    <div className="linkCriarProjeto">
-                        <button onClick={togglePopup}>Criar Projeto</button>
-                    </div>
+                    {user?.cargo === "administrador" ?
+                        <div className="linkCriarProjeto">
+                            <button onClick={togglePopup}>Criar Projeto</button>
+                        </div> :
+                        <p></p>
+                    }
                     <ProjetoLista projetos={projetos} />
                 </div>
             </main>
