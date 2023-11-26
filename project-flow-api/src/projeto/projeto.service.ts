@@ -18,6 +18,9 @@ export class ProjetoService {
     const usuario: Usuario = await this.usuarioRepositorio.findOneBy({id: createProjetoDto.responsavelId})
 
     if(usuario) {
+      if (createProjetoDto.dt_inicio > createProjetoDto.dt_final) {
+        throw new Error('Data final deve ser maior que data inicial')
+      }
       const project: Projeto = new Projeto();
       project.nome = createProjetoDto.nome
       project.descricao = createProjetoDto.descricao

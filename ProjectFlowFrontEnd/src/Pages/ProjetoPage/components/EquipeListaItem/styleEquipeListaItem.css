@@ -1,0 +1,17 @@
+.cardEquipe{
+    background-color: white;
+    padding: 20px 15px;
+    border-radius: 5%;
+    border: 1px solid #0F70BC;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 1vh;
+    width: 33vw;
+    height: 12vh;
+    margin-bottom: 1vh;
+
+    & p{
+        font-size: 10.5px;
+    }
+}

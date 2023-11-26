@@ -22,11 +22,6 @@ export class CreateUsuarioDto {
     nome: string;
 
     @IsNotEmpty()
-    @MinLength(8, { message: 'O telefone deve ter ao menos 8 caracteres.' })
-    @ApiProperty()
-    telefone: string;
-
-    @IsNotEmpty()
     @ApiProperty()
     email: string;
 

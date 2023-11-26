@@ -8,6 +8,7 @@ import LoginPage from './Pages/LoginPage'
 import { useMemo } from 'react'
 import { useAuth } from './contexts/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import TarefaPage from './Pages/TarefaPage'
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   const authBlock = useMemo(() => {
     return (
       isAuthenticated ?
-        <p>{user!.username}
+        <p>{user!.nome}
           <button onClick={() => { signout() }}>Sair</button>
         </p>
         : <p>Olá Visitante!</p>)
@@ -35,6 +36,7 @@ function App() {
             <Route index element={<ProtectedRoute> <ProjetosPage /> </ProtectedRoute>} />
             <Route path=':id' element={<ProtectedRoute> <ProjetoPage /> </ProtectedRoute>} />
           </Route>
+          <Route path='/tarefas' element={<ProtectedRoute> <TarefaPage></TarefaPage> </ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </div>

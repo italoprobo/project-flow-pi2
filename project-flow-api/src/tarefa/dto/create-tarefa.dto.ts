@@ -54,9 +54,5 @@ export class CreateTarefaDto {
 
   @IsNumber()
   @IsNotEmpty()
-  ProjetoId: number
-
-  @IsNumber()
-  @IsNotEmpty()
   EquipeId: number
 }

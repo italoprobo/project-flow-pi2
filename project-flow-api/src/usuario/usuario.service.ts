@@ -15,7 +15,7 @@ export class UsuarioService {
   ) {}
 
   async createUser(createUsuarioDto: CreateUsuarioDto): Promise<Usuario>{
-    const { nome, senha, telefone, email, cargo } = createUsuarioDto
+    const { nome, senha, email, cargo } = createUsuarioDto
 
     const salt = await bcrypt.genSalt();
     const hashedSenha = await bcrypt.hash(senha, salt);
@@ -23,7 +23,6 @@ export class UsuarioService {
     const user = new Usuario();
     user.nome = nome
     user.senha = hashedSenha
-    user.telefone = telefone
     user.email = email
     user.cargo = cargo
 
@@ -55,7 +54,6 @@ export class UsuarioService {
   async updateUser(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
     const usuario: Usuario = new Usuario();
     usuario.nome = updateUsuarioDto.nome
-    usuario.telefone = updateUsuarioDto.telefone
     usuario.email = updateUsuarioDto.email
     const salt = await bcrypt.genSalt();
     const hashedSenha = await bcrypt.hash(updateUsuarioDto.senha, salt);

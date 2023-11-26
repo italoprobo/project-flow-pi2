@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Api } from "../../../providers/api";
+import { log } from "console";
 
 interface PopupProps {
     onClose: () => void;
@@ -16,8 +17,17 @@ interface PopupProps {
 }
 
 const PopupComponent: React.FC<PopupProps> = ({ onClose }) => {
-    
+
     const [listaUsuarios, setListaUsuarios] = useState<Usuario[]>([]);
+
+    const [projetoVazio, setProjetoVazio] = useState(false)
+    const [descricaoVazio, setDescricaoVazio] = useState(false)
+    const [usuarioVazio, setUsuarioVazio] = useState(false)
+    const [dataMaior, setDataMaior] = useState(false)
+
+    const textoVermelho = {
+        color: 'red'
+    };
 
     useEffect(() => {
         const carregarUsuarios = async () => {
@@ -67,13 +77,43 @@ const PopupComponent: React.FC<PopupProps> = ({ onClose }) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (projetoData.nome.trim() === "") {
+            setDataMaior(false)
+            setUsuarioVazio(false)
+            setDescricaoVazio(false)
+            setProjetoVazio(true)
+            return
+        }
+
+        if (projetoData.descricao.trim() === "") {
+            setDataMaior(false)
+            setProjetoVazio(false)
+            setUsuarioVazio(false)
+            setDescricaoVazio(true)
+            return
+        }
+
+        if (projetoData.dt_inicio > projetoData.dt_final) {
+            setProjetoVazio(false)
+            setUsuarioVazio(false)
+            setDescricaoVazio(false)
+            setDataMaior(true)
+            return
+        }
+
+        if (projetoData.responsavelId === 0) {
+            setDataMaior(false)
+            setProjetoVazio(false)
+            setDescricaoVazio(false)
+            setUsuarioVazio(true)
+            return
+        }
+
         try {
             await Api.post("/v1/projeto", projetoData);
             console.log(projetoData);
             onClose();
         } catch (error) {
-            console.log(projetoData);
-            console.error("Erro ao criar projeto:", error);
         }
     };
 
@@ -128,6 +168,22 @@ const PopupComponent: React.FC<PopupProps> = ({ onClose }) => {
                 </label>
                 <button className="BotaoCriarProjeto" type="submit">Criar Projeto</button>
             </form>
+            {projetoVazio === false ?
+                <p></p> :
+                <p style={textoVermelho}>Insira o nome do projeto</p>
+            }
+            {descricaoVazio === false ?
+                <p></p> :
+                <p style={textoVermelho}>Insira a descrição do projeto</p>
+            }
+            {usuarioVazio === false ?
+                <p></p> :
+                <p style={textoVermelho}>Selecione um usuário</p>
+            }
+            {dataMaior === false ?
+                <p></p> :
+                <p style={textoVermelho}>Data final deve ser maior que inicial</p>
+            }
         </div>
     );
 };

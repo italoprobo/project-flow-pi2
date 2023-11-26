@@ -1,8 +1,8 @@
 import { Api } from "../providers/api";
-import {ITarefa} from "../interfaces"
+import {IEquipe} from "../interfaces"
 
-const getAllTarefas = () => Api.get<ITarefa[]>('v1/projeto/')
+const getAllEquipes = () => Api.get<IEquipe[]>('v1/equipe/')
 
-export const TarefaService = {
-    getAllTarefas,
+export const EquipeService = {
+    getAllEquipes,
 }

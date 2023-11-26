@@ -1,0 +1,30 @@
+.cardTarefa{
+    background-color: white;
+    padding: 20px 15px;
+    border-radius: 5%;
+    border: 1px solid #0F70BC;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 1vh;
+    width: 33vw;
+    height: 18vh;
+    margin-bottom: 1vh;
+
+    & p{
+        font-size: 10.5px;
+        text-align: start;
+    }
+}
+
+.time {
+    height: 40%;
+}
+
+.concluido {
+    background-color: green;
+}
+
+.nao_concluido {
+    background-color: rgb(181, 39, 39);
+}

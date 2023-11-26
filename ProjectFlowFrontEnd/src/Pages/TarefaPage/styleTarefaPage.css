@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    border: 0;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: #7A7A7A;
+    justify-content: start;
+
+    & a {
+        text-decoration: none;
+        color: #0F70BC;
+        font-size: large;
+    }
+
+    & header {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+            & .logo{
+                padding-top: 1rem;
+                height: 10vh;
+                width: auto;
+            }
+            & .div_logo{
+                justify-content: center;
+            }
+    }
+    & main{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw;
+        height: 80vh;
+        padding: 0 0 20vh 0vh;
+
+        & .div_frase{
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100vw;
+            & p{
+                font-size: 1.2rem;
+            }
+        }
+
+        & .div_lista_tarefas{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            height: 32vh;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    & footer{
+        width: 100vw;
+        height: 10vh;
+        background-color: #979797;
+        display: flex;
+        align-items: center;
+        
+        & .footer-content{
+            & .menu{
+                display: flex;
+                justify-content: space-around;
+                width: 100vw;
+            }
+            & img{
+                height: 4vh;
+                width: auto;
+            }
+
+            & img:hover{
+                transform: scale(1.2);
+            }   
+        }
+
+    }
+}

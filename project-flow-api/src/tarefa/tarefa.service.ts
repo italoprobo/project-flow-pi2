@@ -17,11 +17,9 @@ export class TarefaService {
   ) { }
 
   async createTask(createTarefaDto: CreateTarefaDto): Promise<Tarefa> {
-
-    const projeto: Projeto = await this.projetoRepositorio.findOneBy({ id: createTarefaDto.ProjetoId });
     const equipe: Equipe = await this.equipeRepositorio.findOneBy({ id: createTarefaDto.EquipeId });
 
-    if (equipe && projeto) {
+    if (equipe) {
       const tarefa: Tarefa = new Tarefa();
       tarefa.nome = createTarefaDto.nome
       tarefa.descricao = createTarefaDto.descricao
@@ -31,7 +29,7 @@ export class TarefaService {
       tarefa.importancia = createTarefaDto.importancia
       tarefa.isDone = createTarefaDto.isDone
       tarefa.equipe = equipe
-      tarefa.projeto = projeto
+      tarefa.projeto = equipe.projeto
       return this.tarefaRepositorio.save(tarefa)
     }
   }

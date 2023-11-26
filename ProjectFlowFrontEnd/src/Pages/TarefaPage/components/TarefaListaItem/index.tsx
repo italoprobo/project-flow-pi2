@@ -1,5 +1,5 @@
 import {Tarefa} from "../../../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
-import "./styleTarefaListaItem.css"
+import "./styleTarefaListaItemPage.css"
 
 interface TarefaListItemProps {
     tarefa: Tarefa

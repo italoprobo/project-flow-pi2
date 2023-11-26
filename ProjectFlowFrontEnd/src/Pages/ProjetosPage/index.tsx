@@ -22,7 +22,7 @@ const ProjetosPage = () => {
         display: 'none'
     };
 
-    const [footerVisible, setFooterVisible] = useState(false);
+    const [footerVisible, setFooterVisible] = useState(true);
 
     const toggleFooter = () => {
         setFooterVisible(!footerVisible);
@@ -60,9 +60,9 @@ const ProjetosPage = () => {
                 <footer style={displayNone}>
                     <div className="footer-content">
                         <div className="menu">
-                            <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></a></Link>
-                            <a href=""><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></a>
-                            <a href=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></a>
+                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer> :
@@ -72,9 +72,9 @@ const ProjetosPage = () => {
                             <button onClick={toggleFooter}><FaCircleArrowDown /></button>
                         </div>
                         <div className="menu">
-                            <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></a></Link>
-                            <a href=""><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></a>
-                            <a href=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></a>
+                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer>

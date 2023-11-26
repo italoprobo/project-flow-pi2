@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useProjeto } from '../../hooks'
 import { Link, useParams } from "react-router-dom";
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
+import "./styleProjeto.css"
+import { useEquipe } from "../../hooks/useEquipe";
+import EquipeListaItem from "./components/EquipeListaItem";
+import { EquipeLista } from "./components/EquipeLista";
 
 const ProjetoPage = () => {
     const { projeto, getProjetoId } = useProjeto()
@@ -13,7 +17,13 @@ const ProjetoPage = () => {
         getProjetoId(id)
     }, [])
 
-    const [footerVisible, setFooterVisible] = useState(false);
+    const { equipes, getAllEquipes } = useEquipe()
+
+    useEffect(() => {
+        getAllEquipes()
+    }, [])
+
+    const [footerVisible, setFooterVisible] = useState(true);
 
     const toggleFooter = () => {
         setFooterVisible(!footerVisible);
@@ -22,6 +32,18 @@ const ProjetoPage = () => {
     const displayNone = {
         display: 'none'
     };
+
+    const dataInicio = String(projeto?.dt_inicio)
+    const dataInicioSeparada = dataInicio.split("T")[0]
+    const dataInicioSeparada2 = dataInicioSeparada.split("-")
+
+    const dataInicioFormatada = `${dataInicioSeparada2[2]}/${dataInicioSeparada2[1]}/${dataInicioSeparada2[0]}`
+
+    const dataFinal = String(projeto?.dt_final)
+    const dataFinalSeparada = dataFinal.split("T")[0]
+    const dataFinalSeparada2 = dataFinalSeparada.split("-")
+
+    const dataFinalFormatada = `${dataFinalSeparada2[2]}/${dataFinalSeparada2[1]}/${dataFinalSeparada2[0]}`
 
     return (
         <body>
@@ -36,24 +58,28 @@ const ProjetoPage = () => {
                 </div>
             </header>
             <main>
-                <div className="adicionarTarefa">
-                    <Link to="">Adicionar tarefa</Link>
-                </div>
                 <div className="criarEquipe">
-                    <Link to="">Criar equipe</Link>
+                    <div className="BotaoCriarEquipe">
+                        <button>Criar equipe</button>
+                    </div>
                 </div>
                 <div className="ProjetoDetalhes">
                     <p>{projeto?.nome}</p>
-                    <p>{projeto?.responsavel.nome}</p>
+                    <p>Responsável: {projeto?.responsavel.nome}</p>
+                    <p>Início: {dataInicioFormatada}</p>
+                    <p>Final: {dataFinalFormatada}</p>
+                </div>
+                <div className="equipes">
+                    <EquipeLista equipes={equipes} />
                 </div>
             </main>
             {footerVisible ?
                 <footer style={displayNone}>
                     <div className="footer-content">
                         <div className="menu">
-                            <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></a></Link>
-                            <a href=""><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></a>
-                            <a href=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></a>
+                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer> :
@@ -63,9 +89,9 @@ const ProjetoPage = () => {
                             <button onClick={toggleFooter}><FaCircleArrowDown /></button>
                         </div>
                         <div className="menu">
-                            <Link to="/projetos"><a href=""><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></a></Link>
-                            <a href=""><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></a>
-                            <a href=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></a>
+                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer>
