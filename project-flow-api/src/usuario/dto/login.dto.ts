@@ -14,11 +14,12 @@ import {
 export class LoginDto {
 
     @IsString()
-    @MinLength(2, { message: 'Nome deve ter ao menos 2 caracteres' })
+    @MinLength(2, { message: 'Email deve ter ao menos 2 caracteres' })
     @IsNotEmpty()
     @ApiProperty()
-    nome: string;
+    email: string;
 
+    @IsString()
     @IsNotEmpty()
     @ApiProperty()
     senha: string;

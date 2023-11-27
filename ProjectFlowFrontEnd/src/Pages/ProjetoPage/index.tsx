@@ -6,6 +6,7 @@ import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import "./styleProjeto.css"
 import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "./components/EquipeLista";
+import PopupComponent from "./components/PopUp/Popup";
 
 const ProjetoPage = () => {
     const { projeto, getProjetoId } = useProjeto()
@@ -26,6 +27,12 @@ const ProjetoPage = () => {
 
     const toggleFooter = () => {
         setFooterVisible(!footerVisible);
+    };
+
+    const [popupVisible, setPopupVisible] = useState(false);
+
+    const togglePopup = () => {
+        setPopupVisible(!popupVisible);
     };
 
     const displayNone = {
@@ -67,6 +74,7 @@ const ProjetoPage = () => {
                     <p>Responsável: {projeto?.responsavel.nome}</p>
                     <p>Início: {dataInicioFormatada}</p>
                     <p>Final: {dataFinalFormatada}</p>
+                    <button className="botaoEditarprojeto" onClick={togglePopup}>Editar</button>
                 </div>
                 <div className="equipes">
                     <EquipeLista equipes={equipes} />
@@ -103,6 +111,7 @@ const ProjetoPage = () => {
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div>
             }
+            {popupVisible && <PopupComponent onClose={togglePopup} />}
         </body>
     )
 }

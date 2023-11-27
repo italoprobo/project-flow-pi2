@@ -1,11 +1,10 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsuarioService } from 'src/usuario/usuario.service';
 import { CreateUsuarioDto } from 'src/usuario/dto/create-usuario.dto';
 import { LoginDto } from 'src/usuario/dto/login.dto';
-import { Public } from './public.decorator';
-import { LocalAuthGuard } from './local-auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
 
 @Controller('api/auth')
 @ApiTags('autenticacao')
@@ -20,10 +19,9 @@ export class AuthController {
         return this.usuarioService.createUser(registerUserDto)
     }
 
-    @Public()
-    @UseGuards(LocalAuthGuard)
-    @Post('login')
-    async login(@Body() loginUserDto: LoginDto){
-        return this.authService.login(loginUserDto)
-    }
+    @UsePipes(ValidationPipe)
+    @Post()
+    async login(@Body() loginDto: LoginDto): Promise<Usuario> {
+        return await this.authService.login(loginDto)
+    }   
 }

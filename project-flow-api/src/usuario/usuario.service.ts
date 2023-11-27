@@ -33,6 +33,16 @@ export class UsuarioService {
     return await this.usuarioRepositorio.find();
   }
 
+  async findByEmail(email: string): Promise<Usuario | null> {
+    try {
+      const user = await this.usuarioRepositorio.findOne({ where: { email } });
+      return user || null;
+    } catch (error) {
+      console.error('Erro ao buscar usuário pelo nome:', error);
+      return null;
+    }
+  }
+
   async viewUser(id: number): Promise<Usuario> {
     try{
       return this.usuarioRepositorio.findOneBy({id})
