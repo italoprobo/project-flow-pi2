@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 import { useAuth } from '../../contexts/AuthContext'
 
 const HomePage = () => {
-    const { signout, isAuthenticated, user } = useAuth()
+    const { user } = useAuth()
 
-    const { tarefas, getAllTarefas } = useTarefa()
+    const { getAllTarefas } = useTarefa()
 
     const { fourTarefas, get4Tarefas } = useTarefa()
 

@@ -1,12 +1,11 @@
 import "./style.css"
 import { BiSolidUser } from 'react-icons/bi'
 import { AiFillLock, AiFillMail } from 'react-icons/ai'
-import { BsFillTelephoneFill } from "react-icons/bs";
 import logo from '../../assets/logo_project_flow.png';
 import React, { useState } from "react";
 import { Api } from "../../providers/api";
 import { isAxiosError } from "axios";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CadastroPage = () => {
 

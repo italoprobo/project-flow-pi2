@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import "./styleProjeto.css"
 import { useEquipe } from "../../hooks/useEquipe";
-import EquipeListaItem from "./components/EquipeListaItem";
 import { EquipeLista } from "./components/EquipeLista";
 
 const ProjetoPage = () => {

@@ -4,7 +4,7 @@ import { AiFillLock } from 'react-icons/ai'
 import logo from '../../assets/logo_project_flow.png';
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUsuario } from "../../hooks";
 interface LoginPagePros {
   next?: string
@@ -18,7 +18,7 @@ export function LoginPage({ next = '/' }: LoginPagePros) {
     getAllUsuarios()
   }, [])
 
-  const { signin, isAuthenticated } = useAuth()
+  const { signin} = useAuth()
 
   const navigate = useNavigate()
 

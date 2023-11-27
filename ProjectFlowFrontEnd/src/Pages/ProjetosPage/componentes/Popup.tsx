@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Api } from "../../../providers/api";
-import { log } from "console";
 
 interface PopupProps {
     onClose: () => void;
