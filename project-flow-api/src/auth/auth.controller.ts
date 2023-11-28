@@ -12,16 +12,21 @@ export class AuthController {
     constructor(
         private readonly authService: AuthService,
         private readonly usuarioService: UsuarioService,
-    ){}
+    ) { }
 
     @Post('registrar')
-    async registar(@Body() registerUserDto: CreateUsuarioDto){
+    async registar(@Body() registerUserDto: CreateUsuarioDto) {
         return this.usuarioService.createUser(registerUserDto)
     }
 
     @UsePipes(ValidationPipe)
-    @Post()
+    @Post('login')
     async login(@Body() loginDto: LoginDto): Promise<Usuario> {
-        return await this.authService.login(loginDto)
-    }   
+        return await this.authService.login(loginDto.email, loginDto.senha)
+    }
+
+    @Post('refresh')
+    async reautenticar(@Body() refresh_token: string) {
+        return this.authService.reautenticar(refresh_token);
+    }
 }

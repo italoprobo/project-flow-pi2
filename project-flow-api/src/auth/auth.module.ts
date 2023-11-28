@@ -4,17 +4,18 @@ import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UsuarioModule } from 'src/usuario/usuario.module';
+import { UsuarioService } from 'src/usuario/usuario.service';
+import { JwtStrategy } from './jwt-strategy';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
 
 @Module({
   imports: [
-    UsuarioModule,
-    PassportModule.register({ defaultStrategy: 'local' }),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'secret',
-      signOptions: { expiresIn: '1h' },
-    }),
+    TypeOrmModule.forFeature([Usuario]),
+    PassportModule,
+    JwtModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, UsuarioService, JwtStrategy],
   exports: [AuthService],
   controllers: [AuthController]
 })

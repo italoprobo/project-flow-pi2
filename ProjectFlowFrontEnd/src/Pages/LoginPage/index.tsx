@@ -40,16 +40,22 @@ export function LoginPage({ next = '/' }: LoginPagePros) {
     const senha = senhaInputRef.current!.value
 
     try {
-      const response = await Api.post('/auth', {
+      const response = await Api.post('/auth/login', {
         email,
         senha
       })
 
       signin({
-        nome: response.data.nome,
-        id: response.data.id,
-        cargo: response.data.cargo
+        nome: response.data[1].nome,
+        id: response.data[1].id,
+        cargo: response.data[1].cargo
       })
+      
+      const authToken = response.data[0].access_token;
+      const refreshToken = response.data[0].refresh_token;
+      localStorage.setItem('authToken', authToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      
       navigate(next)
       return
     } catch (error) {
