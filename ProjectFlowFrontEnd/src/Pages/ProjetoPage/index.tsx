@@ -6,7 +6,6 @@ import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import "./styleProjeto.css"
 import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "./components/EquipeLista";
-import PopupComponent from "./components/PopUp/Popup";
 
 const ProjetoPage = () => {
     const { projeto, getProjetoId } = useProjeto()
@@ -29,10 +28,28 @@ const ProjetoPage = () => {
         setFooterVisible(!footerVisible);
     };
 
-    const [popupVisible, setPopupVisible] = useState(false);
+    const [edicaoAtivaNome, setEdicaoAtivaNome] = useState(false);
 
-    const togglePopup = () => {
-        setPopupVisible(!popupVisible);
+    const toggleEdicaoNome = () => {
+        setEdicaoAtivaNome(!edicaoAtivaNome);
+    };
+
+    const [edicaoAtivaResponsavel, setEdicaoAtivaResponsavel] = useState(false);
+
+    const toggleEdicaoResponsavel = () => {
+        setEdicaoAtivaResponsavel(!edicaoAtivaResponsavel);
+    };
+
+    const [edicaoAtivaInicio, setEdicaoAtivaInicio] = useState(false);
+
+    const toggleEdicaoInicio = () => {
+        setEdicaoAtivaInicio(!edicaoAtivaInicio);
+    };
+
+    const [edicaoAtivaFinal, setEdicaoAtivaFinal] = useState(false);
+
+    const toggleEdicaoFinal = () => {
+        setEdicaoAtivaFinal(!edicaoAtivaFinal);
     };
 
     const displayNone = {
@@ -70,49 +87,113 @@ const ProjetoPage = () => {
                     </div>
                 </div>
                 <div className="ProjetoDetalhes">
-                    <p>{projeto?.nome}</p>
-                    <p>Responsável: {projeto?.responsavel.nome}</p>
-                    <p>Início: {dataInicioFormatada}</p>
-                    <p>Final: {dataFinalFormatada}</p>
-                    <button className="botaoEditarprojeto" onClick={togglePopup}>Editar</button>
+                    <div className="dadosProjeto">
+                        <div className="areaDadoProjeto">
+                            {edicaoAtivaNome ? (
+                                <input
+                                    type="text"
+                                />
+                            ) : (
+                                <p>{projeto?.nome}</p>
+                            )}
+                        </div>
+                        <div className="areaBotaoEditarProjeto">
+                            {edicaoAtivaNome ? 
+                            <><button className="editarProjeto" onClick={toggleEdicaoNome}>Salvar</button>
+                            <button className="editarProjeto" onClick={toggleEdicaoNome}>Cancelar</button></>
+                             : <button className="editarProjeto" onClick={toggleEdicaoNome}>Editar</button>}
+                        </div>
+                    </div>
+                    <div className="dadosProjeto">
+                        <div className="areaDadoProjeto">
+                            {edicaoAtivaResponsavel ? (
+                                <input
+                                    type="text"
+                                />
+                            ) : (
+                                <p>Responsável: {projeto?.responsavel.nome}</p>
+                            )}
+                        </div>
+                        <div className="areaBotaoEditarProjeto">
+                            {edicaoAtivaResponsavel ? 
+                            <><button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Salvar</button>
+                            <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Cancelar</button></>
+                             : <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Editar</button>}
+                        </div>
+                    </div>
+                    <div className="dadosProjeto">
+                        <div className="areaDadoProjeto">
+                            {edicaoAtivaInicio ? (
+                                <input
+                                    type="text"
+                                />
+                            ) : (
+                                <p>Início: {dataInicioFormatada}</p>
+                            )}
+                        </div>
+                        <div className="areaBotaoEditarProjeto">
+                            {edicaoAtivaInicio ? 
+                            <><button className="editarProjeto" onClick={toggleEdicaoInicio}>Salvar</button>
+                            <button className="editarProjeto" onClick={toggleEdicaoInicio}>Cancelar</button></>
+                             : <button className="editarProjeto" onClick={toggleEdicaoInicio}>Editar</button>}
+                        </div>
+                    </div>
+                    <div className="dadosProjeto">
+                        <div className="areaDadoProjeto">
+                            {edicaoAtivaFinal ? (
+                                <input
+                                    type="text"
+                                />
+                            ) : (
+                                <p>Final: {dataFinalFormatada}</p>
+                            )}
+                        </div>
+                        <div className="areaBotaoEditarProjeto">
+                            {edicaoAtivaFinal ? 
+                            <><button className="editarProjeto" onClick={toggleEdicaoFinal}>Salvar</button>
+                            <button className="editarProjeto" onClick={toggleEdicaoFinal}>Cancelar</button></>
+                             : <button className="editarProjeto" onClick={toggleEdicaoFinal}>Editar</button>}
+                        </div>
+                    </div>
                 </div>
                 <div className="equipes">
                     <EquipeLista equipes={equipes} />
                 </div>
             </main>
-            {footerVisible ?
-                <footer style={displayNone}>
-                    <div className="footer-content">
-                        <div className="menu">
-                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
-                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+            {
+                footerVisible ?
+                    <footer style={displayNone}>
+                        <div className="footer-content">
+                            <div className="menu">
+                                <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                                <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                                <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            </div>
                         </div>
-                    </div>
-                </footer> :
-                <footer>
-                    <div className="footer-content">
-                        <div className="botaoBarraAbaixar">
-                            <button onClick={toggleFooter}><FaCircleArrowDown /></button>
+                    </footer> :
+                    <footer>
+                        <div className="footer-content">
+                            <div className="botaoBarraAbaixar">
+                                <button onClick={toggleFooter}><FaCircleArrowDown /></button>
+                            </div>
+                            <div className="menu">
+                                <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                                <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                                <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            </div>
                         </div>
-                        <div className="menu">
-                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
-                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
-                        </div>
-                    </div>
-                </footer>
+                    </footer>
             }
-            {footerVisible ?
-                <div className="botaoBarraSubir">
-                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
-                </div> :
-                <div className="botaoBarraSubir" style={displayNone}>
-                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
-                </div>
+            {
+                footerVisible ?
+                    <div className="botaoBarraSubir">
+                        <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                    </div> :
+                    <div className="botaoBarraSubir" style={displayNone}>
+                        <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                    </div>
             }
-            {popupVisible && <PopupComponent onClose={togglePopup} />}
-        </body>
+        </body >
     )
 }
 
