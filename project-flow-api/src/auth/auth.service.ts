@@ -5,6 +5,11 @@ import { LoginDto } from 'src/usuario/dto/login.dto';
 import { Usuario } from 'src/usuario/entities/usuario.entity';
 import { UsuarioService } from 'src/usuario/usuario.service';
 
+
+interface Data {
+  token: Object,
+  userData?: Usuario
+}
 @Injectable()
 export class AuthService {
 
@@ -16,17 +21,24 @@ export class AuthService {
   async login(email: string, senha: string): Promise<any> {
     const usuario: Usuario | undefined = await this.userService.findByEmail(email).catch(() => undefined)
 
-    const isMatch = await compare(senha, usuario.senha || '')
+    const doesPasswordMatch = await usuario.validatePassword(senha)
 
-    if (!usuario || !isMatch) {
-      throw Error("E-mail inválido")
-    }
+    let data: Data = {
+      token: {}
+    };
 
-    const dados = []
-    dados.push(await this.gerarToken(usuario))
-    dados.push(usuario)
+    console.log(usuario,  doesPasswordMatch);
 
-    return dados
+    if (!usuario || !doesPasswordMatch) {
+      throw Error("E-mail ou senha inválido")
+    } else if (usuario && doesPasswordMatch) {
+      console.log('entrou', data);
+      data.token = await this.gerarToken(usuario)
+      data.userData = usuario
+      console.log(data)
+      return data
+    } else return;
+
   }
 
   async gerarToken(payload: Usuario) {
@@ -42,7 +54,7 @@ export class AuthService {
       { email: payload.email },
       {
         secret: 'sua-chave-refresh',
-        expiresIn: '60s',
+        expiresIn: '1800s',
       },
     );
     return { access_token: accessToken, refresh_token: refreshToken };

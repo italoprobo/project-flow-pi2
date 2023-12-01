@@ -28,10 +28,19 @@ export function LoginPage({ next = '/' }: LoginPagePros) {
   const senhaInputRef = useRef<HTMLInputElement>(null)
 
   const [loginAutorizado, setLoginAutorizado] = useState(true)
+  const [accessToken, setAccessToken] = useState('')
+  const [refreshToken, setRefreshToken] = useState('')
 
   const textoVermelho = {
     color: 'red'
   };
+
+  const handleToken = (token: any) => {
+    setAccessToken(token.access_token)
+    setRefreshToken(token.refresh_token)
+    localStorage.setItem('authToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+  }
 
   const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
@@ -45,27 +54,27 @@ export function LoginPage({ next = '/' }: LoginPagePros) {
         senha
       })
 
-      signin({
-        nome: response.data[1].nome,
-        id: response.data[1].id,
-        cargo: response.data[1].cargo
-      })
-      
-      const authToken = response.data[0].access_token;
-      const refreshToken = response.data[0].refresh_token;
-      localStorage.setItem('authToken', authToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      
+      const token = response.data.token;
+      handleToken(token)
+
+      const userData = {
+        nome: response.data.userData.nome,
+        id: response.data.userData.id,
+        cargo: response.data.userData.cargo
+      }
+
+      signin(userData)
+
       navigate(next)
       return
     } catch (error) {
       if (isAxiosError(error) && error.response) {
-          console.error('Erro ao registrar usuário:', error.response.data.message);
+        console.error('Erro ao registrar usuário:', error.response.data.message);
       } else {
-          console.error('Erro desconhecido ao registrar usuário:', error);
+        console.error('Erro desconhecido ao registrar usuário:', error);
       }
 
-  }
+    }
 
     setLoginAutorizado(false)
   }
