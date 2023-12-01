@@ -5,23 +5,19 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "t
 @Entity()
 export class Usuario_equipe {
     @PrimaryGeneratedColumn()
-    id:number
+    id: number
 
-    @Column({name: 'usuarioId', nullable: false})
+    @Column({ name: 'usuarioId', nullable: false })
     usuarioId: number
-    
-    @Column({name: 'equipeId', nullable: false})
+
+    @Column({ name: 'equipeId', nullable: false })
     equipeId: number
 
-    @ManyToOne(
-        () => Usuario, (usuario) => usuario.usuario_equipe,
-        )
-        @JoinColumn({name: 'usuarioId', referencedColumnName: 'id'})
+    @ManyToOne(() => Usuario, (usuario) => usuario.usuario_equipe, { onDelete: 'CASCADE' })
+    @JoinColumn({ name: 'usuarioId', referencedColumnName: 'id' })
     usuario?: Usuario
 
-    @ManyToOne(
-        () => Equipe, (equipe) => equipe.usuario_equipe,
-        )
-        @JoinColumn({name: 'equipeId', referencedColumnName: 'id'})
+    @ManyToOne(() => Equipe, (equipe) => equipe.usuario_equipe, {onDelete:'CASCADE'})
+    @JoinColumn({ name: 'equipeId', referencedColumnName: 'id' })
     equipe?: Equipe
 }

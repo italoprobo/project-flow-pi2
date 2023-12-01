@@ -27,12 +27,12 @@ export class Usuario {
         return bcrypt.compare(senha, this.senha)
     }
 
-    @OneToMany(() => Equipe, (equipe) => equipe.responsavel, { cascade: true })
+    @OneToMany(() => Equipe, (equipe) => equipe.responsavel)
     equipeslideradas: Equipe[]
 
-    @OneToMany(() => Projeto, (projeto: Projeto) => projeto.responsavel, { cascade: true })
+    @OneToMany(() => Projeto, (projeto: Projeto) => projeto.responsavel)
     projetosliderados: Projeto[]
 
-    @OneToMany(() => Usuario_equipe, (usuario_equipe) => usuario_equipe.usuario, { cascade: true })
+    @OneToMany(() => Usuario_equipe, (usuario_equipe) => usuario_equipe.usuario)
     usuario_equipe?: Usuario_equipe[]
 }

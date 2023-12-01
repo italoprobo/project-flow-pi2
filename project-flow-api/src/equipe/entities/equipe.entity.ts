@@ -17,10 +17,10 @@ export class Equipe {
     @Column({length:50, nullable: true})
     funcao: string
 
-    @ManyToOne(() => Usuario, (usuario) => usuario.equipeslideradas)
+    @ManyToOne(() => Usuario, (usuario) => usuario.equipeslideradas, {onDelete:'CASCADE'})
     responsavel: Usuario
 
-    @ManyToOne(() => Projeto, (projeto) => projeto.equipes)
+    @ManyToOne(() => Projeto, (projeto) => projeto.equipes, {onDelete:'CASCADE'})
     projeto: Projeto
 
     @OneToMany(() => Usuario_equipe, (usuario_equipe) => usuario_equipe.equipe, { cascade: true })

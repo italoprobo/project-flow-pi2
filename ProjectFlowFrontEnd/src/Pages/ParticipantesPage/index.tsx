@@ -1,22 +1,19 @@
 import "../../components/ProjetoListaItem"
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import "./styleParticipantes.css"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
-import "./styleEquipe.css"
 import { useEquipe } from "../../hooks/useEquipe";
+import { ParticipantesLista } from "./components/ParticipantesLista";
 
-const EquipePage = () => {
-    const { equipe, getEquipeId } = useEquipe()
+const ParticipantesPage = () => {
+    const { participantes } = useEquipe()
 
     const [footerVisible, setFooterVisible] = useState(true);
     const [edicaoAtivaNome, setEdicaoAtivaNome] = useState(false);
     const [edicaoAtivaResponsavel, setEdicaoAtivaResponsavel] = useState(false);
 
     let { id } = useParams()
-
-    useEffect(() => {
-        getEquipeId(id)
-    }, [])
 
     const toggleFooter = () => {
         setFooterVisible(!footerVisible);
@@ -47,51 +44,8 @@ const EquipePage = () => {
                 </div>
             </header>
             <main>
-                <div className="criarEquipe">
-                    <div className="BotaoCriarEquipe">
-                        <button>Adicionar tarefa</button>
-                    </div>
-                </div>
-                <div className="ProjetoDetalhes">
-                    <div className="dadosProjeto">
-                        <div className="areaDadoProjeto">
-                            {edicaoAtivaNome ? (
-                                <input
-                                    type="text"
-                                />
-                            ) : (
-                                <p>{equipe?.nome}</p>
-                            )}
-                        </div>
-                        <div className="areaBotaoEditarProjeto">
-                            {edicaoAtivaNome ? 
-                            <><button className="editarProjeto" onClick={toggleEdicaoNome}>Salvar</button>
-                            <button className="editarProjeto" onClick={toggleEdicaoNome}>Cancelar</button></>
-                             : <button className="editarProjeto" onClick={toggleEdicaoNome}>Editar</button>}
-                        </div>
-                    </div>
-                    <div className="dadosProjeto">
-                        <div className="areaDadoProjeto">
-                            {edicaoAtivaResponsavel ? (
-                                <input
-                                    type="text"
-                                />
-                            ) : (
-                                <p>Responsável: {equipe?.responsavel.nome}</p>
-                            )}
-                        </div>
-                        <div className="areaBotaoEditarProjeto">
-                            {edicaoAtivaResponsavel ? 
-                            <><button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Salvar</button>
-                            <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Cancelar</button></>
-                             : <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Editar</button>}
-                        </div>
-                    </div>
-                    <div className="dadosProjeto">
-                        <div className="areaDadoProjeto">
-                            <Link to={`/participantes/${equipe?.id}`}>Ver Participantes</Link>
-                        </div>
-                    </div>
+            <div className="participantes">
+                    <ParticipantesLista usuarios={participantes} />
                 </div>
             </main>
             {
@@ -131,4 +85,4 @@ const EquipePage = () => {
     )
 }
 
-export default EquipePage
+export default ParticipantesPage

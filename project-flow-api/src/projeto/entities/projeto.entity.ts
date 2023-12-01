@@ -21,7 +21,7 @@ export class Projeto {
     @Column({type: 'timestamptz',  nullable: true})
     dt_final: Date;
 
-    @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.projetosliderados)
+    @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.projetosliderados, {onDelete:'CASCADE'})
     responsavel: Usuario
 
     @OneToMany(() => Tarefa, (tarefa) => tarefa.projeto, { cascade: true })

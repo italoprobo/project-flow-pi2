@@ -1,4 +1,4 @@
-.cardEquipe{
+.cardEquipe {
     background-color: white;
     padding: 20px 15px;
     border-radius: 5%;
@@ -11,7 +11,17 @@
     height: 12vh;
     margin-bottom: 1vh;
 
-    & p{
+    & p {
         font-size: 10.5px;
+    }
+
+    & .linkEquipe {
+        display: flex;
+        text-align: center;
+        width: 100%;
+
+        & a {
+            width: 100%;
+        }
     }
 }

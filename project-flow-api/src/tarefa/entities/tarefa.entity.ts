@@ -29,9 +29,9 @@ export class Tarefa {
     @Column({type: 'boolean'})
     isDone: boolean;
 
-    @ManyToOne(() => Projeto, (projeto) => projeto.tarefas)
+    @ManyToOne(() => Projeto, (projeto) => projeto.tarefas, {onDelete:'CASCADE'})
     projeto: Projeto
 
-    @ManyToOne(() => Equipe, (equipe) => equipe.tarefas)
+    @ManyToOne(() => Equipe, (equipe) => equipe.tarefas, {onDelete:'CASCADE'})
     equipe: Equipe
 }

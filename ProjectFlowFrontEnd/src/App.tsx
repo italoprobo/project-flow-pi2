@@ -9,6 +9,8 @@ import { useMemo } from 'react'
 import { useAuth } from './contexts/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import TarefaPage from './Pages/TarefaPage'
+import EquipePage from './Pages/EquipePage'
+import ParticipantesPage from './Pages/ParticipantesPage'
 
 
 function App() {
@@ -35,6 +37,13 @@ function App() {
           <Route path='projetos'>
             <Route index element={<ProtectedRoute> <ProjetosPage /> </ProtectedRoute>} />
             <Route path=':id' element={<ProtectedRoute> <ProjetoPage /> </ProtectedRoute>} />
+          </Route>
+          <Route path='equipes'>
+            <Route index element={<ProtectedRoute> <EquipePage /> </ProtectedRoute>} />
+            <Route path=':id' element={<ProtectedRoute> <EquipePage /> </ProtectedRoute>} />
+          </Route>
+          <Route path='participantes'>
+            <Route path='id' element={<ProtectedRoute> <ParticipantesPage /> </ProtectedRoute>} />
           </Route>
           <Route path='/tarefas' element={<ProtectedRoute> <TarefaPage></TarefaPage> </ProtectedRoute>} />
         </Routes>
