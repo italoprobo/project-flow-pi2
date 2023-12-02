@@ -46,49 +46,58 @@ const HomePage = () => {
                 </div>
             </header>
             <main>
-                <div className="div_saudacao">
-                    <h1>Olá, {user?.nome}.</h1>
-                    <p>Essas são as tarefas que você deve executar agora:</p>
-                </div>
-                <div className="div_lista_tarefas">
-                    <TarefaLista tarefas={fourTarefas} />
-                </div>
-                <div className="div_lista_reunioes">
+                {fourTarefas.length > 0 ?
+                    <div className="div_saudacao">
+                        <h1>Olá, {user?.nome}.</h1>
+                        <p>Você ainda não possui tarefas</p>
+                    </div> :
+                    <><div className="div_saudacao">
+                        <h1>Olá, {user?.nome}.</h1>
+                        <p>Essas são as tarefas que você deve executar agora:</p>
+                    </div>
+                        <div className="div_lista_tarefas">
+                            <TarefaLista tarefas={fourTarefas} />
+                        </div><div className="div_lista_reunioes"> </div></>
 
-                </div>
+                }
+
+
+
             </main>
-            {footerVisible ?
-                <footer style={displayNone}>
-                    <div className="footer-content">
-                        <div className="menu">
-                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
-                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+            {
+                footerVisible ?
+                    <footer style={displayNone}>
+                        <div className="footer-content">
+                            <div className="menu">
+                                <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                                <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                                <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            </div>
                         </div>
-                    </div>
-                </footer> :
-                <footer>
-                    <div className="footer-content">
-                        <div className="botaoBarraAbaixar">
-                            <button onClick={toggleFooter}><FaCircleArrowDown /></button>
+                    </footer> :
+                    <footer>
+                        <div className="footer-content">
+                            <div className="botaoBarraAbaixar">
+                                <button onClick={toggleFooter}><FaCircleArrowDown /></button>
+                            </div>
+                            <div className="menu">
+                                <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                                <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                                <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            </div>
                         </div>
-                        <div className="menu">
-                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
-                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
-                        </div>
-                    </div>
-                </footer>
+                    </footer>
             }
-            {footerVisible ?
-                <div className="botaoBarraSubir">
-                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
-                </div> :
-                <div className="botaoBarraSubir" style={displayNone}>
-                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
-                </div>
+            {
+                footerVisible ?
+                    <div className="botaoBarraSubir">
+                        <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                    </div> :
+                    <div className="botaoBarraSubir" style={displayNone}>
+                        <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                    </div>
             }
-        </body>
+        </body >
     )
 }
 

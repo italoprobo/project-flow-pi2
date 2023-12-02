@@ -11,12 +11,11 @@ import { ITarefa } from "../../interfaces";
 import { Tarefa } from "../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
 
 const TarefasPage = () => {
-    const { tarefasOrdenadasPrioridade, tarefas, getAllTarefas, getTarefasOrdenadasPrioridade } = useTarefa()
-    const { signout, isAuthenticated, user } = useAuth()
+    const { tarefas, getAllTarefas } = useTarefa()
+    const { signout, user } = useAuth()
 
     useEffect(() => {
         getAllTarefas()
-        getTarefasOrdenadasPrioridade()
     }, [])
 
     const displayNone = {
@@ -35,7 +34,7 @@ const TarefasPage = () => {
 
     useEffect(() => {
         getAllEquipes(),
-        findAllUser_Team()
+            findAllUser_Team()
     }, [])
 
 
@@ -67,6 +66,45 @@ const TarefasPage = () => {
         }
     }
 
+    let tarefas_equipes_usuarioOrdenadas: Tarefa[] = []
+
+    for (let tarefa of tarefas_equipes_usuario) {
+        if (!tarefa.isDone && tarefa.importancia === 'Alta') {
+            tarefas_equipes_usuarioOrdenadas.push(tarefa)
+        }
+    }
+
+    for (let tarefa of tarefas_equipes_usuario) {
+        if (!tarefa.isDone && tarefa.importancia === 'Média') {
+            tarefas_equipes_usuarioOrdenadas.push(tarefa)
+        }
+    }
+
+    for (let tarefa of tarefas_equipes_usuario) {
+        if (!tarefa.isDone && tarefa.importancia === 'Baixa') {
+            tarefas_equipes_usuarioOrdenadas.push(tarefa)
+        }
+    }
+
+    for (let tarefa of tarefas_equipes_usuario) {
+        if (tarefa.isDone && tarefa.importancia === 'Alta') {
+            tarefas_equipes_usuarioOrdenadas.push(tarefa)
+        }
+    }
+
+    for (let tarefa of tarefas_equipes_usuario) {
+        if (tarefa.isDone && tarefa.importancia === 'Média') {
+            tarefas_equipes_usuarioOrdenadas.push(tarefa)
+        }
+    }
+
+    for (let tarefa of tarefas_equipes_usuario) {
+        if (tarefa.isDone && tarefa.importancia === 'Baixa') {
+            tarefas_equipes_usuarioOrdenadas.push(tarefa)
+        }
+    }
+
+
     return (
         <body>
             <header>
@@ -85,7 +123,7 @@ const TarefasPage = () => {
                 </div>
                 {tarefas_equipes_usuario.length > 0 ?
                     <div className="div_lista_tarefas">
-                        <TarefaLista tarefas={tarefas_equipes_usuario} />
+                        <TarefaLista tarefas={tarefas_equipes_usuarioOrdenadas} />
                     </div> :
                     <p>Lista de tarefas vazia</p>
                 }

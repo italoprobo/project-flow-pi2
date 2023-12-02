@@ -9,7 +9,7 @@ import { EquipeLista } from "../ProjetoPage/components/EquipeLista";
 import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
 
 const EquipesPage = () => {
-    const { signout, isAuthenticated, user } = useAuth()
+    const { signout, user } = useAuth()
 
     const { equipes, getAllEquipes } = useEquipe()
     const {usuario_equipe, findAllUser_Team} = useUsuario_Equipe()
