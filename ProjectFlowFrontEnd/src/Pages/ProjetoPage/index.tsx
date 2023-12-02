@@ -6,6 +6,7 @@ import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import "./styleProjeto.css"
 import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "./components/EquipeLista";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ProjetoPage = () => {
     const { projeto, getProjetoId, salvarEdicaoNome, salvarEdicaoDataIncio, salvarEdicaoDataFinal } = useProjeto()
@@ -59,6 +60,8 @@ const ProjetoPage = () => {
         display: 'none'
     };
 
+    const { user } = useAuth()
+
     const dataInicio = String(projeto?.dt_inicio)
     const dataInicioSeparada = dataInicio.split("T")[0]
     const dataInicioSeparada2 = dataInicioSeparada.split("-")
@@ -98,123 +101,164 @@ const ProjetoPage = () => {
                 </div>
             </header>
             <main>
-                <div className="criarEquipe">
-                    <div className="BotaoCriarEquipe">
-                        <button>Criar equipe</button>
+                {projeto?.responsavel.id === user?.id ?
+                    <><div className="criarEquipe">
+                        <div className="BotaoCriarEquipe">
+                            <button>Criar equipe</button>
+                        </div>
+                    </div><div className="ProjetoDetalhes">
+                            <div className="dadosProjeto">
+                                <div className="areaDadoProjeto">
+                                    {edicaoAtivaNome ? (
+                                        <input
+                                            type="text"
+                                            value={nomeProjetoEditado}
+                                            onChange={(e) => setNomeProjetoEditado(e.target.value)} />
+                                    ) : (
+                                        <p>{nomeProjetoEditado || projeto?.nome}</p>
+                                    )}
+                                </div>
+                                <div className="areaBotaoEditarProjeto">
+                                    {edicaoAtivaNome ?
+                                        <><button className="editarProjeto" onClick={handleSalvarEdicaoNome}>Salvar</button>
+                                            <button className="editarProjeto" onClick={toggleEdicaoNome}>Cancelar</button></>
+                                        : <button className="editarProjeto" onClick={toggleEdicaoNome}>Editar</button>}
+                                </div>
+                            </div>
+                            <div className="dadosProjeto">
+                                <div className="areaDadoProjeto">
+                                    {edicaoAtivaResponsavel ? (
+                                        <input
+                                            type="text" />
+                                    ) : (
+                                        <p>Responsável: {projeto?.responsavel.nome}</p>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="dadosProjeto">
+                                <div className="areaDadoProjeto">
+                                    {edicaoAtivaInicio ? (
+                                        <input
+                                            type="text"
+                                            value={dataInicioEditada}
+                                            onChange={(e) => setDataInicioEditada(e.target.value)} />
+                                    ) : (
+                                        <p>Início: {dataInicioEditada || dataInicioFormatada}</p>
+                                    )}
+                                </div>
+                                <div className="areaBotaoEditarProjeto">
+                                    {edicaoAtivaInicio ?
+                                        <><button className="editarProjeto" onClick={handleSalvarEdicaoDataInicio}>Salvar</button>
+                                            <button className="editarProjeto" onClick={toggleEdicaoInicio}>Cancelar</button></>
+                                        : <button className="editarProjeto" onClick={toggleEdicaoInicio}>Editar</button>}
+                                </div>
+                            </div>
+                            <div className="dadosProjeto">
+                                <div className="areaDadoProjeto">
+                                    {edicaoAtivaFinal ? (
+                                        <input
+                                            type="text"
+                                            value={dataFinalEditada}
+                                            onChange={(e) => setDataFinalEditada(e.target.value)} />
+                                    ) : (
+                                        <p>Final: {dataFinalEditada || dataFinalFormatada}</p>
+                                    )}
+                                </div>
+                                <div className="areaBotaoEditarProjeto">
+                                    {edicaoAtivaFinal ?
+                                        <><button className="editarProjeto" onClick={handleSalvarEdicaoDataFinal}>Salvar</button>
+                                            <button className="editarProjeto" onClick={toggleEdicaoFinal}>Cancelar</button></>
+                                        : <button className="editarProjeto" onClick={toggleEdicaoFinal}>Editar</button>}
+                                </div>
+                            </div>
+                        </div></> :
+                        <div className="ProjetoDetalhes">
+                        <div className="dadosProjeto">
+                            <div className="areaDadoProjeto">
+                                {edicaoAtivaNome ? (
+                                    <input
+                                        type="text"
+                                        value={nomeProjetoEditado}
+                                        onChange={(e) => setNomeProjetoEditado(e.target.value)}
+                                    />
+                                ) : (
+                                    <p>Nome: {nomeProjetoEditado || projeto?.nome}</p>
+                                )}
+                            </div>
+                        </div>
+                        <div className="dadosProjeto">
+                            <div className="areaDadoProjeto">
+                                {edicaoAtivaResponsavel ? (
+                                    <input
+                                        type="text"
+                                    />
+                                ) : (
+                                    <p>Responsável: {projeto?.responsavel.nome}</p>
+                                )}
+                            </div>
+                        </div>
+                        <div className="dadosProjeto">
+                            <div className="areaDadoProjeto">
+                                {edicaoAtivaInicio ? (
+                                    <input
+                                        type="text"
+                                        value={dataInicioEditada}
+                                        onChange={(e) => setDataInicioEditada(e.target.value)}
+                                    />
+                                ) : (
+                                    <p>Início: {dataInicioEditada || dataInicioFormatada}</p>
+                                )}
+                            </div>
+                        </div>
+                        <div className="dadosProjeto">
+                            <div className="areaDadoProjeto">
+                                {edicaoAtivaFinal ? (
+                                    <input
+                                        type="text"
+                                        value={dataFinalEditada}
+                                        onChange={(e) => setDataFinalEditada(e.target.value)}
+                                    />
+                                ) : (
+                                    <p>Final: {dataFinalEditada || dataFinalFormatada}</p>
+                                )}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className="ProjetoDetalhes">
-                    <div className="dadosProjeto">
-                        <div className="areaDadoProjeto">
-                            {edicaoAtivaNome ? (
-                                <input
-                                    type="text"
-                                    value={nomeProjetoEditado}
-                                    onChange={(e) => setNomeProjetoEditado(e.target.value)}
-                                />
-                            ) : (
-                                <p>{nomeProjetoEditado || projeto?.nome}</p>
-                            )}
-                        </div>
-                        <div className="areaBotaoEditarProjeto">
-                            {edicaoAtivaNome ? 
-                            <><button className="editarProjeto" onClick={handleSalvarEdicaoNome}>Salvar</button>
-                            <button className="editarProjeto" onClick={toggleEdicaoNome}>Cancelar</button></>
-                             : <button className="editarProjeto" onClick={toggleEdicaoNome}>Editar</button>}
-                        </div>
-                    </div>
-                    <div className="dadosProjeto">
-                        <div className="areaDadoProjeto">
-                            {edicaoAtivaResponsavel ? (
-                                <input
-                                    type="text"
-                                />
-                            ) : (
-                                <p>Responsável: {projeto?.responsavel.nome}</p>
-                            )}
-                        </div>
-                        <div className="areaBotaoEditarProjeto">
-                            {edicaoAtivaResponsavel ? 
-                            <><button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Salvar</button>
-                            <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Cancelar</button></>
-                             : <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Editar</button>}
-                        </div>
-                    </div>
-                    <div className="dadosProjeto">
-                        <div className="areaDadoProjeto">
-                            {edicaoAtivaInicio ? (
-                                <input
-                                    type="text"
-                                    value={dataInicioEditada}
-                                    onChange={(e) => setDataInicioEditada(e.target.value)}
-                                />
-                            ) : (
-                                <p>Início: {dataInicioEditada || dataInicioFormatada}</p>
-                            )}
-                        </div>
-                        <div className="areaBotaoEditarProjeto">
-                            {edicaoAtivaInicio ? 
-                            <><button className="editarProjeto" onClick={handleSalvarEdicaoDataInicio}>Salvar</button>
-                            <button className="editarProjeto" onClick={toggleEdicaoInicio}>Cancelar</button></>
-                             : <button className="editarProjeto" onClick={toggleEdicaoInicio}>Editar</button>}
-                        </div>
-                    </div>
-                    <div className="dadosProjeto">
-                        <div className="areaDadoProjeto">
-                            {edicaoAtivaFinal ? (
-                                <input
-                                type="text"
-                                value={dataFinalEditada}
-                                onChange={(e) => setDataFinalEditada(e.target.value)}
-                                />
-                            ) : (
-                                <p>Final: {dataFinalEditada || dataFinalFormatada}</p>
-                            )}
-                        </div>
-                        <div className="areaBotaoEditarProjeto">
-                            {edicaoAtivaFinal ? 
-                            <><button className="editarProjeto" onClick={handleSalvarEdicaoDataFinal}>Salvar</button>
-                            <button className="editarProjeto" onClick={toggleEdicaoFinal}>Cancelar</button></>
-                             : <button className="editarProjeto" onClick={toggleEdicaoFinal}>Editar</button>}
-                        </div>
-                    </div>
-                </div>
+                }
                 <div className="equipes">
                     <EquipeLista equipes={equipes} />
                 </div>
             </main>
-            {
-                footerVisible ?
-                    <footer style={displayNone}>
-                        <div className="footer-content">
-                            <div className="menu">
-                                <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
-                                <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                                <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
-                            </div>
+            {footerVisible ?
+                <footer style={displayNone}>
+                    <div className="footer-content">
+                        <div className="menu">
+                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
-                    </footer> :
-                    <footer>
-                        <div className="footer-content">
-                            <div className="botaoBarraAbaixar">
-                                <button onClick={toggleFooter}><FaCircleArrowDown /></button>
-                            </div>
-                            <div className="menu">
-                                <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
-                                <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                                <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
-                            </div>
-                        </div>
-                    </footer>
-            }
-            {
-                footerVisible ?
-                    <div className="botaoBarraSubir">
-                        <button onClick={toggleFooter}><FaCircleArrowUp /></button>
-                    </div> :
-                    <div className="botaoBarraSubir" style={displayNone}>
-                        <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                     </div>
+                </footer> :
+                <footer>
+                    <div className="footer-content">
+                        <div className="botaoBarraAbaixar">
+                            <button onClick={toggleFooter}><FaCircleArrowDown /></button>
+                        </div>
+                        <div className="menu">
+                            <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
+                            <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                        </div>
+                    </div>
+                </footer>
+            }
+            {footerVisible ?
+                <div className="botaoBarraSubir">
+                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                </div> :
+                <div className="botaoBarraSubir" style={displayNone}>
+                    <button onClick={toggleFooter}><FaCircleArrowUp /></button>
+                </div>
             }
         </body >
     )

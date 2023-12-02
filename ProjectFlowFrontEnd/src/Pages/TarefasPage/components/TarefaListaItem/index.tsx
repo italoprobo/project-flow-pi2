@@ -1,8 +1,9 @@
 import {Tarefa} from "../../../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
+import { ITarefa } from "../../../../interfaces";
 import "./styleTarefaListaItemPage.css"
 
 interface TarefaListItemProps {
-    tarefa: Tarefa
+    tarefa: ITarefa
 }
 
 export default function TarefaListaItem({tarefa}: TarefaListItemProps) {

@@ -4,11 +4,18 @@ import { useTarefa } from "../../hooks";
 import { TarefaLista } from "./components/TarefaLista/"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
+import { useAuth } from "../../contexts/AuthContext";
+import { useEquipe } from "../../hooks/useEquipe";
+import { ITarefa } from "../../interfaces";
+import { Tarefa } from "../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
 
-const TarefaPage = () => {
-    const { tarefasOrdenadasPrioridade, getTarefasOrdenadasPrioridade } = useTarefa()
+const TarefasPage = () => {
+    const { tarefasOrdenadasPrioridade, tarefas, getAllTarefas, getTarefasOrdenadasPrioridade } = useTarefa()
+    const { signout, isAuthenticated, user } = useAuth()
 
     useEffect(() => {
+        getAllTarefas()
         getTarefasOrdenadasPrioridade()
     }, [])
 
@@ -21,6 +28,44 @@ const TarefaPage = () => {
     const toggleFooter = () => {
         setFooterVisible(!footerVisible);
     };
+
+    const { equipes, getAllEquipes } = useEquipe()
+
+    const { usuario_equipe, findAllUser_Team } = useUsuario_Equipe()
+
+    useEffect(() => {
+        getAllEquipes(),
+        findAllUser_Team()
+    }, [])
+
+
+    let ids = []
+
+    for (let linha of usuario_equipe) {
+        if (linha.usuarioId === user?.id) {
+            ids.push(linha.equipeId)
+        }
+    }
+
+    let equipes_usuario = []
+
+    for (let equipe of equipes) {
+        for (let id of ids) {
+            if (equipe.id === id) {
+                equipes_usuario.push(equipe)
+            }
+        }
+    }
+
+    let tarefas_equipes_usuario: Tarefa[] = []
+
+    for (let equipe of equipes_usuario) {
+        for (let tarefa of tarefas) {
+            if (tarefa.equipe.id === equipe.id) {
+                tarefas_equipes_usuario.push(tarefa)
+            }
+        }
+    }
 
     return (
         <body>
@@ -38,9 +83,12 @@ const TarefaPage = () => {
                 <div className="div_frase">
                     <p>Essas são todas as suas tarefas:</p>
                 </div>
-                <div className="div_lista_tarefas">
-                    <TarefaLista tarefas={tarefasOrdenadasPrioridade} />
-                </div>
+                {tarefas_equipes_usuario.length > 0 ?
+                    <div className="div_lista_tarefas">
+                        <TarefaLista tarefas={tarefas_equipes_usuario} />
+                    </div> :
+                    <p>Lista de tarefas vazia</p>
+                }
             </main>
             {footerVisible ?
                 <footer style={displayNone}>
@@ -48,7 +96,7 @@ const TarefaPage = () => {
                         <div className="menu">
                             <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
                             <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer> :
@@ -60,7 +108,7 @@ const TarefaPage = () => {
                         <div className="menu">
                             <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
                             <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer>
@@ -77,4 +125,4 @@ const TarefaPage = () => {
     )
 }
 
-export default TarefaPage
+export default TarefasPage

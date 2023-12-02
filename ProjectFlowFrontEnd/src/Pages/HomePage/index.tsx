@@ -63,7 +63,7 @@ const HomePage = () => {
                         <div className="menu">
                             <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
                             <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer> :
@@ -75,7 +75,7 @@ const HomePage = () => {
                         <div className="menu">
                             <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
                             <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer>

@@ -7,16 +7,16 @@ import "./styleProjetosPage.css"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import PopupComponent from "./componentes/Popup";
 import { useAuth } from "../../contexts/AuthContext";
+import { useEquipe } from "../../hooks/useEquipe";
+import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
+import { IPVersion } from "net";
+import { IProjeto } from "../../interfaces";
+import { Projeto } from "../../../../project-flow-api/src/projeto/entities/projeto.entity";
 
 const ProjetosPage = () => {
     const { signout, isAuthenticated, user } = useAuth()
 
-    const { projetos, getAllProjetos } = useProjeto()
     const [popupVisible, setPopupVisible] = useState(false);
-
-    useEffect(() => {
-        getAllProjetos()
-    }, [])
 
     const displayNone = {
         display: 'none'
@@ -31,6 +31,54 @@ const ProjetosPage = () => {
     const togglePopup = () => {
         setPopupVisible(!popupVisible);
     };
+
+    const {projetos, getAllProjetos} = useProjeto()
+
+    const { equipes, getAllEquipes } = useEquipe()
+    const {usuario_equipe, findAllUser_Team} = useUsuario_Equipe()
+
+    useEffect(() => {
+        getAllProjetos(),
+        getAllEquipes(),
+        findAllUser_Team()
+    }, [])
+    
+
+    let ids = []
+
+    for(let linha of usuario_equipe) {
+        if (linha.usuarioId === user?.id) {
+            ids.push(linha.equipeId)
+        }
+    }
+
+    let equipes_usuario = []
+
+    for (let equipe of equipes) {
+        for (let id of ids) {
+            if (equipe.id === id) {
+                equipes_usuario.push(equipe)
+            }
+        }
+    }
+
+    let projetos_usuario = []
+
+    if (user) 
+    for (let projeto of projetos) {
+        if(user.id === projeto.responsavel.id) {
+            projetos_usuario.push(projeto)
+        }
+    }
+
+    for (let equipe_usuario of equipes_usuario) {
+        for (let projeto of projetos) {
+            if(equipe_usuario.projeto.id === projeto.id) {
+                projetos_usuario.push(projeto)
+            }
+        }
+    }
+
 
     return (
         <body>
@@ -53,7 +101,7 @@ const ProjetosPage = () => {
                         </div> :
                         <p></p>
                     }
-                    <ProjetoLista projetos={projetos} />
+                    <ProjetoLista projetos={projetos_usuario} />
                 </div>
             </main>
             {footerVisible ?
@@ -62,7 +110,7 @@ const ProjetosPage = () => {
                         <div className="menu">
                             <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
                             <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer> :
@@ -74,7 +122,7 @@ const ProjetosPage = () => {
                         <div className="menu">
                             <Link to="/projetos"><img src="../../../public/list_icon.png" alt="Lista" className="lista" /></Link>
                             <Link to="/tarefas"><img src="../../../public/calendar_icon.png" alt="Calendario" className="calendario" /></Link>
-                            <Link to=""><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
+                            <Link to="/equipes"><img src="../../../public/team_icon.png" alt="Time" className="time" /></Link>
                         </div>
                     </div>
                 </footer>

@@ -4,6 +4,8 @@ import { ITarefa } from '../interfaces'
 
 export const useTarefa = () => {
     const [tarefas, setTarefas] = useState<ITarefa[]>([])
+    const [tarefasEquipe, setTarefasEquipe] = useState<ITarefa[]>([])
+    const [tarefa, setTarefa] = useState<ITarefa>()
     const [fourTarefas, setFourTarefas] = useState<ITarefa[]>([])
     const [tarefasOrdenadasPrioridade, setTarefasOrdenadasPrioridade] = useState<ITarefa[]>([])
 
@@ -15,6 +17,26 @@ export const useTarefa = () => {
         }
 
         setTarefas(data)
+    }, [])
+
+    const getTarefaId = useCallback(async (id: number) => {
+        const { status, data } = await TarefaService.getTarefaId(id)
+
+        if (status !== 200) {
+            throw new Error()
+        }
+
+        setTarefa(data)
+    }, [])
+
+    const getTarefaIdEquipe = useCallback(async (id: number) => {
+        const { status, data } = await TarefaService.getTarefaIdEquipe(id)
+
+        if (status !== 200) {
+            throw new Error()
+        }
+
+        setTarefasEquipe(data)
     }, [])
 
     const get4Tarefas = useCallback(async () => {
@@ -79,11 +101,15 @@ export const useTarefa = () => {
 
     return {
         tarefas,
+        tarefasEquipe,
+        tarefa,
         fourTarefas,
         tarefasOrdenadasPrioridade,
         getAllTarefas,
         get4Tarefas,
-        getTarefasOrdenadasPrioridade
+        getTarefasOrdenadasPrioridade,
+        getTarefaId,
+        getTarefaIdEquipe
     }
 
 }

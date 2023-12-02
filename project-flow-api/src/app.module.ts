@@ -10,6 +10,7 @@ import { EquipeModule } from './equipe/equipe.module';
 import { Equipe } from './equipe/entities/equipe.entity';
 import { AuthModule } from './auth/auth.module';
 import { Usuario_equipe } from './usuario_equipe/entities/usuario_equipe.entity';
+import { Usuario_equipeModule } from './usuario_equipe/usuario_equipe.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { Usuario_equipe } from './usuario_equipe/entities/usuario_equipe.entity'
     TarefaModule,
     ProjetoModule,
     EquipeModule,
+    Usuario_equipeModule,
     AuthModule,
   ],
   controllers: [],
