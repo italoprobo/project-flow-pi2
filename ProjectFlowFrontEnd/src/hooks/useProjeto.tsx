@@ -44,13 +44,57 @@ export const useProjeto = () => {
             }
         }
     };
+    
+
+    const salvarEdicaoDataIncio = async (DataInicioProjetoEditado: string) => {
+        if (projeto) {
+            const dataInicio = new Date(DataInicioProjetoEditado);
+            setProjeto({
+                ...projeto,
+                dt_inicio: dataInicio,
+            });
+
+            try {
+                await ProjetoService.updateProjeto({
+                    ...projeto,
+                    dt_inicio: dataInicio,
+                });
+            } catch (error: any) {
+                console.error('Erro ao alterar a data de inicio do projeto', error.message);
+            }
+        }
+    };
+    
+    
+
+    const salvarEdicaoDataFinal = async (DataFinalProjetoEditado: string) => {
+        if (projeto) {
+            const dataFinal = new Date(DataFinalProjetoEditado)
+            setProjeto({
+                ...projeto,
+                dt_final: dataFinal,
+            });
+
+            try {
+                await ProjetoService.updateProjeto({
+                    ...projeto,
+                    dt_final: dataFinal,
+                });
+            } catch (error: any) {
+                console.error('Erro ao alterar a data de conclusao do projeto', error.message);
+            }
+        }
+    };
+    
 
     return{
         projetos,
         projeto,
         getAllProjetos,
         getProjetoId,
-        salvarEdicaoNome
+        salvarEdicaoNome,
+        salvarEdicaoDataIncio,
+        salvarEdicaoDataFinal
     }
     
 }

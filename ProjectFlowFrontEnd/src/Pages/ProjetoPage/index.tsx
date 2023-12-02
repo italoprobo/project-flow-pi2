@@ -8,8 +8,10 @@ import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "./components/EquipeLista";
 
 const ProjetoPage = () => {
-    const { projeto, getProjetoId, salvarEdicaoNome } = useProjeto()
+    const { projeto, getProjetoId, salvarEdicaoNome, salvarEdicaoDataIncio, salvarEdicaoDataFinal } = useProjeto()
     const [nomeProjetoEditado, setNomeProjetoEditado] = useState("");
+    const [dataInicioEditada, setDataInicioEditada] = useState('');
+    const [dataFinalEditada, setDataFinalEditada] = useState('');
 
     let { id } = useParams()
 
@@ -74,6 +76,15 @@ const ProjetoPage = () => {
         toggleEdicaoNome()
     };
 
+    const handleSalvarEdicaoDataInicio = () => {
+        salvarEdicaoDataIncio(nomeProjetoEditado);
+        toggleEdicaoInicio()
+    };
+    const handleSalvarEdicaoDataFinal = () => {
+        salvarEdicaoDataFinal(nomeProjetoEditado);
+        toggleEdicaoFinal()
+    };
+
     return (
         <body>
             <header>
@@ -134,14 +145,16 @@ const ProjetoPage = () => {
                             {edicaoAtivaInicio ? (
                                 <input
                                     type="text"
+                                    value={dataInicioEditada}
+                                    onChange={(e) => setDataInicioEditada(e.target.value)}
                                 />
                             ) : (
-                                <p>Início: {dataInicioFormatada}</p>
+                                <p>Início: {dataInicioEditada || dataInicioFormatada}</p>
                             )}
                         </div>
                         <div className="areaBotaoEditarProjeto">
                             {edicaoAtivaInicio ? 
-                            <><button className="editarProjeto" onClick={toggleEdicaoInicio}>Salvar</button>
+                            <><button className="editarProjeto" onClick={handleSalvarEdicaoDataInicio}>Salvar</button>
                             <button className="editarProjeto" onClick={toggleEdicaoInicio}>Cancelar</button></>
                              : <button className="editarProjeto" onClick={toggleEdicaoInicio}>Editar</button>}
                         </div>
@@ -150,15 +163,17 @@ const ProjetoPage = () => {
                         <div className="areaDadoProjeto">
                             {edicaoAtivaFinal ? (
                                 <input
-                                    type="text"
+                                type="text"
+                                value={dataFinalEditada}
+                                onChange={(e) => setDataFinalEditada(e.target.value)}
                                 />
                             ) : (
-                                <p>Final: {dataFinalFormatada}</p>
+                                <p>Final: {dataFinalEditada || dataFinalFormatada}</p>
                             )}
                         </div>
                         <div className="areaBotaoEditarProjeto">
                             {edicaoAtivaFinal ? 
-                            <><button className="editarProjeto" onClick={toggleEdicaoFinal}>Salvar</button>
+                            <><button className="editarProjeto" onClick={handleSalvarEdicaoDataFinal}>Salvar</button>
                             <button className="editarProjeto" onClick={toggleEdicaoFinal}>Cancelar</button></>
                              : <button className="editarProjeto" onClick={toggleEdicaoFinal}>Editar</button>}
                         </div>
