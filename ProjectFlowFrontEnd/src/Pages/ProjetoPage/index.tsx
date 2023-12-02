@@ -8,7 +8,8 @@ import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "./components/EquipeLista";
 
 const ProjetoPage = () => {
-    const { projeto, getProjetoId } = useProjeto()
+    const { projeto, getProjetoId, salvarEdicaoNome } = useProjeto()
+    const [nomeProjetoEditado, setNomeProjetoEditado] = useState("");
 
     let { id } = useParams()
 
@@ -68,6 +69,11 @@ const ProjetoPage = () => {
 
     const dataFinalFormatada = `${dataFinalSeparada2[2]}/${dataFinalSeparada2[1]}/${dataFinalSeparada2[0]}`
 
+    const handleSalvarEdicaoNome = () => {
+        salvarEdicaoNome(nomeProjetoEditado);
+        toggleEdicaoNome()
+    };
+
     return (
         <body>
             <header>
@@ -92,14 +98,16 @@ const ProjetoPage = () => {
                             {edicaoAtivaNome ? (
                                 <input
                                     type="text"
+                                    value={nomeProjetoEditado}
+                                    onChange={(e) => setNomeProjetoEditado(e.target.value)}
                                 />
                             ) : (
-                                <p>{projeto?.nome}</p>
+                                <p>{nomeProjetoEditado || projeto?.nome}</p>
                             )}
                         </div>
                         <div className="areaBotaoEditarProjeto">
                             {edicaoAtivaNome ? 
-                            <><button className="editarProjeto" onClick={toggleEdicaoNome}>Salvar</button>
+                            <><button className="editarProjeto" onClick={handleSalvarEdicaoNome}>Salvar</button>
                             <button className="editarProjeto" onClick={toggleEdicaoNome}>Cancelar</button></>
                              : <button className="editarProjeto" onClick={toggleEdicaoNome}>Editar</button>}
                         </div>
