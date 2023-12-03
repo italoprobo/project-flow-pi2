@@ -41,6 +41,7 @@ const ProjetoPage = () => {
     const [edicaoAtivaResponsavel, setEdicaoAtivaResponsavel] = useState(false);
 
     const toggleEdicaoResponsavel = () => {
+        focus()
         setEdicaoAtivaResponsavel(!edicaoAtivaResponsavel);
     };
 
@@ -115,7 +116,7 @@ const ProjetoPage = () => {
                                             value={nomeProjetoEditado}
                                             onChange={(e) => setNomeProjetoEditado(e.target.value)} />
                                     ) : (
-                                        <p>{nomeProjetoEditado || projeto?.nome}</p>
+                                        <p><b>Projeto: {nomeProjetoEditado || projeto?.nome}</b></p>
                                     )}
                                 </div>
                                 <div className="areaBotaoEditarProjeto">
@@ -127,19 +128,14 @@ const ProjetoPage = () => {
                             </div>
                             <div className="dadosProjeto">
                                 <div className="areaDadoProjeto">
-                                    {edicaoAtivaResponsavel ? (
-                                        <input
-                                            type="text" />
-                                    ) : (
-                                        <p>Responsável: {projeto?.responsavel.nome}</p>
-                                    )}
+                                    <p>Responsável: {projeto?.responsavel.nome}</p>
                                 </div>
                             </div>
                             <div className="dadosProjeto">
                                 <div className="areaDadoProjeto">
                                     {edicaoAtivaInicio ? (
                                         <input
-                                            type="text"
+                                            type="date"
                                             value={dataInicioEditada}
                                             onChange={(e) => setDataInicioEditada(e.target.value)} />
                                     ) : (
@@ -157,7 +153,7 @@ const ProjetoPage = () => {
                                 <div className="areaDadoProjeto">
                                     {edicaoAtivaFinal ? (
                                         <input
-                                            type="text"
+                                            type="date"
                                             value={dataFinalEditada}
                                             onChange={(e) => setDataFinalEditada(e.target.value)} />
                                     ) : (

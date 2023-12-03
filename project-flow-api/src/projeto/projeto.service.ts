@@ -40,29 +40,23 @@ export class ProjetoService {
   }
 
   async updateProject(idUsuario: number, updateProjetoDto: UpdateProjetoDto): Promise<Projeto | null> {
-    // Encontre o projeto existente pelo ID
     const project: Projeto | undefined = await this.projetoRepositorio.findOneBy({id: idUsuario});
 
     if (project) {
-        // Encontre o usuário pelo ID
         const usuario: Usuario | undefined = await this.usuarioRepositorio.findOneBy({id: updateProjetoDto.responsavelId});
 
         if (usuario) {
-            // Atualize as propriedades do projeto com os valores do DTO
             project.nome = updateProjetoDto.nome;
             project.descricao = updateProjetoDto.descricao;
             project.dt_inicio = updateProjetoDto.dt_inicio;
             project.dt_final = updateProjetoDto.dt_final;
             project.responsavel = usuario;
 
-            // Salve as alterações no projeto existente
             return this.projetoRepositorio.save(project);
         } else {
-            // Trate o caso em que o usuário não foi encontrado
             return null;
         }
     } else {
-        // Trate o caso em que o projeto não foi encontrado
         return null;
     }
 }

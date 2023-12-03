@@ -30,7 +30,18 @@ body {
             height: 10vh;
             display: flex;
             flex-direction: row;
-            gap: 60vw;
+            justify-content: space-between;
+            padding-right: 1rem;
+
+            & .direita {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                & button {
+                    cursor: pointer;
+                }
+            }
 
             & img {
                 height: 8vh;
