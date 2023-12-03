@@ -80,11 +80,11 @@ const ProjetoPage = () => {
     };
 
     const handleSalvarEdicaoDataInicio = () => {
-        salvarEdicaoDataIncio(nomeProjetoEditado);
+        salvarEdicaoDataIncio(dataInicioEditada);
         toggleEdicaoInicio()
     };
     const handleSalvarEdicaoDataFinal = () => {
-        salvarEdicaoDataFinal(nomeProjetoEditado);
+        salvarEdicaoDataFinal(dataFinalEditada);
         toggleEdicaoFinal()
     };
 

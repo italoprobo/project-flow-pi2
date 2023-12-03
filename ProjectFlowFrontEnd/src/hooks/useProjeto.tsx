@@ -28,16 +28,22 @@ export const useProjeto = () => {
 
     const salvarEdicaoNome = async (nomeProjetoEditado: string) => {
         if (projeto) {
-
-            setProjeto({
-                ...projeto,
-                nome: nomeProjetoEditado,
-            });
-
             try {
-                await ProjetoService.updateProjeto({
+                setProjeto({
                     ...projeto,
                     nome: nomeProjetoEditado,
+                });
+    
+                await ProjetoService.updateProjeto({
+                    id: projeto.id,
+                    nome: nomeProjetoEditado,
+                    descricao: projeto.descricao,
+                    dt_inicio: projeto.dt_inicio,
+                    dt_final: projeto.dt_final,
+                    responsavel: projeto.responsavel, 
+                    tarefas: projeto.tarefas,
+                    equipes: projeto.equipes,
+                    project: projeto.project,
                 });
             } catch (error: any) {
                 console.error('Erro ao alterar o Nome do projeto', error.message);
@@ -45,15 +51,16 @@ export const useProjeto = () => {
         }
     };
     
+    
 
-    const salvarEdicaoDataIncio = async (DataInicioProjetoEditado: string) => {
+    const salvarEdicaoDataIncio = async (dataInicioProjetoEditado: string) => {
         if (projeto) {
-            const dataInicio = new Date(DataInicioProjetoEditado);
+            const dataInicio = new Date(dataInicioProjetoEditado);
             setProjeto({
                 ...projeto,
                 dt_inicio: dataInicio,
             });
-
+    
             try {
                 await ProjetoService.updateProjeto({
                     ...projeto,
@@ -65,16 +72,14 @@ export const useProjeto = () => {
         }
     };
     
-    
-
-    const salvarEdicaoDataFinal = async (DataFinalProjetoEditado: string) => {
+    const salvarEdicaoDataFinal = async (dataFinalProjetoEditado: string) => {
         if (projeto) {
-            const dataFinal = new Date(DataFinalProjetoEditado)
+            const dataFinal = new Date(dataFinalProjetoEditado)
             setProjeto({
                 ...projeto,
                 dt_final: dataFinal,
             });
-
+    
             try {
                 await ProjetoService.updateProjeto({
                     ...projeto,
