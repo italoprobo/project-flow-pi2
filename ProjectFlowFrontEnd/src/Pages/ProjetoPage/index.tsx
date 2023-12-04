@@ -7,6 +7,7 @@ import "./styleProjeto.css"
 import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "./components/EquipeLista";
 import { useAuth } from "../../contexts/AuthContext";
+import PopupEquipe from "../EquipesPage/componentes/PopupEquipe";
 
 const ProjetoPage = () => {
     const { projeto, getProjetoId, salvarEdicaoNome, salvarEdicaoDataIncio, salvarEdicaoDataFinal } = useProjeto()
@@ -89,6 +90,12 @@ const ProjetoPage = () => {
         toggleEdicaoFinal()
     };
 
+    const [popupVisible, setPopupVisible] = useState(false);
+
+    const togglePopup = () => {
+      setPopupVisible(!popupVisible);
+    };
+
     return (
         <body>
             <header>
@@ -105,7 +112,7 @@ const ProjetoPage = () => {
                 {projeto?.responsavel.id === user?.id ?
                     <><div className="criarEquipe">
                         <div className="BotaoCriarEquipe">
-                            <button>Criar equipe</button>
+                            <button onClick={togglePopup}>Criar equipe</button>
                         </div>
                     </div><div className="ProjetoDetalhes">
                             <div className="dadosProjeto">
@@ -256,6 +263,7 @@ const ProjetoPage = () => {
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div>
             }
+            {popupVisible && <PopupEquipe onClose={togglePopup} />}
         </body >
     )
 }

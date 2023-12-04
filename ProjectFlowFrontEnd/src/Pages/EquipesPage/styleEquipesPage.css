@@ -89,3 +89,35 @@
         border: 0.2vh solid black;
     }
 }
+
+.div_lista_equipe {
+    padding-top: 4vh;
+    display: flex;
+    flex-direction: column;
+
+    & h1 {
+        padding-left: 10vw;
+    }
+
+    & .participar{
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+        height: 10vh;
+        align-items: center;
+
+        & p {
+            text-align: center;
+        }
+    
+        & .bnt-criar-equipe {
+            text-align: center;
+            background-color: white;
+            width: 35vw;
+            padding: 7px 5px;
+            border-radius: 2%;
+            border: 1px solid #0F70BC;
+        }
+    }
+
+}

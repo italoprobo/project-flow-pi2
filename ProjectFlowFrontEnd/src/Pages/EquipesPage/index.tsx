@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "../ProjetoPage/components/EquipeLista";
 import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
+import PopupEquipe from './componentes/PopupEquipe'; 
 
 const EquipesPage = () => {
     const { signout, user } = useAuth()
@@ -48,6 +49,12 @@ const EquipesPage = () => {
         setFooterVisible(!footerVisible);
     };
 
+    const [popupVisible, setPopupVisible] = useState(false);
+
+    const togglePopup = () => {
+      setPopupVisible(!popupVisible);
+    };
+
     return (
         <body>
             <header>
@@ -61,11 +68,14 @@ const EquipesPage = () => {
                 </div>
             </header>
             <main>
-                <div className="div_lista_projetos">
+                <div className="div_lista_equipe">
                     <h1>Suas equipes: </h1>
                     {equipes_usuario.length > 0 ?
                     <EquipeLista equipes={equipes_usuario} />:
-                    <p>Você ainda não participa de nenhuma equipe</p>
+                    <div className="participar">
+                        <p>Você ainda não participa de nenhuma equipe!</p>
+                        <button className="bnt-criar-equipe" onClick={togglePopup}>Criar uma equipe</button>
+                    </div>
                     }
                 </div>
             </main>
@@ -100,6 +110,7 @@ const EquipesPage = () => {
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div>
             }
+            {popupVisible && <PopupEquipe onClose={togglePopup} />}
         </body>
     )
 }
