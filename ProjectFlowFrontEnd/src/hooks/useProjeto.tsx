@@ -27,12 +27,16 @@ export const useProjeto = () => {
     }
 
     const salvarEdicaoNome = async (nomeProjetoEditado: string) => {
+        console.log(projeto);
+
         if (projeto) {
             try {
                 setProjeto({
                     ...projeto,
                     nome: nomeProjetoEditado,
                 });
+
+                console.log(projeto);
     
                 await ProjetoService.updateProjeto({
                     id: projeto.id,
@@ -45,6 +49,8 @@ export const useProjeto = () => {
                     equipes: projeto.equipes,
                     project: projeto.project,
                 });
+
+                console.log(projeto);
             } catch (error: any) {
                 console.error('Erro ao alterar o Nome do projeto', error.message);
             }

@@ -8,6 +8,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { Tarefa } from "../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
 import { TarefaLista } from "../TarefasPage/components/TarefaLista";
 import { useTarefa } from "../../hooks";
+import { ITarefa } from "../../interfaces";
+import PopupTarefaComponent from "./components/PopupTarefa";
 
 const EquipePage = () => {
     const { signout, user } = useAuth()
@@ -41,46 +43,62 @@ const EquipePage = () => {
         display: 'none'
     };
 
-    let tarefas_equipes_usuarioOrdenadas: Tarefa[] = []
+    let tarefas_equipe: ITarefa[] = []
 
     for (let tarefa of tarefas) {
+        if(tarefa.equipe.id === equipe?.id) {
+            tarefas_equipe.push(tarefa)
+        }
+    }
+
+    let tarefas_equipes_usuarioOrdenadas: Tarefa[] = []
+
+    for (let tarefa of tarefas_equipe) {
         if (!tarefa.isDone && tarefa.importancia === 'Alta') {
             tarefas_equipes_usuarioOrdenadas.push(tarefa)
         }
     }
 
-    for (let tarefa of tarefas) {
+    for (let tarefa of tarefas_equipe) {
         if (!tarefa.isDone && tarefa.importancia === 'Média') {
             tarefas_equipes_usuarioOrdenadas.push(tarefa)
         }
     }
 
-    for (let tarefa of tarefas) {
+    for (let tarefa of tarefas_equipe) {
         if (!tarefa.isDone && tarefa.importancia === 'Baixa') {
             tarefas_equipes_usuarioOrdenadas.push(tarefa)
         }
     }
 
-    for (let tarefa of tarefas) {
+    for (let tarefa of tarefas_equipe) {
         if (tarefa.isDone && tarefa.importancia === 'Alta') {
             tarefas_equipes_usuarioOrdenadas.push(tarefa)
         }
     }
 
-    for (let tarefa of tarefas) {
+    for (let tarefa of tarefas_equipe) {
         if (tarefa.isDone && tarefa.importancia === 'Média') {
             tarefas_equipes_usuarioOrdenadas.push(tarefa)
         }
     }
 
-    for (let tarefa of tarefas) {
+    for (let tarefa of tarefas_equipe) {
         if (tarefa.isDone && tarefa.importancia === 'Baixa') {
             tarefas_equipes_usuarioOrdenadas.push(tarefa)
         }
     }
 
-    console.log(tarefas);
+    const [popupVisible, setPopupVisible] = useState(false);
 
+    const [equipeIdAberto, setEquipeIdAberto] = useState(0);
+    const [projetoIdAberto, setprojetoIdAberto] = useState(0);
+
+    const togglePopup = (equipeId: number, projetoId: number) => {
+        setPopupVisible(!popupVisible);
+        setEquipeIdAberto(equipeId);
+        setprojetoIdAberto(projetoId);
+    };
 
     return (
         <body>
@@ -98,7 +116,7 @@ const EquipePage = () => {
                 {user?.id === equipe?.responsavel.id ?
                     <><div className="criarEquipe">
                         <div className="BotaoCriarEquipe">
-                            <button>Adicionar tarefa</button>
+                            <button onClick={() => togglePopup(equipeIdAberto, projetoIdAberto)}>Adicionar tarefa</button>
                         </div>
                     </div><div className="ProjetoDetalhes">
                             <div className="dadosProjeto">
@@ -207,6 +225,9 @@ const EquipePage = () => {
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div>
             }
+            {popupVisible && equipe && (
+                <PopupTarefaComponent onClose={() => togglePopup(equipeIdAberto, projetoIdAberto)} equipeId={equipeIdAberto || equipe.id} projetoId={projetoIdAberto | equipe.projeto.id}/>
+            )}
         </body >
     )
 }

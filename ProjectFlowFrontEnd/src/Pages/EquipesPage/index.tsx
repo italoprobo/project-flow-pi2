@@ -74,7 +74,6 @@ const EquipesPage = () => {
                     <EquipeLista equipes={equipes_usuario} />:
                     <div className="participar">
                         <p>Você ainda não participa de nenhuma equipe!</p>
-                        <button className="bnt-criar-equipe" onClick={togglePopup}>Criar uma equipe</button>
                     </div>
                     }
                 </div>

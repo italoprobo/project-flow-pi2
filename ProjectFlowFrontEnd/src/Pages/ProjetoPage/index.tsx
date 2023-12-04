@@ -8,6 +8,7 @@ import { useEquipe } from "../../hooks/useEquipe";
 import { EquipeLista } from "./components/EquipeLista";
 import { useAuth } from "../../contexts/AuthContext";
 import PopupEquipe from "../EquipesPage/componentes/PopupEquipe";
+import { IEquipe } from "../../interfaces";
 
 const ProjetoPage = () => {
     const { projeto, getProjetoId, salvarEdicaoNome, salvarEdicaoDataIncio, salvarEdicaoDataFinal } = useProjeto()
@@ -89,12 +90,23 @@ const ProjetoPage = () => {
         salvarEdicaoDataFinal(dataFinalEditada);
         toggleEdicaoFinal()
     };
+    
+    const [projetoIdAberto, setProjetoIdAberto] = useState(0);
 
     const [popupVisible, setPopupVisible] = useState(false);
 
-    const togglePopup = () => {
-      setPopupVisible(!popupVisible);
+    const togglePopup = (projetoId: number) => {
+        setPopupVisible(!popupVisible);
+        setProjetoIdAberto(projetoId);
     };
+
+    let equipesProjeto: IEquipe[] = []
+
+    for (let equipe of equipes) {
+        if (equipe.projeto.id === projeto?.id) {
+            equipesProjeto.push(equipe)
+        }
+    }
 
     return (
         <body>
@@ -112,7 +124,7 @@ const ProjetoPage = () => {
                 {projeto?.responsavel.id === user?.id ?
                     <><div className="criarEquipe">
                         <div className="BotaoCriarEquipe">
-                            <button onClick={togglePopup}>Criar equipe</button>
+                            <button onClick={() => togglePopup(projetoIdAberto)}>Criar equipe</button>
                         </div>
                     </div><div className="ProjetoDetalhes">
                             <div className="dadosProjeto">
@@ -175,7 +187,7 @@ const ProjetoPage = () => {
                                 </div>
                             </div>
                         </div></> :
-                        <div className="ProjetoDetalhes">
+                    <div className="ProjetoDetalhes">
                         <div className="dadosProjeto">
                             <div className="areaDadoProjeto">
                                 {edicaoAtivaNome ? (
@@ -229,7 +241,7 @@ const ProjetoPage = () => {
                     </div>
                 }
                 <div className="equipes">
-                    <EquipeLista equipes={equipes} />
+                    <EquipeLista equipes={equipesProjeto} />
                 </div>
             </main>
             {footerVisible ?
@@ -263,7 +275,9 @@ const ProjetoPage = () => {
                     <button onClick={toggleFooter}><FaCircleArrowUp /></button>
                 </div>
             }
-            {popupVisible && <PopupEquipe onClose={togglePopup} />}
+            {popupVisible && projeto && (
+                <PopupEquipe onClose={() => togglePopup(projetoIdAberto)} projetoId={projetoIdAberto || projeto.id} />
+            )}
         </body >
     )
 }
