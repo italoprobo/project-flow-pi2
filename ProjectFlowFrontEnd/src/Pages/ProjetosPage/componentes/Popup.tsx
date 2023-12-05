@@ -110,7 +110,6 @@ const PopupComponent: React.FC<PopupProps> = ({ onClose }) => {
 
         try {
             await Api.post("/v1/projeto", projetoData);
-            console.log(projetoData);
             onClose();
         } catch (error) {
         }

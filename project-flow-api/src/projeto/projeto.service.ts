@@ -39,26 +39,18 @@ export class ProjetoService {
     return this.projetoRepositorio.findOne({ where: { id }, relations: ['responsavel', 'tarefas'] });
   }
 
-  async updateProject(idUsuario: number, updateProjetoDto: UpdateProjetoDto): Promise<Projeto | null> {
-    const project: Projeto | undefined = await this.projetoRepositorio.findOneBy({id: idUsuario});
+  async updateProject(idProjeto: number, updateProjetoDto: UpdateProjetoDto): Promise<Projeto> {
+    const projeto = new Projeto()
+    const responsavel: Usuario = await this.usuarioRepositorio.findOne({ where: { id: updateProjetoDto.responsavelId }, relations: ['equipeslideradas', 'projetosliderados', 'usuario_equipe'] })
+    projeto.descricao = updateProjetoDto.descricao
+    projeto.dt_final = updateProjetoDto.dt_final
+    projeto.dt_inicio = updateProjetoDto.dt_inicio
+    projeto.nome = updateProjetoDto.nome
+    projeto.responsavel = responsavel
+    projeto.id = idProjeto
 
-    if (project) {
-        const usuario: Usuario | undefined = await this.usuarioRepositorio.findOneBy({id: updateProjetoDto.responsavelId});
-
-        if (usuario) {
-            project.nome = updateProjetoDto.nome;
-            project.descricao = updateProjetoDto.descricao;
-            project.dt_inicio = updateProjetoDto.dt_inicio;
-            project.dt_final = updateProjetoDto.dt_final;
-            project.responsavel = usuario;
-
-            return this.projetoRepositorio.save(project);
-        } else {
-            return null;
-        }
-    } else {
-        return null;
-    }
+    console.log(projeto);
+    return this.projetoRepositorio.save(projeto)
 }
 
 

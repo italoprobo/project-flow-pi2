@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react'
 import { ProjetoService } from '../services'
-import { IProjeto } from '../interfaces'
+import { IProjeto, IUpdateProjeto } from '../interfaces'
 
 export const useProjeto = () => {
     const [projetos, setProjetos] = useState<IProjeto[]>([])
     const [projeto, setProjeto] = useState<IProjeto>()
+    const [updateProjeto, setUpdateProjeto] = useState<IUpdateProjeto>()
 
     const getAllProjetos = useCallback(async () => {
         const { status, data } = await ProjetoService.getAllProjetos()
@@ -16,7 +17,7 @@ export const useProjeto = () => {
         setProjetos(data)
     }, [])
 
-    const getProjetoId = async (id: string) => {
+    const getProjetoId = async (id: number) => {
         const { status, data } = await ProjetoService.getProjetoId(id)
 
         if (status !== 200) {
@@ -26,8 +27,8 @@ export const useProjeto = () => {
         setProjeto(data)
     }
 
-    const salvarEdicaoNome = async (nomeProjetoEditado: string) => {
-        console.log(projeto);
+    const salvarEdicaoNome = async (nomeProjetoEditado: string, idProjeto: number) => {
+        getProjetoId(idProjeto)
 
         if (projeto) {
             try {
@@ -36,69 +37,90 @@ export const useProjeto = () => {
                     nome: nomeProjetoEditado,
                 });
 
-                console.log(projeto);
-    
                 await ProjetoService.updateProjeto({
                     id: projeto.id,
                     nome: nomeProjetoEditado,
                     descricao: projeto.descricao,
                     dt_inicio: projeto.dt_inicio,
                     dt_final: projeto.dt_final,
-                    responsavel: projeto.responsavel, 
-                    tarefas: projeto.tarefas,
-                    equipes: projeto.equipes,
-                    project: projeto.project,
+                    responsavelId: projeto.responsavel.id
                 });
-
-                console.log(projeto);
             } catch (error: any) {
                 console.error('Erro ao alterar o Nome do projeto', error.message);
             }
         }
     };
-    
-    
 
-    const salvarEdicaoDataIncio = async (dataInicioProjetoEditado: string) => {
+
+
+    const salvarEdicaoDataIncio = async (dataInicioProjetoEditado: string, idProjeto: number) => {
+        await getProjetoId(idProjeto)
+
         if (projeto) {
             const dataInicio = new Date(dataInicioProjetoEditado);
+
             setProjeto({
-                ...projeto,
+                id: projeto.id,
+                nome: projeto.nome,
+                descricao: projeto.descricao,
                 dt_inicio: dataInicio,
+                dt_final: projeto.dt_final,
+                responsavel: projeto.responsavel,
+                tarefas: projeto.tarefas,
+                equipes: projeto.equipes,
+                project: projeto.project
             });
-    
+
             try {
                 await ProjetoService.updateProjeto({
-                    ...projeto,
+                    id: projeto.id,
+                    nome: projeto.nome,
+                    descricao: projeto.descricao,
                     dt_inicio: dataInicio,
+                    dt_final: projeto.dt_final,
+                    responsavelId: projeto.responsavel.id
                 });
             } catch (error: any) {
                 console.error('Erro ao alterar a data de inicio do projeto', error.message);
             }
         }
     };
-    
-    const salvarEdicaoDataFinal = async (dataFinalProjetoEditado: string) => {
+
+    const salvarEdicaoDataFinal = async (dataFinalProjetoEditado: string, idProjeto: number) => {
+        await getProjetoId(idProjeto)
+
         if (projeto) {
-            const dataFinal = new Date(dataFinalProjetoEditado)
+            const dataFinal = new Date(dataFinalProjetoEditado);
+
             setProjeto({
-                ...projeto,
+                id: projeto.id,
+                nome: projeto.nome,
+                descricao: projeto.descricao,
+                dt_inicio: projeto.dt_inicio,
                 dt_final: dataFinal,
+                responsavel: projeto.responsavel,
+                tarefas: projeto.tarefas,
+                equipes: projeto.equipes,
+                project: projeto.project
             });
-    
+
             try {
                 await ProjetoService.updateProjeto({
-                    ...projeto,
+                    id: projeto.id,
+                    nome: projeto.nome,
+                    descricao: projeto.descricao,
+                    dt_inicio: projeto.dt_inicio,
                     dt_final: dataFinal,
+                    responsavelId: projeto.responsavel.id
                 });
             } catch (error: any) {
-                console.error('Erro ao alterar a data de conclusao do projeto', error.message);
+                console.error('Erro ao alterar a data de inicio do projeto', error.message);
             }
         }
     };
-    
 
-    return{
+
+    return {
         projetos,
         projeto,
         getAllProjetos,
@@ -107,5 +129,5 @@ export const useProjeto = () => {
         salvarEdicaoDataIncio,
         salvarEdicaoDataFinal
     }
-    
+
 }

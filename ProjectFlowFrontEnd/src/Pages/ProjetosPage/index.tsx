@@ -62,18 +62,21 @@ const ProjetosPage = () => {
         }
     }
 
-    let projetos_usuario = []
+    let projetos_usuario: IProjeto[] = []
 
-    if (user) 
-    for (let projeto of projetos) {
-        if(user.id === projeto.responsavel.id) {
-            projetos_usuario.push(projeto)
+    const isInProjects = (projetoBuscado: IProjeto) => {
+        for (let projeto of projetos_usuario) {
+            if(projeto.id === projetoBuscado.id) {
+                return true
+            }
         }
+
+        return false
     }
 
     for (let equipe_usuario of equipes_usuario) {
         for (let projeto of projetos) {
-            if(equipe_usuario.projeto.id === projeto.id) {
+            if(equipe_usuario.projeto.id === projeto.id && !isInProjects(projeto)) {
                 projetos_usuario.push(projeto)
             }
         }

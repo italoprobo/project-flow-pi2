@@ -23,10 +23,6 @@ export class Usuario {
     @Column({ type: 'varchar' })
     cargo: string;
 
-    async validatePassword(senha: string): Promise<boolean> {
-        return bcrypt.compare(senha, this.senha)
-    }
-
     @OneToMany(() => Equipe, (equipe) => equipe.responsavel)
     equipeslideradas: Equipe[]
 

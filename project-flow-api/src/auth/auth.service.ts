@@ -21,7 +21,7 @@ export class AuthService {
   async login(email: string, senha: string): Promise<any> {
     const usuario: Usuario | undefined = await this.userService.findByEmail(email).catch(() => undefined)
 
-    const doesPasswordMatch = await usuario.validatePassword(senha)
+    const doesPasswordMatch = await compare(senha, usuario.senha)
 
     let data: Data = {
       token: {}

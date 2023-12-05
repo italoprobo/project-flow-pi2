@@ -78,19 +78,25 @@ const ProjetoPage = () => {
     const dataFinalFormatada = `${dataFinalSeparada2[2]}/${dataFinalSeparada2[1]}/${dataFinalSeparada2[0]}`
 
     const handleSalvarEdicaoNome = () => {
-        salvarEdicaoNome(nomeProjetoEditado);
-        toggleEdicaoNome()
+        if (projeto) {
+            salvarEdicaoNome(nomeProjetoEditado, projeto.id);
+            toggleEdicaoNome()
+        }
     };
 
     const handleSalvarEdicaoDataInicio = () => {
-        salvarEdicaoDataIncio(dataInicioEditada);
-        toggleEdicaoInicio()
+        if (projeto) {
+            salvarEdicaoDataIncio(dataInicioEditada, projeto.id);
+            toggleEdicaoInicio()
+        }
     };
     const handleSalvarEdicaoDataFinal = () => {
-        salvarEdicaoDataFinal(dataFinalEditada);
-        toggleEdicaoFinal()
+        if (projeto) {
+            salvarEdicaoDataFinal(dataFinalEditada, projeto.id);
+            toggleEdicaoFinal()
+        }
     };
-    
+
     const [projetoIdAberto, setProjetoIdAberto] = useState(0);
 
     const [popupVisible, setPopupVisible] = useState(false);
