@@ -28,6 +28,27 @@ export const useEquipe = () => {
         setEquipe(data)
     }, [])
 
+    const salvarEdicaoNomeEquipe = async (nomeEquipeEditado: string, idEquipe: number) => {
+        getEquipeId(idEquipe)
+
+        if (equipe) {
+            try {
+                setEquipe({
+                    ...equipe,
+                    nome: nomeEquipeEditado,
+                });
+                //continuar a parti daqui
+                await EquipeService.updateEquipe({
+                    id: equipe.id,
+                    nome: nomeProjetoEditado,
+
+                });
+            } catch (error: any) {
+                console.error('Erro ao alterar o Nome do projeto', error.message);
+            }
+        }
+    };
+
     return {
         equipes, equipe, participantes, getAllEquipes, getEquipeId
     }
