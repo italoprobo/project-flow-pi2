@@ -9,9 +9,7 @@ import PopupComponent from "./componentes/Popup";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEquipe } from "../../hooks/useEquipe";
 import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
-import { IPVersion } from "net";
 import { IProjeto } from "../../interfaces";
-import { Projeto } from "../../../../project-flow-api/src/projeto/entities/projeto.entity";
 
 const ProjetosPage = () => {
     const { signout, isAuthenticated, user } = useAuth()
@@ -97,10 +95,10 @@ const ProjetosPage = () => {
             </header>
             <main>
                 <div className="div_lista_projetos">
-                    <h1>Seus projetos: </h1>
+                    <h1>Projetos</h1>
                     {user?.cargo === "administrador" ?
                         <div className="linkCriarProjeto">
-                            <button onClick={togglePopup}>Criar Projeto</button>
+                            <button className="btn-criar-proj" onClick={togglePopup}>Criar Projeto </button>
                         </div> :
                         <p></p>
                     }

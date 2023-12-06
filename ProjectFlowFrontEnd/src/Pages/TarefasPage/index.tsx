@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEquipe } from "../../hooks/useEquipe";
-import { ITarefa } from "../../interfaces";
 import { Tarefa } from "../../../../project-flow-api/src/tarefa/entities/tarefa.entity";
 
 const TarefasPage = () => {
@@ -119,10 +118,11 @@ const TarefasPage = () => {
             </header>
             <main>
                 <div className="div_frase">
-                    <p>Essas são todas as suas tarefas:</p>
+                    <p>Lista de tarefas</p>
                 </div>
                 {tarefas_equipes_usuario.length > 0 ?
                     <div className="div_lista_tarefas">
+                        <p className="h1">Essas são todas as suas tarefas:</p>
                         <TarefaLista tarefas={tarefas_equipes_usuarioOrdenadas} />
                     </div> :
                     <p>Lista de tarefas vazia</p>

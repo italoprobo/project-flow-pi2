@@ -2,6 +2,7 @@ import { ITarefa } from "../../../../interfaces";
 import TarefaListaItem from "../TarefaListaItem";
 import "./styleTarefaListaPage.css"
 
+
 interface TarefaListProps {
     tarefas: ITarefa[]
 }

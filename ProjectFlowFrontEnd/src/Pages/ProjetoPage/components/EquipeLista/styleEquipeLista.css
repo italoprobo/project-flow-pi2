@@ -5,9 +5,10 @@
     height: 32vh;
     width: 100%;
     text-align: center;
-    padding: 2vh 0 0 0;
+    padding: 1vh 0 0 0;
     & ul {
         width: 100vw;
+        height: 17vh;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;

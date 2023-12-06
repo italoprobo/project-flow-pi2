@@ -69,7 +69,7 @@ const EquipesPage = () => {
             </header>
             <main>
                 <div className="div_lista_equipe">
-                    <h1>Suas equipes: </h1>
+                    <h1>Equipes </h1>
                     {equipes_usuario.length > 0 ?
                     <EquipeLista equipes={equipes_usuario} />:
                     <div className="participar">

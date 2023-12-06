@@ -12,8 +12,8 @@ export default function ProjetoListaItem({ projeto }: ProjetoListItemProps) {
 
         <>
             <div className="cardProjeto">
-                <p>Nome: {projeto.nome}</p>
-                <p>Responsável: {projeto.responsavel.nome}</p>
+                <p>Nome {projeto.nome}</p>
+                <p>Responsável {projeto.responsavel.nome}</p>
                 <div className="linkProjeto">
                     <Link to={`/projetos/${projeto.id}`}>Ver projeto</Link>
                 </div>

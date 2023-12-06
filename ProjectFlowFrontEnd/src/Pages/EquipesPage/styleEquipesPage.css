@@ -1,7 +1,7 @@
 
 
 .div_lista_projetos {
-    padding-top: 4vh;
+    padding-top: 2vh;
 
     & .linkCriarProjeto {
         text-align: center;
@@ -16,6 +16,7 @@
 
     & h1 {
         padding-left: 10vw;
+        color: white;
     }
 }
 
@@ -91,12 +92,13 @@
 }
 
 .div_lista_equipe {
-    padding-top: 4vh;
+    padding-top: 2vh;
     display: flex;
     flex-direction: column;
 
     & h1 {
         padding-left: 10vw;
+        color: white;
     }
 
     & .participar{

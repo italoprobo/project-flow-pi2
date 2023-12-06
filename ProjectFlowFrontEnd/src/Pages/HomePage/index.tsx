@@ -42,7 +42,7 @@ const HomePage = () => {
                     </div>
                     <div className="direita">
                         <div className="botaoSair">
-                            <button onClick={signout}>Sair</button>
+                            <button className="btn-sair" onClick={signout}>Sair</button>
                         </div>
                     </div>
                 </div>

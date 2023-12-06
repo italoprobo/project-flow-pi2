@@ -12,10 +12,19 @@ export default function EquipeListaItem({equipe}: EquipeListItemProps) {
 
         <>
             <div className="cardEquipe">
-                <p>Nome: {equipe.nome}</p>
-                <p>Responsável: {equipe.responsavel.nome}</p>
-                <p>Projeto: {equipe.projeto.nome}</p>
-                <p>Função: {equipe.funcao}</p>
+                <div className="nome-card-equipe">
+                    <p>{equipe.nome}</p>
+                </div>
+                <div className="resto-card-equipe">
+                    <div className="resp">
+                        <p className="nome-princ">Responsável</p>
+                        <p>{equipe.responsavel.nome}</p>
+                    </div>
+                    <div className="proj">
+                        <p className="nome-princ">Projeto</p>
+                        <p>{equipe.projeto.nome}</p>
+                    </div>
+                </div>
                 <div className="linkEquipe">
                     <Link to={`/equipes/${equipe.id}`}>Ver equipe</Link>
                 </div>
