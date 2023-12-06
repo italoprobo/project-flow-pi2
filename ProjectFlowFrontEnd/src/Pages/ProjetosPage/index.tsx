@@ -72,6 +72,12 @@ const ProjetosPage = () => {
         return false
     }
 
+    for (let projeto of projetos) {
+        if(projeto.responsavel.id === user?.id && !isInProjects(projeto)) {
+            projetos_usuario.push(projeto)
+        }
+    }
+
     for (let equipe_usuario of equipes_usuario) {
         for (let projeto of projetos) {
             if(equipe_usuario.projeto.id === projeto.id && !isInProjects(projeto)) {
@@ -84,14 +90,31 @@ const ProjetosPage = () => {
     return (
         <body>
             <header>
-                <div className="head-content">
+                {user?.cargo === "administrador" ?
+                    <div className="head-content">
+                        <div className="div_logo">
+                            <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
+                        </div>
+                        <div className="direita">
+                            <div className="botaoSair">
+                                <button className="btn-sair" onClick={signout}>Sair</button>
+                            </div>
+                            <div className="botaoSair">
+                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
+                            </div>
+                        </div>
+                    </div> :
+                    <div className="head-content">
                     <div className="div_logo">
                         <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                     </div>
-                    <div className="div_account">
-                        <img src="../../../public/account.png" alt="Conta" className="conta_icon" />
+                    <div className="direita">
+                        <div className="botaoSair">
+                            <button className="btn-sair" onClick={signout}>Sair</button>
+                        </div>
                     </div>
                 </div>
+                }
             </header>
             <main>
                 <div className="div_lista_projetos">

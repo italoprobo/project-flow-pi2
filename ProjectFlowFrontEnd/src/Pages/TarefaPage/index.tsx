@@ -1,23 +1,13 @@
-import "./styleHome.css"
-import "./components/TarefaListaItem"
+import "./styleTarefaPage.css"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import { useEffect, useState } from "react";
-import { useTarefa } from '../../hooks'
-import { TarefaLista } from "./components/TarefaLista";
 import { Link } from "react-router-dom";
 import { useAuth } from '../../contexts/AuthContext'
-import { useEquipe } from "../../hooks/useEquipe";
-import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
-import { ITarefa } from "../../interfaces";
 
-const HomePage = () => {
+const TarefaPage = () => {
 
     const { user, signout } = useAuth()
-
-    const { tarefas, getAllTarefas } = useTarefa()
-
-    const { fourTarefas, get4Tarefas } = useTarefa()
-
+    
     const displayNone = {
         display: 'none'
     };
@@ -28,83 +18,7 @@ const HomePage = () => {
         setFooterVisible(!footerVisible);
     };
 
-    const { equipes, getAllEquipes } = useEquipe()
-
-    const { usuario_equipe, findAllUser_Team } = useUsuario_Equipe()
-
-    useEffect(() => {
-        getAllTarefas(),
-            get4Tarefas(),
-            getAllEquipes(),
-            findAllUser_Team()
-    }, [])
-
-    let ids: number[] = []
-
-    for (let linha of usuario_equipe) {
-        if (linha.usuarioId === user?.id) {
-            ids.push(linha.equipeId)
-        }
-    }
-
-    let equipes_usuario = []
-
-    for (let equipe of equipes) {
-        for (let id of ids) {
-            if (equipe.id === id) {
-                equipes_usuario.push(equipe)
-            }
-        }
-    }
-
-    let tarefas_equipes_usuario: ITarefa[] = []
-
-    for (let equipe of equipes_usuario) {
-        for (let tarefa of tarefas) {
-            if (tarefa.equipe.id === equipe.id) {
-                tarefas_equipes_usuario.push(tarefa)
-            }
-        }
-    }
-
-    let tarefas_equipes_usuarioOrdenadas: ITarefa[] = []
-
-    for (let tarefa of tarefas_equipes_usuario) {
-        if (!tarefa.isDone && tarefa.importancia === 'Alta' && tarefas_equipes_usuarioOrdenadas.length < 4) {
-            tarefas_equipes_usuarioOrdenadas.push(tarefa)
-        }
-    }
-
-    for (let tarefa of tarefas_equipes_usuario) {
-        if (!tarefa.isDone && tarefa.importancia === 'Média' && tarefas_equipes_usuarioOrdenadas.length < 4) {
-            tarefas_equipes_usuarioOrdenadas.push(tarefa)
-        }
-    }
-
-    for (let tarefa of tarefas_equipes_usuario) {
-        if (!tarefa.isDone && tarefa.importancia === 'Baixa' && tarefas_equipes_usuarioOrdenadas.length < 4) {
-            tarefas_equipes_usuarioOrdenadas.push(tarefa)
-        }
-    }
-
-    for (let tarefa of tarefas_equipes_usuario) {
-        if (tarefa.isDone && tarefa.importancia === 'Alta' && tarefas_equipes_usuarioOrdenadas.length < 4) {
-            tarefas_equipes_usuarioOrdenadas.push(tarefa)
-        }
-    }
-
-    for (let tarefa of tarefas_equipes_usuario) {
-        if (tarefa.isDone && tarefa.importancia === 'Média' && tarefas_equipes_usuarioOrdenadas.length < 4) {
-            tarefas_equipes_usuarioOrdenadas.push(tarefa)
-        }
-    }
-
-    for (let tarefa of tarefas_equipes_usuario) {
-        if (tarefa.isDone && tarefa.importancia === 'Baixa' && tarefas_equipes_usuarioOrdenadas.length < 4) {
-            tarefas_equipes_usuarioOrdenadas.push(tarefa)
-        }
-    }
-
+    
     return (
         <body>
             <header>
@@ -135,19 +49,7 @@ const HomePage = () => {
                 }
             </header>
             <main>
-                {tarefas_equipes_usuarioOrdenadas.length < 0 ?
-                    <div className="div_saudacao">
-                        <h1>Olá, {user?.nome}.</h1>
-                        <p>Você ainda não possui tarefas</p>
-                    </div> :
-                    <><div className="div_saudacao">
-                        <h1>Olá, {user?.nome}.</h1>
-                        <p>Essas são suas próximas tarefas:</p>
-                    </div>
-                        <div className="div_lista_tarefas">
-                            <TarefaLista tarefas={tarefas_equipes_usuarioOrdenadas} />
-                        </div></>
-                }
+                
             </main>
             {
                 footerVisible ?
@@ -186,4 +88,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default TarefaPage

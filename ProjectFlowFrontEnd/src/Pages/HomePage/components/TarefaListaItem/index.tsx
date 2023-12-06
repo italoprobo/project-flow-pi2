@@ -12,10 +12,7 @@ export default function TarefaListaItem({tarefa}: TarefaListItemProps) {
         <>
             <div className="cardTarefa">
                 <p>Nome: {tarefa.nome}</p>
-                <p>Projeto: {tarefa.projeto.nome}</p>
                 <p>Equipe: {tarefa.equipe.nome}</p>
-                <p>Importância: {tarefa.importancia}</p>
-                <p className="tempoPrevisto" >Tempo previsto: {tarefa.tempo_previsto} minutos</p>
                 {tarefa.isDone?
                 <p className="concluido" >Concluído</p> :
                 <p className="nao_concluido">Não Concluído</p>

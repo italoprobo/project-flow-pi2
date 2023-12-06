@@ -63,7 +63,7 @@ const ProjetoPage = () => {
         display: 'none'
     };
 
-    const { user } = useAuth()
+    const { user, signout } = useAuth()
 
     const dataInicio = String(projeto?.dt_inicio)
     const dataInicioSeparada = dataInicio.split("T")[0]
@@ -117,14 +117,31 @@ const ProjetoPage = () => {
     return (
         <body>
             <header>
-                <div className="head-content">
+                {user?.cargo === "administrador" ?
+                    <div className="head-content">
+                        <div className="div_logo">
+                            <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
+                        </div>
+                        <div className="direita">
+                            <div className="botaoSair">
+                                <button className="btn-sair" onClick={signout}>Sair</button>
+                            </div>
+                            <div className="botaoSair">
+                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
+                            </div>
+                        </div>
+                    </div> :
+                    <div className="head-content">
                     <div className="div_logo">
                         <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                     </div>
-                    <div className="div_account">
-                        <img src="../../../public/account.png" alt="Conta" className="conta_icon" />
+                    <div className="direita">
+                        <div className="botaoSair">
+                            <button className="btn-sair" onClick={signout}>Sair</button>
+                        </div>
                     </div>
                 </div>
+                }
             </header>
             <main>
                 {projeto?.responsavel.id === user?.id ?

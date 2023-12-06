@@ -37,20 +37,45 @@ export const useEquipe = () => {
                     ...equipe,
                     nome: nomeEquipeEditado,
                 });
-                //continuar a parti daqui
+                
                 await EquipeService.updateEquipe({
                     id: equipe.id,
-                    nome: nomeProjetoEditado,
-
+                    nome: nomeEquipeEditado,
+                    funcao: equipe.funcao,
+                    responsavelId: equipe.responsavel.id,
+                    projetoId: equipe.projeto.id
                 });
             } catch (error: any) {
-                console.error('Erro ao alterar o Nome do projeto', error.message);
+                console.error('Erro ao alterar o Nome da equipe', error.message);
+            }
+        }
+    };
+
+    const salvarEdicaoFuncaoEquipe = async (funcaoEquipeEditado: string, idEquipe: number) => {
+        getEquipeId(idEquipe)
+
+        if (equipe) {
+            try {
+                setEquipe({
+                    ...equipe,
+                    funcao: funcaoEquipeEditado,
+                });
+                
+                await EquipeService.updateEquipe({
+                    id: equipe.id,
+                    nome: equipe.nome,
+                    funcao: funcaoEquipeEditado,
+                    responsavelId: equipe.responsavel.id,
+                    projetoId: equipe.projeto.id
+                });
+            } catch (error: any) {
+                console.error('Erro ao alterar a função da equipe', error.message);
             }
         }
     };
 
     return {
-        equipes, equipe, participantes, getAllEquipes, getEquipeId
+        equipes, equipe, participantes, getAllEquipes, getEquipeId, salvarEdicaoNomeEquipe, salvarEdicaoFuncaoEquipe
     }
 
 }

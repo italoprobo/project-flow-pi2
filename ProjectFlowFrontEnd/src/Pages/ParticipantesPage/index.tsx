@@ -3,15 +3,25 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./styleParticipantes.css"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
-import { useEquipe } from "../../hooks/useEquipe";
 import { ParticipantesLista } from "./components/ParticipantesLista";
+import { useUsuario_Equipe } from "../../hooks/useUsuario_Equipe";
+import { IUsuario } from "../../interfaces";
+import { useUsuario } from "../../hooks";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ParticipantesPage = () => {
-    const { participantes } = useEquipe()
+
+    const {user, signout} = useAuth()
 
     const [footerVisible, setFooterVisible] = useState(true);
-    const [edicaoAtivaNome, setEdicaoAtivaNome] = useState(false);
-    const [edicaoAtivaResponsavel, setEdicaoAtivaResponsavel] = useState(false);
+
+    const { usuario_equipe, findAllUser_Team  } = useUsuario_Equipe()
+    const { usuarios, getAllUsuarios  } = useUsuario()
+
+    useEffect(() => {
+        findAllUser_Team(),
+        getAllUsuarios()
+    }, [])
 
     let { id } = useParams()
 
@@ -19,33 +29,53 @@ const ParticipantesPage = () => {
         setFooterVisible(!footerVisible);
     };
 
-    const toggleEdicaoNome = () => {
-        setEdicaoAtivaNome(!edicaoAtivaNome);
-    };
-
-    const toggleEdicaoResponsavel = () => {
-        setEdicaoAtivaResponsavel(!edicaoAtivaResponsavel);
-    };
-
     const displayNone = {
         display: 'none'
     };
 
+    let membros: IUsuario[] = []
+
+    for (let equipe of usuario_equipe) {
+        for (let usuario of usuarios) {
+            if(usuario.id === equipe.usuarioId && equipe.equipeId === Number(id)) {
+                membros.push(usuario)
+            }
+        }
+    }
+
     return (
         <body>
             <header>
-                <div className="head-content">
+                {user?.cargo === "administrador" ?
+                    <div className="head-content">
+                        <div className="div_logo">
+                            <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
+                        </div>
+                        <div className="direita">
+                            <div className="botaoSair">
+                                <button className="btn-sair" onClick={signout}>Sair</button>
+                            </div>
+                            <div className="botaoSair">
+                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
+                            </div>
+                        </div>
+                    </div> :
+                    <div className="head-content">
                     <div className="div_logo">
                         <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                     </div>
-                    <div className="div_account">
-                        <img src="../../../public/account.png" alt="Conta" className="conta_icon" />
+                    <div className="direita">
+                        <div className="botaoSair">
+                            <button className="btn-sair" onClick={signout}>Sair</button>
+                        </div>
                     </div>
                 </div>
+                }
             </header>
             <main>
+                <h1>Membros:</h1>
             <div className="participantes">
-                    <ParticipantesLista usuarios={participantes} />
+                    <ParticipantesLista usuarios={membros} />
                 </div>
             </main>
             {footerVisible ?

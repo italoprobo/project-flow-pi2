@@ -20,10 +20,6 @@ export default function EquipeListaItem({equipe}: EquipeListItemProps) {
                         <p className="nome-princ">Responsável</p>
                         <p>{equipe.responsavel.nome}</p>
                     </div>
-                    <div className="proj">
-                        <p className="nome-princ">Projeto</p>
-                        <p>{equipe.projeto.nome}</p>
-                    </div>
                 </div>
                 <div className="linkEquipe">
                     <Link to={`/equipes/${equipe.id}`}>Ver equipe</Link>

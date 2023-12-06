@@ -13,11 +13,12 @@ import PopupTarefaComponent from "./components/PopupTarefa";
 
 const EquipePage = () => {
     const { signout, user } = useAuth()
-    const { equipe, getEquipeId } = useEquipe()
+    const { equipe, getEquipeId, salvarEdicaoNomeEquipe, salvarEdicaoFuncaoEquipe } = useEquipe()
     const { tarefas, getAllTarefas } = useTarefa()
 
     const [footerVisible, setFooterVisible] = useState(true);
     const [edicaoAtivaNome, setEdicaoAtivaNome] = useState(false);
+    const [edicaoAtivaFuncao, setEdicaoAtivaFuncao] = useState(false);
     const [edicaoAtivaResponsavel, setEdicaoAtivaResponsavel] = useState(false);
 
     let { id } = useParams()
@@ -35,6 +36,10 @@ const EquipePage = () => {
         setEdicaoAtivaNome(!edicaoAtivaNome);
     };
 
+    const toggleEdicaoFuncao = () => {
+        setEdicaoAtivaFuncao(!edicaoAtivaFuncao);
+    };
+
     const toggleEdicaoResponsavel = () => {
         setEdicaoAtivaResponsavel(!edicaoAtivaResponsavel);
     };
@@ -46,7 +51,7 @@ const EquipePage = () => {
     let tarefas_equipe: ITarefa[] = []
 
     for (let tarefa of tarefas) {
-        if(tarefa.equipe.id === equipe?.id) {
+        if (tarefa.equipe.id === equipe?.id) {
             tarefas_equipe.push(tarefa)
         }
     }
@@ -100,17 +105,52 @@ const EquipePage = () => {
         setprojetoIdAberto(projetoId);
     };
 
+    const [nomeEquipeEditado, setNomeEquipeEditado] = useState("");
+
+    const handleSalvarEdicaoNome = () => {
+        if (equipe) {
+            salvarEdicaoNomeEquipe(nomeEquipeEditado, equipe.id);
+            toggleEdicaoNome()
+        }
+    };
+
+    const [funcaoEquipeEditado, setfuncaoEquipeEditado] = useState("");
+
+    const handleSalvarEdicaoFuncao = () => {
+        if (equipe) {
+            salvarEdicaoFuncaoEquipe(funcaoEquipeEditado, equipe.id);
+            toggleEdicaoFuncao()
+        }
+    };
+
     return (
         <body>
             <header>
-                <div className="head-content">
+                {user?.cargo === "administrador" ?
+                    <div className="head-content">
+                        <div className="div_logo">
+                            <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
+                        </div>
+                        <div className="direita">
+                            <div className="botaoSair">
+                                <button className="btn-sair" onClick={signout}>Sair</button>
+                            </div>
+                            <div className="botaoSair">
+                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
+                            </div>
+                        </div>
+                    </div> :
+                    <div className="head-content">
                     <div className="div_logo">
                         <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                     </div>
-                    <div className="div_account">
-                        <img src="../../../public/account.png" alt="Conta" className="conta_icon" />
+                    <div className="direita">
+                        <div className="botaoSair">
+                            <button className="btn-sair" onClick={signout}>Sair</button>
+                        </div>
                     </div>
                 </div>
+                }
             </header>
             <main>
                 {user?.id === equipe?.responsavel.id ?
@@ -123,37 +163,46 @@ const EquipePage = () => {
                                 <div className="areaDadoProjeto">
                                     {edicaoAtivaNome ? (
                                         <input
-                                            type="text" />
+                                            type="text"
+                                            value={nomeEquipeEditado}
+                                            onChange={(e) => setNomeEquipeEditado(e.target.value)} />
                                     ) : (
-                                        <p>{equipe?.nome}</p>
+                                        <p><b>Equipe: {nomeEquipeEditado || equipe?.nome}</b></p>
                                     )}
                                 </div>
                                 <div className="areaBotaoEditarProjeto">
                                     {edicaoAtivaNome ?
-                                        <><button className="editarProjeto" onClick={toggleEdicaoNome}>Salvar</button>
+                                        <><button className="editarProjeto" onClick={handleSalvarEdicaoNome}>Salvar</button>
                                             <button className="editarProjeto" onClick={toggleEdicaoNome}>Cancelar</button></>
                                         : <button className="editarProjeto" onClick={toggleEdicaoNome}>Editar</button>}
                                 </div>
                             </div>
                             <div className="dadosProjeto">
                                 <div className="areaDadoProjeto">
-                                    {edicaoAtivaResponsavel ? (
+                                    {edicaoAtivaFuncao ? (
                                         <input
-                                            type="text" />
+                                            type="text"
+                                            value={funcaoEquipeEditado}
+                                            onChange={(e) => setfuncaoEquipeEditado(e.target.value)} />
                                     ) : (
-                                        <p>Responsável: {equipe?.responsavel.nome}</p>
+                                        <p><b>Função: {funcaoEquipeEditado || equipe?.funcao}</b></p>
                                     )}
                                 </div>
                                 <div className="areaBotaoEditarProjeto">
-                                    {edicaoAtivaResponsavel ?
-                                        <><button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Salvar</button>
-                                            <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Cancelar</button></>
-                                        : <button className="editarProjeto" onClick={toggleEdicaoResponsavel}>Editar</button>}
+                                    {edicaoAtivaFuncao ?
+                                        <><button className="editarProjeto" onClick={handleSalvarEdicaoFuncao}>Salvar</button>
+                                            <button className="editarProjeto" onClick={toggleEdicaoFuncao}>Cancelar</button></>
+                                        : <button className="editarProjeto" onClick={toggleEdicaoFuncao}>Editar</button>}
                                 </div>
                             </div>
                             <div className="dadosProjeto">
                                 <div className="areaDadoProjeto">
-                                    <Link to={`/participantes/${equipe?.id}`}>Ver Participantes</Link>
+                                    <p>Responsável: {equipe?.responsavel.nome}</p>
+                                </div>
+                            </div>
+                            <div className="dadosProjeto">
+                                <div className="areaDadoProjeto">
+                                    <Link to={`/participantes/${equipe?.id}`}>Ver Membros</Link>
                                 </div>
                             </div>
                         </div></> :
@@ -180,7 +229,7 @@ const EquipePage = () => {
                         </div>
                         <div className="dadosProjeto">
                             <div className="areaDadoProjeto">
-                                <Link to={`/participantes/${equipe?.id}`}>Ver Participantes</Link>
+                                <Link to={`/participantes/${equipe?.id}`}>Ver Membros</Link>
                             </div>
                         </div>
                     </div><p></p></>
@@ -226,7 +275,7 @@ const EquipePage = () => {
                 </div>
             }
             {popupVisible && equipe && (
-                <PopupTarefaComponent onClose={() => togglePopup(equipeIdAberto, projetoIdAberto)} equipeId={equipeIdAberto || equipe.id} projetoId={projetoIdAberto | equipe.projeto.id}/>
+                <PopupTarefaComponent onClose={() => togglePopup(equipeIdAberto, projetoIdAberto)} equipeId={equipeIdAberto || equipe.id} projetoId={projetoIdAberto | equipe.projeto.id} />
             )}
         </body >
     )
