@@ -155,12 +155,12 @@ const ParticipantesPage = () => {
                         <div className="div_logo">
                             <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                         </div>
+                        <div className="botaoCadastro">
+                                <Link to={"/cadastro"}><button className="btn-cad">cadastrar usuário</button></Link>
+                            </div>
                         <div className="direita">
                             <div className="botaoSair">
                                 <button className="btn-sair" onClick={signout}>Sair</button>
-                            </div>
-                            <div className="botaoSair">
-                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
                             </div>
                         </div>
                     </div> :
@@ -177,7 +177,8 @@ const ParticipantesPage = () => {
                 }
             </header>
             <main>
-                <h1>Membros:</h1>
+                <div className="tudo-membro">
+                <h1 className="h1-membro">Membros:</h1>
                 {user?.id === equipe?.responsavel.id ?
                     <>
                         <form onSubmit={handleSubmit} className="adicionarMembro">
@@ -195,7 +196,7 @@ const ParticipantesPage = () => {
                                     ))}
                                 </select>
                             </label>
-                            <button type="submit">Adicionar</button>
+                            <button className="button-p" type="submit">Adicionar</button>
                         </form>
                         <form onSubmit={handleSubmitRemove} className="removerMembro">
                             <label>
@@ -212,10 +213,11 @@ const ParticipantesPage = () => {
                                     ))}
                                 </select>
                             </label>
-                            <button type="submit">Remover</button>
+                            <button className="button-p" type="submit">Remover</button>
                         </form></> :
                     <p></p>
                 }
+                </div>
                 <div className="participantes">
                     <ParticipantesLista usuarios={membros} />
                 </div>

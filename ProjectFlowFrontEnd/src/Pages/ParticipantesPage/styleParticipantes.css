@@ -115,3 +115,54 @@
     border: 1px solid #0F70BC;
     cursor: pointer;
 }
+
+.h1-membro {
+    color: white;
+
+}
+
+.tudo-membro {
+    margin-top: 2vh;
+    margin-left: 4vh;
+    gap: 2vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.participantes{
+    margin-top: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+}
+
+select {
+    padding: 8px;
+    font-size: 12px;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff; 
+    color: #333; 
+    box-sizing: border-box;
+}
+
+option {
+    color: #333; 
+}
+
+.button-p {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; 
+    color: #fff; 
+    cursor: pointer;
+}
+
+.adicionarMembro {
+    gap: 10px;
+}

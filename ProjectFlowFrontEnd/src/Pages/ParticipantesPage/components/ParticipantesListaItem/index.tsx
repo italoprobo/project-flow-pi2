@@ -12,7 +12,7 @@ export default function ParticipantesListaItem({ usuario }: UsuarioListItemProps
     return (
 
         <>
-            <div className="cardEquipe">
+            <div className="cardTarefa">
                 <p>Nome: {usuario.nome}</p>
             </div>
         </>

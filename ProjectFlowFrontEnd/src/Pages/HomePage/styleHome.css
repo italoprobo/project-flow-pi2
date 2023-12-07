@@ -33,6 +33,20 @@ body {
             justify-content: space-between;
             padding-right: 1rem;
 
+            & .botaoCadastro {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                & .btn-cad {
+                    text-transform: uppercase;
+                    padding: 6px 12px;
+                    border-radius: 20px;
+                    background-color: #0F70BC;
+                    color: white;
+                }
+            }
+
             & .direita {
                 display: flex;
                 flex-direction: row;

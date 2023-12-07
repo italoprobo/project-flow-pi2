@@ -131,12 +131,12 @@ const EquipePage = () => {
                         <div className="div_logo">
                             <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                         </div>
+                        <div className="botaoCadastro">
+                                <Link to={"/cadastro"}><button className="btn-cad">cadastrar usuário</button></Link>
+                            </div>
                         <div className="direita">
                             <div className="botaoSair">
                                 <button className="btn-sair" onClick={signout}>Sair</button>
-                            </div>
-                            <div className="botaoSair">
-                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
                             </div>
                         </div>
                     </div> :
@@ -197,14 +197,12 @@ const EquipePage = () => {
                             </div>
                             <div className="dadosProjeto">
                                 <div className="areaDadoProjeto">
-                                    <p>Responsável: {equipe?.responsavel.nome}</p>
+                                    <p><b>Responsável: {equipe?.responsavel.nome}</b></p>
                                 </div>
                             </div>
-                            <div className="dadosProjeto">
-                                <div className="areaDadoProjeto">
+                                <div className="ver-mais-membros">
                                     <Link to={`/participantes/${equipe?.id}`}>Ver Membros</Link>
                                 </div>
-                            </div>
                         </div></> :
                     <><div className="ProjetoDetalhes">
                         <div className="dadosProjeto">
@@ -235,7 +233,7 @@ const EquipePage = () => {
                     </div><p></p></>
                 }
                 <div className="listaTarefas">
-                    <p>Tarefas da equipe:</p>
+                    <p className="tarefas-p">Tarefas da equipe:</p>
                     {tarefas_equipes_usuarioOrdenadas.length > 0 ?
                         <TarefaLista tarefas={tarefas_equipes_usuarioOrdenadas} /> :
                         <p>Equipe não possui tarefas</p>

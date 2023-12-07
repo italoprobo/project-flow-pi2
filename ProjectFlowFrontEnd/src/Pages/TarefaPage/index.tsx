@@ -52,12 +52,12 @@ const TarefaPage = () => {
                         <div className="div_logo">
                             <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                         </div>
+                        <div className="botaoCadastro">
+                                <Link to={"/cadastro"}><button className="btn-cad">cadastrar usuário</button></Link>
+                            </div>
                         <div className="direita">
                             <div className="botaoSair">
                                 <button className="btn-sair" onClick={signout}>Sair</button>
-                            </div>
-                            <div className="botaoSair">
-                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
                             </div>
                         </div>
                     </div> :
@@ -74,18 +74,26 @@ const TarefaPage = () => {
                 }
             </header>
             <main>
-                <p><b>Nome</b> {tarefa?.nome}</p>
-                <p>Descrição: {tarefa?.descricao}</p>
-                <p>Tempo previsto: {tarefa?.tempo_previsto} minutos</p>
-                <p>Importância: {tarefa?.importancia}</p>
-                <p>Início: {dataInicioFormatada}</p>
-                <p>Final: {dataFinalFormatada}</p>
-                {tarefa?.isDone === true ?
-                    <><p className="concluido">Concluído</p>
-                    <button onClick={handleMudarStatus}>Marcar como não concluída</button></> :
-                    <><p className="nao_concluido">Não concluído</p>
-                    <button onClick={handleMudarStatus}>Marcar como concluída</button></>
-                }
+
+                <div className="dadosTarefa-esp">
+                        <h1 className="h1-nome">{tarefa?.nome}</h1>
+                    <div className="data">
+                        <p>Descrição: {tarefa?.descricao}</p>
+                        <p>Tempo previsto: {tarefa?.tempo_previsto} minutos</p>
+                        <p>Importância: {tarefa?.importancia}</p>
+                        <p>Início: {dataInicioFormatada}</p>
+                        <p>Final: {dataFinalFormatada}</p>
+                    </div>
+
+                    <div className="concluida">
+                    {tarefa?.isDone === true ?
+                        <><p className="concluido">Concluído</p>
+                        <button className="btn-concluido" onClick={handleMudarStatus}>Marcar como não concluída</button></> :
+                        <><p className="nao_concluido">Não concluído</p>
+                        <button className="btn-concluido" onClick={handleMudarStatus}>Marcar como concluída</button></>
+                    }
+                    </div>
+                </div>
             </main>
             {
                 footerVisible ?

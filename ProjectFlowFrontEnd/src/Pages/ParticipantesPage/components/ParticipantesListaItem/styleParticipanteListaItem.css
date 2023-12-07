@@ -1,0 +1,46 @@
+.cardTarefa{
+    background-color: white;
+    padding: 20px 15px;
+    border-radius: 20px;
+    border: 1px solid #0F70BC;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1vh;
+    width: 75vw;
+    height: 5vh;
+
+    & p{
+        font-size: 10px;
+        text-align: start;
+    }
+
+    & .inf1{
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    & .inf2, .inf3{
+        font-weight: 300;
+        opacity: 0.6;
+    }
+
+    & .ver-mais-tarefa{
+        font-size: 20px;
+        background-color: white;
+        color: black;
+    }
+}
+
+.time {
+    height: 40%;
+}
+
+.concluido {
+    background-color: green;
+}
+
+.nao_concluido {
+    background-color: rgb(181, 39, 39);
+}

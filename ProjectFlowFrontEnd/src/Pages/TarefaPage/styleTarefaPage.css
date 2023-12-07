@@ -176,3 +176,39 @@ body {
     color: white;
     font-weight: 400;
 }
+
+.dadosTarefa-esp{
+    display: flex;
+    margin: 30px 40px;
+    flex-direction: column  ;
+}
+
+.h1-nome{
+    color: white;
+    text-align: center;
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.concluida {
+    display: flex;
+    margin-top: 5vh;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+}
+
+.btn-concluido{
+    text-align: center;
+    background-color: white;
+    border-radius: 2%;
+    border: 1px solid #0F70BC;
+    cursor: pointer;
+}

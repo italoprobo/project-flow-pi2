@@ -112,12 +112,12 @@ const TarefasPage = () => {
                         <div className="div_logo">
                             <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                         </div>
+                        <div className="botaoCadastro">
+                                <Link to={"/cadastro"}><button className="btn-cad">cadastrar usuário</button></Link>
+                            </div>
                         <div className="direita">
                             <div className="botaoSair">
                                 <button className="btn-sair" onClick={signout}>Sair</button>
-                            </div>
-                            <div className="botaoSair">
-                                <Link to={"/cadastro"}><button className="btn-sair" onClick={signout}>cadastrar usuário</button></Link>
                             </div>
                         </div>
                     </div> :
