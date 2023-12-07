@@ -26,7 +26,7 @@ const EquipePage = () => {
     useEffect(() => {
         getEquipeId(id)
         getAllTarefas()
-    }, [])
+    }, [equipe])
 
     const toggleFooter = () => {
         setFooterVisible(!footerVisible);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Api } from "../../../providers/api";
+import { useNavigate } from "react-router-dom";
 
 interface PopupTarefaProps {
     onClose: () => void;
@@ -67,6 +68,8 @@ const PopupTarefaComponent: React.FC<PopupTarefaProps> = ({ onClose, equipeId, p
         }));
     };
 
+    const navigate = useNavigate()
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -98,6 +101,7 @@ const PopupTarefaComponent: React.FC<PopupTarefaProps> = ({ onClose, equipeId, p
             console.log(tarefaData);
             await Api.post("v1/tarefa", tarefaData);
             onClose();
+            navigate(`/equipes/${equipeId}`)
         } catch (error) {
         }
     };

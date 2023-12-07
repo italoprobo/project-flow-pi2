@@ -39,7 +39,7 @@ const ProjetosPage = () => {
         getAllProjetos(),
         getAllEquipes(),
         findAllUser_Team()
-    }, [])
+    }, [projetos])
     
 
     let ids = []

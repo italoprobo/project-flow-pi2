@@ -25,12 +25,6 @@ const ParticipantesPage = () => {
 
     let { id } = useParams()
 
-    useEffect(() => {
-        findAllUser_Team(),
-            getAllUsuarios(),
-            getEquipeId(id)
-    }, [])
-
     const [listaUsuarios, setListaUsuarios] = useState<Usuario[]>([]);
 
     useEffect(() => {
@@ -124,6 +118,12 @@ const ParticipantesPage = () => {
             [name]: parseInt(value, 10),
         }));
     };
+
+    useEffect(() => {
+        findAllUser_Team(),
+            getAllUsuarios(),
+            getEquipeId(id)
+    }, [membros])
 
     const handleSubmitRemove = async (e: React.FormEvent) => {
         e.preventDefault();

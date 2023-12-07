@@ -14,11 +14,15 @@ export const useTarefa = () => {
 
         if (tarefa) {
             try {
+                setTarefa({
+                    ...tarefa,
+                    isDone: !(tarefa.isDone),
+                });
 
                 await TarefaService.updateTask({
                     id: tarefa.id,
                     nome: tarefa.nome,
-                    descricao: tarefa.nome,
+                    descricao: tarefa.descricao,
                     dt_inicio: tarefa.dt_inicio,
                     dt_final: tarefa.dt_final,
                     tempo_previsto: tarefa.tempo_previsto,
@@ -27,11 +31,17 @@ export const useTarefa = () => {
                     projeto: tarefa.projeto,
                     equipe: tarefa.equipe
                 });
+                console.log("Tarefa", tarefa);
+
             } catch (error: any) {
-                console.error('Erro ao alterar o Nome do projeto', error.message);
+                console.error('Erro ao alterar status da tarefa', error.message);
             }
         }
     };
+
+    const removeTask = useCallback(async (id: number) => {
+        await TarefaService.removeTask(id)
+    }, [])
 
     const getAllTarefas = useCallback(async () => {
         const { status, data } = await TarefaService.getAllTarefas()
@@ -134,7 +144,7 @@ export const useTarefa = () => {
         getTarefasOrdenadasPrioridade,
         getTarefaId,
         getTarefaIdEquipe,
-        mudarStatus
+        mudarStatus, removeTask
     }
 
 }

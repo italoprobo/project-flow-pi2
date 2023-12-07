@@ -18,15 +18,12 @@ const ProjetoPage = () => {
 
     let { id } = useParams()
 
-    useEffect(() => {
-        getProjetoId(id)
-    }, [])
-
     const { equipes, getAllEquipes } = useEquipe()
 
     useEffect(() => {
+        getProjetoId(id),
         getAllEquipes()
-    }, [])
+    }, [equipes])
 
     const [footerVisible, setFooterVisible] = useState(true);
 

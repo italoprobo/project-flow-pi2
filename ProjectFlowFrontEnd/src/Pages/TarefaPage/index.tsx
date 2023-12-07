@@ -1,7 +1,7 @@
 import "./styleTarefaPage.css"
 import { FaCircleArrowDown, FaCircleArrowUp } from "react-icons/fa6";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from '../../contexts/AuthContext'
 import { useTarefa } from "../../hooks";
 
@@ -9,13 +9,13 @@ const TarefaPage = () => {
 
     const { user, signout } = useAuth()
 
-    const { tarefa, getTarefaId, mudarStatus } = useTarefa()
+    const { tarefa, getTarefaId, mudarStatus, removeTask } = useTarefa()
 
     let { id } = useParams()
 
     useEffect(() => {
         getTarefaId(id)
-    }, [])
+    }, [tarefa])
 
     const displayNone = {
         display: 'none'
@@ -40,8 +40,18 @@ const TarefaPage = () => {
     const dataFinalFormatada = `${dataFinalSeparada2[2]}/${dataFinalSeparada2[1]}/${dataFinalSeparada2[0]}`
 
     const handleMudarStatus = () => {
-        if(tarefa)
-        mudarStatus(tarefa?.id)
+        if (tarefa) {
+            mudarStatus(tarefa?.id)
+        }
+    }
+
+    const navigate = useNavigate()
+
+    const handleRemoveTask = () => {
+        if (tarefa) {
+            navigate(`/equipes/${tarefa.equipe.id}`)
+            removeTask(tarefa?.id)
+        }
     }
 
     return (
@@ -53,8 +63,8 @@ const TarefaPage = () => {
                             <Link to="/"><img src="../../../public/icon.png" alt="Logo" className="logo" /></Link>
                         </div>
                         <div className="botaoCadastro">
-                                <Link to={"/cadastro"}><button className="btn-cad">cadastrar usuário</button></Link>
-                            </div>
+                            <Link to={"/cadastro"}><button className="btn-cad">cadastrar usuário</button></Link>
+                        </div>
                         <div className="direita">
                             <div className="botaoSair">
                                 <button className="btn-sair" onClick={signout}>Sair</button>
@@ -76,7 +86,7 @@ const TarefaPage = () => {
             <main>
 
                 <div className="dadosTarefa-esp">
-                        <h1 className="h1-nome">{tarefa?.nome}</h1>
+                    <h1 className="h1-nome">{tarefa?.nome}</h1>
                     <div className="data">
                         <p>Descrição: {tarefa?.descricao}</p>
                         <p>Tempo previsto: {tarefa?.tempo_previsto} minutos</p>
@@ -86,13 +96,14 @@ const TarefaPage = () => {
                     </div>
 
                     <div className="concluida">
-                    {tarefa?.isDone === true ?
-                        <><p className="concluido">Concluído</p>
-                        <button className="btn-concluido" onClick={handleMudarStatus}>Marcar como não concluída</button></> :
-                        <><p className="nao_concluido">Não concluído</p>
-                        <button className="btn-concluido" onClick={handleMudarStatus}>Marcar como concluída</button></>
-                    }
+                        {tarefa?.isDone === true ?
+                            <><p className="concluido">Concluído</p>
+                                <button className="btn-concluido" onClick={handleMudarStatus}>Marcar como não concluída</button></> :
+                            <><p className="nao_concluido">Não concluído</p>
+                                <button className="btn-concluido" onClick={handleMudarStatus}>Marcar como concluída</button></>
+                        }
                     </div>
+                    <button onClick={handleRemoveTask}>Remover tarefa</button>
                 </div>
             </main>
             {

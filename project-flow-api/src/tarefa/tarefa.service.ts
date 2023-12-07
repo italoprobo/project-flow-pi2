@@ -40,7 +40,7 @@ export class TarefaService {
   }
 
   viewTask(id: number): Promise<Tarefa> {
-    return this.tarefaRepositorio.findOne({ where: { id } });
+    return this.tarefaRepositorio.findOne({ where: { id }, relations: ['projeto', 'equipe'] });
   }
 
   async findTarefasByEquipeId(equipeId: number): Promise<Tarefa[]> {

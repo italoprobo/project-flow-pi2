@@ -34,7 +34,7 @@ const CadastroPage = () => {
             });
 
             console.log('Usuário registrado com sucesso:', response.data);
-            navigate("/login")
+            navigate("/")
 
         } catch (error) {
             if (isAxiosError(error) && error.response) {
