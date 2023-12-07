@@ -51,15 +51,12 @@ const PopupEquipe: React.FC<PopupEquipeProps> = ({ onClose, projetoId }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log(equipeData);
     
-
     try {
       await Api.post('/v1/equipe', equipeData);
       onClose();
     } catch (error) {
-      console.error('Erro ao criar equipe:', error);
+      console.error('Erro ao adicionar usuário:', error);
     }
   };
 
@@ -90,7 +87,6 @@ const PopupEquipe: React.FC<PopupEquipeProps> = ({ onClose, projetoId }) => {
                         ))}
                     </select>
         </label>
-        {/* membros e tarefas */}
         <button type="submit">Criar Equipe</button>
       </form>
     </div>

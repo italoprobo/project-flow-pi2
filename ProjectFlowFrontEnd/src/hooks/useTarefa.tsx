@@ -9,6 +9,30 @@ export const useTarefa = () => {
     const [fourTarefas, setFourTarefas] = useState<ITarefa[]>([])
     const [tarefasOrdenadasPrioridade, setTarefasOrdenadasPrioridade] = useState<ITarefa[]>([])
 
+    const mudarStatus = async (idTarefa: number) => {
+        getTarefaId(idTarefa)
+
+        if (tarefa) {
+            try {
+
+                await TarefaService.updateTask({
+                    id: tarefa.id,
+                    nome: tarefa.nome,
+                    descricao: tarefa.nome,
+                    dt_inicio: tarefa.dt_inicio,
+                    dt_final: tarefa.dt_final,
+                    tempo_previsto: tarefa.tempo_previsto,
+                    importancia: tarefa.importancia,
+                    isDone: !tarefa.isDone,
+                    projeto: tarefa.projeto,
+                    equipe: tarefa.equipe
+                });
+            } catch (error: any) {
+                console.error('Erro ao alterar o Nome do projeto', error.message);
+            }
+        }
+    };
+
     const getAllTarefas = useCallback(async () => {
         const { status, data } = await TarefaService.getAllTarefas()
 
@@ -109,7 +133,8 @@ export const useTarefa = () => {
         get4Tarefas,
         getTarefasOrdenadasPrioridade,
         getTarefaId,
-        getTarefaIdEquipe
+        getTarefaIdEquipe,
+        mudarStatus
     }
 
 }

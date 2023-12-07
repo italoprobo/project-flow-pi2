@@ -10,7 +10,7 @@ export class Usuario_equipeService {
   constructor(
     @InjectRepository(Usuario_equipe)
     private readonly usuario_equipeRepositorio: Repository<Usuario_equipe>
-  ) {}
+  ) { }
 
   async findAllUser_Team(): Promise<Usuario_equipe[]> {
     return await this.usuario_equipeRepositorio.find();
@@ -21,5 +21,9 @@ export class Usuario_equipeService {
     usuario_equipe.usuarioId = creatUsuario_EquipeDto.usuarioId;
     usuario_equipe.equipeId = creatUsuario_EquipeDto.equipeId;
     this.usuario_equipeRepositorio.save(usuario_equipe)
+  }
+
+  removeMember(id: number) {
+    this.usuario_equipeRepositorio.delete(id)
   }
 }

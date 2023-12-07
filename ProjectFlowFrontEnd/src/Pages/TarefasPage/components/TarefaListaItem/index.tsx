@@ -16,7 +16,7 @@ export default function TarefaListaItem({tarefa}: TarefaListItemProps) {
                 <p className="inf1">{tarefa.nome}</p>
                 <p className="inf2">{tarefa.equipe.nome}</p>
                 <p className="inf3">{tarefa.projeto.nome}</p>
-            <Link to={`/tarefas/${tarefa.id}`}><button className="ver-mais-tarefa "><CgDetailsMore /></button></Link>
+            <Link to={`/tarefa/${tarefa.id}`}><button className="ver-mais-tarefa "><CgDetailsMore /></button></Link>
             </div>
         </>
 

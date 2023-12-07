@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Usuario_EquipeService } from '../services'
-import { IEquipe, IUsuario, IUsuario_Equipe } from '../interfaces'
+import { IUsuario_Equipe } from '../interfaces'
 import { Usuario } from '../../../project-flow-api/src/usuario/entities/usuario.entity'
 
 export const useUsuario_Equipe = () => {
@@ -35,9 +35,13 @@ export const useUsuario_Equipe = () => {
         setMembros(membros)
     }, [])
 
+    const removeMember= useCallback(async (idUsuario_Equipe: number) => {
+        Usuario_EquipeService.removeUser_Team(idUsuario_Equipe)
+    }, [])
+
 
     return {
-        usuario_equipe, membros, findAllUser_Team, findMember_Team
+        usuario_equipe, membros, findAllUser_Team, findMember_Team, removeMember
     }
 
 }

@@ -147,7 +147,7 @@ const PopupTarefaComponent: React.FC<PopupTarefaProps> = ({ onClose, equipeId, p
                         value={tarefaData.importancia}
                         onChange={handleImportanciaChange}
                     >
-                            <option value={0} disabled>Selecione a importância</option>
+                            <option value={0} disabled >Selecione a importância</option>
                             <option value={"Alta"} >Alta</option>
                             <option value={"Média"} >Média</option>
                             <option value={"Baixa"} >Baixa</option>
